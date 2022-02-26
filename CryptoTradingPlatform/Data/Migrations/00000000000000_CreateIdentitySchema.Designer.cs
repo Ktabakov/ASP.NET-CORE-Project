@@ -9,7 +9,7 @@ using System;
 
 namespace CryptoTradingPlatform.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(CryptoTradingDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

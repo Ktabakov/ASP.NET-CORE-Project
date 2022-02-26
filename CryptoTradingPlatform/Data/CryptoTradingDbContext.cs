@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CryptoTradingPlatform.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class CryptoTradingDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public CryptoTradingDbContext(DbContextOptions<CryptoTradingDbContext> options)
             : base(options)
         {
         }
