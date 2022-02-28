@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "dd4e3abd-c0fd-4355-94d9-dbb6e955fdf7": {
+      "ProjectGuid": "dd4e3abd-c0fd-4355-94d9-dbb6e955fdf7",
+      "DisplayName": "CryptoTradingPlatform",
+      "ColorIndex": 0
+    },
+    "55453c5f-ce79-471e-a04e-5dbad0c85e7c": {
+      "ProjectGuid": "55453c5f-ce79-471e-a04e-5dbad0c85e7c",
+      "DisplayName": "Data",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

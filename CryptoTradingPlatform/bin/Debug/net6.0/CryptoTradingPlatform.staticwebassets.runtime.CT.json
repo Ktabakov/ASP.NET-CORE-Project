@@ -8,6 +8,14 @@
     "Children": {
       "css": {
         "Children": {
+          "animation.css": {
+            "Children": null,
+            "Asset": {
+              "ContentRootIndex": 0,
+              "SubPath": "css/animation.css"
+            },
+            "Patterns": null
+          },
           "site.css": {
             "Children": null,
             "Asset": {

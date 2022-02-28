@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KQtCdBHra2wC04yAohGXbcDrjncdz56O8naaAY7rrGg=",
+  "Hash": "pKkBocCEAWFhpKb96teqLl0WQWFKNajOCig45+2Xk6c=",
   "Source": "CryptoTradingPlatform",
   "BasePath": "_content/CryptoTradingPlatform",
   "Mode": "Default",
@@ -1069,6 +1069,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\CryptoTradingPlatform.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\css\\animation.css",
+      "SourceId": "CryptoTradingPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\",
+      "BasePath": "_content/CryptoTradingPlatform",
+      "RelativePath": "css/animation.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\animation.css"
     },
     {
       "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\css\\site.css",
