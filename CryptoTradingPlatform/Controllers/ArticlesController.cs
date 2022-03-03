@@ -10,7 +10,6 @@ namespace CryptoTradingPlatform.Controllers
 
 
         [HttpPost]
-        [Authorize]
         public IActionResult Add(AddArticleFormModel article)
         {
             return View();

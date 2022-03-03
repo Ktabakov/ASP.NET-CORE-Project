@@ -12,14 +12,17 @@
     <div class="mb-3">
         <label asp-for="Ticker" class="form-label">Ticker</label>
         <input asp-for="Ticker" type="text" class="form-control"> 
+        <span asp-validation-for="Ticker" class="small text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Name</label>
         <input asp-for="Name" type="text" class="form-control"> 
+        <span asp-validation-for="Name" class="small text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="ImageURL" class="form-label">Image URL</label>
         <input asp-for="ImageURL" type="text" class="form-control">
+        <span asp-validation-for="ImageURL" class="small text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
 </form>

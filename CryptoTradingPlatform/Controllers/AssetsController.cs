@@ -8,7 +8,6 @@ namespace CryptoTradingPlatform.Controllers
     {
         public IActionResult Add() => View();
 
-        [Authorize]
         [HttpPost]
         public IActionResult Add(AddAssetFormModel asset)
         {
