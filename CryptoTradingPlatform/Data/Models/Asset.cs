@@ -21,6 +21,7 @@ namespace CryptoTradingPlatform.Data.Models
         [MaxLength(DataConstants.TickerMaxLength)]
         public string Ticker { get; set; }
 
+        [Required]
         public string ImageURL { get; set; }
     }
 }

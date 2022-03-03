@@ -28,8 +28,8 @@ namespace CryptoTradingPlatform.Data
 
         public DbSet<Asset> Assets { get; set; }
         public DbSet<Article> Articles { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }      
+        //public DbSet<User> Users { get; set; }
         public DbSet<UserAsset> UserAssets { get; set; }
         public DbSet<UserArticle> UserArticles { get; set; }
     }

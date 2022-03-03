@@ -10,7 +10,22 @@
       "ProjectGuid": "55453c5f-ce79-471e-a04e-5dbad0c85e7c",
       "DisplayName": "Data",
       "ColorIndex": 1
+    },
+    "e4c6befb-e6e8-4a68-9794-554188a7c967": {
+      "ProjectGuid": "e4c6befb-e6e8-4a68-9794-554188a7c967",
+      "DisplayName": "CryptoAPI",
+      "ColorIndex": 2
+    },
+    "5d4122dd-1af2-402b-a4b1-d99e01e4cdd6": {
+      "ProjectGuid": "5d4122dd-1af2-402b-a4b1-d99e01e4cdd6",
+      "DisplayName": "CryptoTradingPlatform.Infrastructure",
+      "ColorIndex": 3
+    },
+    "dc823d60-0746-4f55-9b48-6fb05a89ba9c": {
+      "ProjectGuid": "dc823d60-0746-4f55-9b48-6fb05a89ba9c",
+      "DisplayName": "CryptoTradingPlatfrom.Core",
+      "ColorIndex": 4
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 5
 }

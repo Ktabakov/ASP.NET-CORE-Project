@@ -1,7 +1,7 @@
 {
   "ContentRoots": [
     "/src/CryptoTradingPlatform/wwwroot/",
-    "/root/.nuget/fallbackpackages/microsoft.aspnetcore.identity.ui/6.0.1/staticwebassets/V5/",
+    "/root/.nuget/fallbackpackages/microsoft.aspnetcore.identity.ui/6.0.2/staticwebassets/V5/",
     "/src/CryptoTradingPlatform/obj/Debug/net6.0/scopedcss/bundle/"
   ],
   "Root": {

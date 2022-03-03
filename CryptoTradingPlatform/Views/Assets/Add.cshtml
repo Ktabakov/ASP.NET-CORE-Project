@@ -1,0 +1,21 @@
+﻿@model AddAssetFormModel
+
+@{
+    ViewData["Title"] = "Add Asset";
+}
+
+<form method="post">
+  <div class="mb-3">
+    <label asp-for="Ticker" class="form-label">Ticker</label>
+    <input asp-for="Ticker" type="text" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label asp-for="Name" class="form-label">Name</label>
+    <input asp-for="Name" type="text" class="form-control">
+  </div>
+   <div class="mb-3">
+    <label asp-for="ImageURL" class="form-label">URL</label>
+    <input asp-for="ImageURL" type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>

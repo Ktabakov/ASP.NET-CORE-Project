@@ -67,3 +67,7 @@ C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\ref\CryptoTradingPlatform.dll
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.pdb
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.genruntimeconfig.cache
+C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

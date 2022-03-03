@@ -111,7 +111,10 @@ var document = window.document;
 			for ( i in preservedScriptAttributes ) {
 
 				// Support: Firefox 64+, Edge 18+
-				// Some browsers don't support the "nonce" property on scripts.
+				// Some browsers don't support the "nonce" property on 
+
+
+.
 				// On the other hand, just using `getAttribute` is not enough as
 				// the `nonce` attribute is reset to an empty string whenever it
 				// becomes browsing-context connected.
