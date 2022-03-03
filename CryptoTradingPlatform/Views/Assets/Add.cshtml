@@ -4,18 +4,22 @@
     ViewData["Title"] = "Add Asset";
 }
 
+<div class="mb-3">
+    <h1>Add an asset</h1>
+    <h2>Create a new asset to be traided on the platform</h2>
+</div>
 <form method="post">
-  <div class="mb-3">
-    <label asp-for="Ticker" class="form-label">Ticker</label>
-    <input asp-for="Ticker" type="text" class="form-control">
-  </div>
-  <div class="mb-3">
-    <label asp-for="Name" class="form-label">Name</label>
-    <input asp-for="Name" type="text" class="form-control">
-  </div>
-   <div class="mb-3">
-    <label asp-for="ImageURL" class="form-label">Image URL</label>
-    <input asp-for="ImageURL" type="text" class="form-control">
-  </div>
-  <button type="submit" class="btn btn-primary">Add</button>
+    <div class="mb-3">
+        <label asp-for="Ticker" class="form-label">Ticker</label>
+        <input asp-for="Ticker" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="ImageURL" class="form-label">Image URL</label>
+        <input asp-for="ImageURL" type="text" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
 </form>

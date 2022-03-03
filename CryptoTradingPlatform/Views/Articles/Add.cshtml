@@ -4,6 +4,10 @@
     ViewData["Title"] = "Add Article";
 }
 
+<div class="mb-3">
+    <h1>Add an article</h1>
+    <h2>Share your knowledge with the users of this platform</h2>
+</div>
 <form method="post">
   <div class="mb-3">
     <label asp-for="ImageURL">Image Url</label>
@@ -12,7 +16,7 @@
 
   <div class="mb-3">
     <label asp-for="Content">Content</label>
-    <textarea asp-for="Content" class="form-control" rows="13"></textarea>
+    <textarea asp-for="Content" class="form-control" rows="12"></textarea>
   </div>
     <button type="submit" class="btn btn-primary">Add</button>
 </form>
