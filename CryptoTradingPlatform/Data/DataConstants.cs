@@ -16,6 +16,11 @@
 
         public const int CreditCardMaxLength = 20;
 
-        public const int ArticleMaxLength = 1000;
+        public const int ArticleMaxLength = 2000;
+
+        public const int CreatorNameMaxLength = 50;
+
+        public const int StoryMaxLength = 2000;
+
     }
 }

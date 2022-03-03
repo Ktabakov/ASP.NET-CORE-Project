@@ -23,5 +23,17 @@ namespace CryptoTradingPlatform.Data.Models
 
         [Required]
         public string ImageURL { get; set; }
+
+        [Required]
+        [MaxLength(DataConstants.CreatorNameMaxLength)]
+        public string CreatorName { get; set; }
+
+        [Required]
+        [Range(1, long.MaxValue)]
+        public long TotalSypply { get; set; }
+
+        [Required]
+        [MaxLength(DataConstants.StoryMaxLength)]
+        public string Story { get; set; }
     }
 }

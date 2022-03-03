@@ -4,21 +4,22 @@
     ViewData["Title"] = "Add Article";
 }
 
-<div class="mb-3">
+<div class="md-3">
     <h1>Add an article</h1>
     <h2>Share your knowledge with the users of this platform</h2>
 </div>
-<form method="post">
-  <div class="mb-3">
-    <label asp-for="ImageURL">Image Url</label>
-    <input asp-for="ImageURL" type="text" class="form-control">
-    <span asp-validation-for="ImageURL" class="small text-danger"></span>
-  </div>
-
-  <div class="mb-3">
-    <label asp-for="Content">Content</label>
-    <textarea asp-for="Content" class="form-control" rows="12"></textarea>
-    <span asp-validation-for="Content" class="small text-danger"></span>
-  </div>
-    <button type="submit" class="btn btn-primary">Add</button>
-</form>
+<section>
+    <form method="post">
+        <div class="col-sm-6">
+            <label asp-for="ImageURL">Image Url</label>
+            <input asp-for="ImageURL" type="text" class="form-control">
+            <span asp-validation-for="ImageURL" class="small text-danger"></span>
+        </div>
+        <div class="col-sm-6">
+            <label asp-for="Content">Content</label>
+            <textarea asp-for="Content" class="form-control" rows="12"></textarea>
+            <span asp-validation-for="Content" class="small text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</section>
