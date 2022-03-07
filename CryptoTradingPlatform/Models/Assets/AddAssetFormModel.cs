@@ -19,10 +19,12 @@ namespace CryptoTradingPlatform.Models.Assets
 
         [Required]
         [MaxLength(DataConstants.CreatorNameMaxLength)]
+        [Display(Name = "Creator Name")]
         public string CreatorName { get; set; }
 
         [Required]
         [Range(1, long.MaxValue)]
+        [Display(Name = "Total Sypply")]
         public long TotalSypply { get; set; }
 
         [Required]
