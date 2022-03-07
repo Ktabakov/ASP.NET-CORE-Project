@@ -9,5 +9,7 @@
         public const int AssetTickerMinLength = 2;
 
         public const int AssetTickerMaxLength = 8;
+
+        public const int QuestionMaxLength = 100;
     }
 }

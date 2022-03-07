@@ -1,0 +1,31 @@
+﻿@model AddAdminFormModel
+
+@{
+    ViewData["Title"] = "Become an Admin";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6 col-sm-12">
+            <h2 class="text-center">Fill the form and apply to become an Admin on our Exchange</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label>How much experience do you have as an Admin?</label>
+                    <select asp-for="Experience" class="form-control">
+                        <option>0 - 6 Months</option>
+                        <option>6 - 12 Months</option>
+                        <option>1 - 2 Years</option>
+                        <option>2 - 5 Years</option>
+                        <option>5 +</option>
+                    </select>
+                </div>
+                <div class="form-group mt-2">
+                    <label>Why do you wish to become an Admin?</label>
+                    <textarea asp-for="Question" class="form-control"></textarea>
+                    <span asp-validation-for="Question" class="small text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Apply</button>
+            </form>
+        </div>
+    </div>
+</div>

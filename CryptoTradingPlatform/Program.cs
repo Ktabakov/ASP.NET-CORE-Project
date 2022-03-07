@@ -12,7 +12,16 @@ builder.Services.AddDbContext<CryptoTradingDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    //options.SignIn.RequireConfirmedAccount = true;
+    //use the following for testing
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+
+})
     .AddEntityFrameworkStores<CryptoTradingDbContext>();
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>

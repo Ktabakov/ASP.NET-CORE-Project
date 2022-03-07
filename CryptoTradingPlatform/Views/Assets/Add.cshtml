@@ -12,37 +12,37 @@
             <h1 class="text-center">Add an asset</h1>
             <h2 class="text-center">Create a new asset to be traided on the platform</h2>
             <form method="post">
-                <div class="form-group" asp-validation-summary="ModelOnly">
+                <div class="form-group mt-2" asp-validation-summary="ModelOnly">
                     <label class="form-label">Ticker</label>
                     <input asp-for="Ticker" type="text" class="form-control">
                     <span asp-validation-for="Ticker" class="small text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Name</label>
+                <div class="form-group mt-2">
+                    <label class="form-label mt-2">Name</label>
                     <input asp-for="Name" type="text" class="form-control">
                     <span asp-validation-for="Name" class="small text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <label asp-for="CreatorName" class="form-label"></label>
                     <input asp-for="CreatorName" type="text" class="form-control">
                     <span asp-validation-for="CreatorName" class="small text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <label asp-for="TotalSypply" class="form-label"></label>
                     <input asp-for="TotalSypply" type="text" class="form-control">
                     <span asp-validation-for="TotalSypply" class="small text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <label class="form-label">Image URL</label>
                     <input asp-for="ImageURL" type="text" class="form-control">
                     <span asp-validation-for="ImageURL" class="small text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <label class="form-label">Story</label>
                     <textarea asp-for="Story" class="form-control" rows="4"></textarea>
                     <span asp-validation-for="Story" class="small text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="submit" class="btn btn-primary mt-2">Add</button>
             </form>
         </div>
     </div>
