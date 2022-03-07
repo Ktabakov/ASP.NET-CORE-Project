@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "CryptoTradingPlatform/1.0.0": {
         "dependencies": {
+          "CryptoTradingPlatfrom.Core": "1.0.0",
           "Microsoft.AspNet.WebApi.Client": "5.2.7",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.2",
@@ -1334,6 +1335,11 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "CryptoTradingPlatfrom.Core/1.0.0": {
+        "runtime": {
+          "CryptoTradingPlatfrom.Core.dll": {}
+        }
       }
     }
   },
@@ -2287,6 +2293,11 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "CryptoTradingPlatfrom.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

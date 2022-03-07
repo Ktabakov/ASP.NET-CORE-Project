@@ -2130,6 +2130,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
+      },
+      "CryptoTradingPlatfrom.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/CryptoTradingPlatfrom.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CryptoTradingPlatfrom.Core.dll": {}
+        }
       }
     }
   },
@@ -7363,10 +7373,16 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "CryptoTradingPlatfrom.Core/1.0.0": {
+      "type": "project",
+      "path": "../CryptoTradingPlatfrom.Core/CryptoTradingPlatfrom.Core.csproj",
+      "msbuildProject": "../CryptoTradingPlatfrom.Core/CryptoTradingPlatfrom.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "CryptoTradingPlatfrom.Core >= 1.0.0",
       "Microsoft.AspNet.WebApi.Client >= 5.2.7",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.2",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.2",
@@ -7403,7 +7419,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatfrom.Core\\CryptoTradingPlatfrom.Core.csproj": {
+              "projectPath": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatfrom.Core\\CryptoTradingPlatfrom.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

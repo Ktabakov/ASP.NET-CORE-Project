@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace CryptoTradingPlatform.ModelBinders
 {
-    public class DecimalModelBinder : IModelBinder
+    public class DoubleModelBinder : IModelBinder
     {
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
@@ -11,7 +11,7 @@ namespace CryptoTradingPlatform.ModelBinders
 
             if (valueResult != ValueProviderResult.None && !String.IsNullOrEmpty(valueResult.FirstValue))
             {
-                decimal actualValue = 0;
+                double actualValue = 0;
                 bool success = false;
 
                 try
@@ -20,8 +20,8 @@ namespace CryptoTradingPlatform.ModelBinders
                     decValue = decValue.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
                     decValue = decValue.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
-                    actualValue = Convert.ToDecimal(decValue, CultureInfo.CurrentCulture);
-                    success = true; 
+                    actualValue = Convert.ToDouble(decValue, CultureInfo.CurrentCulture);
+                    success = true;
 
                 }
                 catch (FormatException err)
