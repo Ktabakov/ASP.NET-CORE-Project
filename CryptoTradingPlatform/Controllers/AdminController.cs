@@ -13,7 +13,7 @@ namespace CryptoTradingPlatform.Controllers
         [HttpPost]
         public IActionResult Create(AddAdminFormModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //Save the user as an Admin
                 return Redirect("/");
