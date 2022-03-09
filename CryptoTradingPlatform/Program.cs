@@ -1,9 +1,9 @@
 using CryptoTradingPlatform.Data;
-using CryptoTradingPlatform.Infrastructure.Contracts;
-using CryptoTradingPlatform.Infrastructure.Services;
+using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Core.Services;
 using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.ModelBinders;
-using CryptoTradingPlatfrom.Core.Constants;
+using CryptoTradingPlatfrom.Infrastructure.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +32,7 @@ builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
         options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-        options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormatingConstant.MyDateFormat));
+        options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormatingConstants.MyDateFormat));
         options.ModelBinderProviders.Insert(2, new DoubleModelBinderProvider());
     });
 

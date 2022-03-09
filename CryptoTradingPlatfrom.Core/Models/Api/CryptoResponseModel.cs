@@ -1,4 +1,4 @@
-﻿namespace CryptoTradingPlatform.Models.Api
+﻿namespace CryptoTradingPlatform.Core.Models.Api
 {
     public class CryptoResponseModel
     {

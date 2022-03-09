@@ -1,11 +1,9 @@
-﻿using CryptoTradingPlatform.Infrastructure.Contracts;
-using CryptoTradingPlatform.Models.Api;
-using CryptoTradingPlatform.Infrastructure.Constants;
-using System.Net;
-using System.Web;
+﻿using CryptoTradingPlatform.Core.Constants;
+using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Core.Models.Api;
 using Newtonsoft.Json.Linq;
 
-namespace CryptoTradingPlatform.Infrastructure.Services
+namespace CryptoTradingPlatform.Core.Services
 {
     public class CryptoApiService : ICryptoApiService
     {

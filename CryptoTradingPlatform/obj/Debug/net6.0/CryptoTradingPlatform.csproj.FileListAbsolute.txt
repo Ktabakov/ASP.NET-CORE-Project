@@ -55,7 +55,6 @@ C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.AssemblyInfoInputs.cache
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.AssemblyInfo.cs
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.csproj.CoreCompileInputs.cache
-C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.RazorAssemblyInfo.cache
 C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\obj\Debug\net6.0\CryptoTradingPlatform.RazorAssemblyInfo.cs

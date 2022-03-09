@@ -1,5 +1,5 @@
-﻿using CryptoTradingPlatform.Infrastructure.Contracts;
-using CryptoTradingPlatform.Models.Api;
+﻿using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Core.Models.Api;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoTradingPlatform.Controllers.Api
