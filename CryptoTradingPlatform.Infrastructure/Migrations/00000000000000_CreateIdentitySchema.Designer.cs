@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using CryptoTradingPlatform.Infrastructure.Data;
 using System;
 
 namespace CryptoTradingPlatform.Data.Migrations

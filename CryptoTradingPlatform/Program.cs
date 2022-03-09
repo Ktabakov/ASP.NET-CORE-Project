@@ -1,6 +1,7 @@
 using CryptoTradingPlatform.Data;
 using CryptoTradingPlatform.Infrastructure.Contracts;
 using CryptoTradingPlatform.Infrastructure.Services;
+using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.ModelBinders;
 using CryptoTradingPlatfrom.Core.Constants;
 using Microsoft.AspNetCore.Identity;

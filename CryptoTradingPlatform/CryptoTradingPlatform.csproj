@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CryptoTradingPlatform.Infrastructure\CryptoTradingPlatform.Infrastructure.csproj" />
-    <ProjectReference Include="..\CryptoTradingPlatfrom.Core\CryptoTradingPlatfrom.Core.csproj" />
   </ItemGroup>
 
 </Project>
