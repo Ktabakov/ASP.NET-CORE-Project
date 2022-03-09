@@ -13,5 +13,7 @@
         public long CirculatingSupply { get; init; }
 
         public decimal PercentChange { get; init; }
+
+        public string Logo { get; set; }
     }
 }

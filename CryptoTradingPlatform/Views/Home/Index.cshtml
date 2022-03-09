@@ -9,16 +9,66 @@
 <div>
     <p class="lead">Sign up today and get a 300,000 USD Bonus!</p>
 </div>
+
+<table class="table table-hover text-nowrap mt-4 cryptotable">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Ticker</th>
+            <th scope="col">Price</th>
+            <th scope="col">Market Cap</th>
+            <th scope="col">Change 24h</th>
+            <th scope="col">Circulating Supply</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+    </tbody>
+</table>
+
 <div class="fc-d03c8e14-1 fc-d03c8e14-3"></div></>
 <div>
     <a data-bn-type="button" aria-label="register" class="btn btn-primary" href="/Identity/Account/Register">Get Started</a>
 </div>
 
-
-
 @section Scripts {
 <script>
+    $(document).ready(function(){
+        $.get('/api/crypto', function(data){
+            console.log(data)
+            var html = '';
+            for(var i = 0; i < data.length; i++){
+                 html += '<tr class="cryptotable">'+                         
+                            '<td>' +   
+                            '<picture>' +
+                            '<img src="' + data[i].logo + '" alt="logo" width="36" height="36">' + 
+                             '</picture>' +
+                             '&emsp;' + data[i].name + '</td>' +
+                            '<td>' + data[i].ticker + '</td>' +
+                            '<td>' + '$' + data[i].price.toFixed(2) + '</td>' +
+                            '<td>' + '$' + data[i].marketCap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</td>';
+                        if (data[i].percentChange >= 0){
+                          html +=
+                            '<td>' +
+                            '<span class="text-success">' +
+                            '<i class="fas fa-caret-up me-1">' + data[i].percentChange.toFixed(2) + '%' + '</i>' +
+                            '</span>'+
+                            '</td>';
+                        }else{
+                            html +=
+                            '<td>' +
+                            '<span class="text-danger">' +
+                            '<i class="fas fa-caret-down me-1">' + data[i].percentChange.toFixed(2) + '%' + '</i>' +
+                            '</span>'+
+                            '</td>';
+                        }
+                             html +=
+                            '<td>' + data[i].circulatingSupply.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</td>' +
+                        '</tr>';
 
+            }
+            $('#tbody').first().append(html);
+        })
+    })
 </script>
 }
 

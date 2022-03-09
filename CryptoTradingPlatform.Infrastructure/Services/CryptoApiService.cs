@@ -13,16 +13,13 @@ namespace CryptoTradingPlatform.Infrastructure.Services
 
         public async Task<CryptoResponseModel> GetFirst()
         {
-
-            client.DefaultRequestHeaders.Add("Accepts", "application/json");
-            client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
-
-            HttpResponseMessage response = await client.GetAsync(ApiConstants.BasePath + "?symbol=btc");
+            InitRequest();
+            HttpResponseMessage response = await client.GetAsync(ApiConstants.LatestPath + "?symbol=btc");
 
             if (!response.IsSuccessStatusCode)
             {
                 return null;
-            } 
+            }
 
             var result = await response.Content.ReadAsStringAsync();
 
@@ -40,16 +37,27 @@ namespace CryptoTradingPlatform.Infrastructure.Services
 
         }
 
+        public async Task<string> GetImgUrl(string ticker)
+        {
+            HttpResponseMessage response = await client.GetAsync(ApiConstants.InfoPath + "?symbol=" + ticker);
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+            var result = await response.Content.ReadAsStringAsync();
+            JObject json = JObject.Parse(result);
+            string url = json["data"][ticker]["logo"].ToString();
+            return url;
+
+        }
         public async Task<IEnumerable<CryptoResponseModel>> GetTopFive()
         {
-            client.DefaultRequestHeaders.Add("Accepts", "application/json");
-            client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
-
+            InitRequest();
             //change the request later for all cryptos in the database
             //take the tickers and add in request
             //foreach them on the page
 
-            HttpResponseMessage response = await client.GetAsync(ApiConstants.BasePath + "?symbol=btc,eth,bnb,ada,dot");
+            HttpResponseMessage response = await client.GetAsync(ApiConstants.LatestPath + "?symbol=btc,eth,bnb,ada,dot");
 
             if (!response.IsSuccessStatusCode)
             {
@@ -63,20 +71,31 @@ namespace CryptoTradingPlatform.Infrastructure.Services
 
             foreach (var crypto in json["data"])
             {
+                var ticker = crypto.First[0]["symbol"].ToString();
                 CryptoResponseModel model = new CryptoResponseModel()
                 {
                     CirculatingSupply = (long)crypto.First[0]["circulating_supply"],
                     Name = crypto.First[0]["name"].ToString(),
                     Price = (decimal)crypto.First[0]["quote"]["USD"]["price"],
                     MarketCap = (decimal)crypto.First[0]["quote"]["USD"]["market_cap"],
-                    Ticker = crypto.First[0]["symbol"].ToString(),
+                    Ticker = ticker,
                     PercentChange = (decimal)crypto.First[0]["quote"]["USD"]["volume_change_24h"]
                 };
+                var url = await GetImgUrl(ticker);
+                model.Logo = url;
                 cryptos.Add(model);
             }
+
             return cryptos;
         }
-      
+        private static void InitRequest()
+        {
+            if (!client.DefaultRequestHeaders.Contains("Accepts"))
+            {
+                client.DefaultRequestHeaders.Add("Accepts", "application/json");
+                client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
+            }
+        }
     }
 }
 
