@@ -1,4 +1,6 @@
 using CryptoTradingPlatform.Data;
+using CryptoTradingPlatform.Infrastructure.Contracts;
+using CryptoTradingPlatform.Infrastructure.Services;
 using CryptoTradingPlatform.ModelBinders;
 using CryptoTradingPlatfrom.Core.Constants;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<CryptoTradingDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddScoped<ICryptoApiService, CryptoApiService>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
@@ -31,11 +34,13 @@ builder.Services.AddControllersWithViews()
         options.ModelBinderProviders.Insert(2, new DoubleModelBinderProvider());
     });
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{ 
+{
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
 }
@@ -45,6 +50,13 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+
+//try configure cors
+app.UseCors(options =>
+{
+    options.WithOrigins("https://pro-api.coinmarketcap.com");
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
