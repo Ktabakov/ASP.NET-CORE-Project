@@ -6,12 +6,12 @@
 
         public string Name { get; init; }
 
-        public string Price { get; init; }
+        public decimal Price { get; init; }
 
-        public string MarketCap { get; init; }
+        public decimal MarketCap { get; init; }
 
-        public string CirculatingSupply { get; init; }
+        public long CirculatingSupply { get; init; }
 
-        public string Volume { get; init; }
+        public decimal PercentChange { get; init; }
     }
 }

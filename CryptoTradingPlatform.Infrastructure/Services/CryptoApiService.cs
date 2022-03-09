@@ -29,12 +29,12 @@ namespace CryptoTradingPlatform.Infrastructure.Services
             JObject json = JObject.Parse(result);
             CryptoResponseModel model = new CryptoResponseModel()
             {
-                CirculatingSupply = json["data"]["BTC"][0]["circulating_supply"].ToString(),
+                CirculatingSupply = (long)json["data"]["BTC"][0]["circulating_supply"],
                 Name = json["data"]["BTC"][0]["name"].ToString(),
-                Price = json["data"]["BTC"][0]["quote"]["USD"]["price"].ToString(),
-                MarketCap = json["data"]["BTC"][0]["quote"]["USD"]["market_cap"].ToString(),
+                Price = (decimal)json["data"]["BTC"][0]["quote"]["USD"]["price"],
+                MarketCap = (decimal)json["data"]["BTC"][0]["quote"]["USD"]["market_cap"],
                 Ticker = json["data"]["BTC"][0]["symbol"].ToString(),
-                Volume = json["data"]["BTC"][0]["quote"]["USD"]["volume_24h"].ToString()
+                PercentChange = (decimal)json["data"]["BTC"][0]["quote"]["USD"]["percent_change_24h"]
             };
             return model;
 
@@ -44,6 +44,10 @@ namespace CryptoTradingPlatform.Infrastructure.Services
         {
             client.DefaultRequestHeaders.Add("Accepts", "application/json");
             client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
+
+            //change the request later for all cryptos in the database
+            //take the tickers and add in request
+            //foreach them on the page
 
             HttpResponseMessage response = await client.GetAsync(ApiConstants.BasePath + "?symbol=btc,eth,bnb,ada,dot");
 
@@ -61,12 +65,12 @@ namespace CryptoTradingPlatform.Infrastructure.Services
             {
                 CryptoResponseModel model = new CryptoResponseModel()
                 {
-                    CirculatingSupply = crypto.First[0]["circulating_supply"].ToString(),
+                    CirculatingSupply = (long)crypto.First[0]["circulating_supply"],
                     Name = crypto.First[0]["name"].ToString(),
-                    Price = crypto.First[0]["quote"]["USD"]["price"].ToString(),
-                    MarketCap = crypto.First[0]["quote"]["USD"]["market_cap"].ToString(),
+                    Price = (decimal)crypto.First[0]["quote"]["USD"]["price"],
+                    MarketCap = (decimal)crypto.First[0]["quote"]["USD"]["market_cap"],
                     Ticker = crypto.First[0]["symbol"].ToString(),
-                    Volume = crypto.First[0]["quote"]["USD"]["volume_24h"].ToString()
+                    PercentChange = (decimal)crypto.First[0]["quote"]["USD"]["volume_change_24h"]
                 };
                 cryptos.Add(model);
             }
