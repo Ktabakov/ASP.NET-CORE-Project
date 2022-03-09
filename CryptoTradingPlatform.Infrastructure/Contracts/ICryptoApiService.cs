@@ -11,6 +11,6 @@ namespace CryptoTradingPlatform.Infrastructure.Contracts
     {
         Task<CryptoResponseModel> GetFirst();
 
-        Task<IEnumerable<CryptoResponseModel>> GetTopFive();
+        Task<IEnumerable<CryptoResponseModel>> GetTopFive(List<string> tickers);
     }
 }

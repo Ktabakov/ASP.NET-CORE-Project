@@ -37,27 +37,31 @@ namespace CryptoTradingPlatform.Infrastructure.Services
 
         }
 
-        public async Task<string> GetImgUrl(string ticker)
+        public async Task<List<string>> GetImgUrls(List<string> tickers)
         {
-            HttpResponseMessage response = await client.GetAsync(ApiConstants.InfoPath + "?symbol=" + ticker);
+            HttpResponseMessage response = await client.GetAsync(ApiConstants.InfoPath + "?symbol=" + string.Join(',', tickers));
+            List<string> list = new List<string>();
             if (!response.IsSuccessStatusCode)
             {
                 return null;
             }
             var result = await response.Content.ReadAsStringAsync();
             JObject json = JObject.Parse(result);
-            string url = json["data"][ticker]["logo"].ToString();
-            return url;
+            foreach (var item in json["data"])
+            {
+                list.Add(item.First["logo"].ToString());
+            }
+            return list;
 
         }
-        public async Task<IEnumerable<CryptoResponseModel>> GetTopFive()
+        public async Task<IEnumerable<CryptoResponseModel>> GetTopFive(List<string> tickers)
         {
             InitRequest();
             //change the request later for all cryptos in the database
             //take the tickers and add in request
             //foreach them on the page
 
-            HttpResponseMessage response = await client.GetAsync(ApiConstants.LatestPath + "?symbol=btc,eth,bnb,ada,dot");
+            HttpResponseMessage response = await client.GetAsync(ApiConstants.LatestPath + "?symbol=" + string.Join(',',tickers));
 
             if (!response.IsSuccessStatusCode)
             {
@@ -67,25 +71,28 @@ namespace CryptoTradingPlatform.Infrastructure.Services
             var result = await response.Content.ReadAsStringAsync();
 
             List<CryptoResponseModel> cryptos = new List<CryptoResponseModel>();
+            List<string> list = new List<string>();
             JObject json = JObject.Parse(result);
 
             foreach (var crypto in json["data"])
             {
-                var ticker = crypto.First[0]["symbol"].ToString();
                 CryptoResponseModel model = new CryptoResponseModel()
                 {
                     CirculatingSupply = (long)crypto.First[0]["circulating_supply"],
                     Name = crypto.First[0]["name"].ToString(),
                     Price = (decimal)crypto.First[0]["quote"]["USD"]["price"],
                     MarketCap = (decimal)crypto.First[0]["quote"]["USD"]["market_cap"],
-                    Ticker = ticker,
-                    PercentChange = (decimal)crypto.First[0]["quote"]["USD"]["volume_change_24h"]
+                    Ticker = crypto.First[0]["symbol"].ToString(),
+                    PercentChange = (decimal)crypto.First[0]["quote"]["USD"]["percent_change_24h"]
                 };
-                var url = await GetImgUrl(ticker);
-                model.Logo = url;
                 cryptos.Add(model);
+                list.Add(model.Ticker);
             }
-
+            var urls = await GetImgUrls(list);
+            for (int i = 0; i < cryptos.Count; i++)
+            {
+                cryptos[i].Logo = urls[i];
+            }
             return cryptos;
         }
         private static void InitRequest()

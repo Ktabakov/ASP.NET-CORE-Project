@@ -24,7 +24,10 @@ namespace CryptoTradingPlatform.Controllers.Api
         [HttpGet]
         public Task<IEnumerable<CryptoResponseModel>> TopFive()
         {
-            return cryptoApiService.GetTopFive();
+            List<string> tickers = new List<string>{ "btc", "eth", "bnb", "ada", "dot"};
+            //get cryptos from db and make api call
+            //test with list<string>
+            return cryptoApiService.GetTopFive(tickers);
         }
 
     }
