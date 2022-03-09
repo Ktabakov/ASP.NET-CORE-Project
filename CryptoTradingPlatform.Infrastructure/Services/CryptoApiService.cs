@@ -40,9 +40,37 @@ namespace CryptoTradingPlatform.Infrastructure.Services
 
         }
 
-        public TopCryptosApiRequestModel GetTopFive()
+        public async Task<IEnumerable<CryptoResponseModel>> GetTopFive()
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Add("Accepts", "application/json");
+            client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
+
+            HttpResponseMessage response = await client.GetAsync(ApiConstants.BasePath + "?symbol=btc,eth,bnb,ada,dot");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var result = await response.Content.ReadAsStringAsync();
+
+            List<CryptoResponseModel> cryptos = new List<CryptoResponseModel>();
+            JObject json = JObject.Parse(result);
+
+            foreach (var crypto in json["data"])
+            {
+                CryptoResponseModel model = new CryptoResponseModel()
+                {
+                    CirculatingSupply = crypto.First[0]["circulating_supply"].ToString(),
+                    Name = crypto.First[0]["name"].ToString(),
+                    Price = crypto.First[0]["quote"]["USD"]["price"].ToString(),
+                    MarketCap = crypto.First[0]["quote"]["USD"]["market_cap"].ToString(),
+                    Ticker = crypto.First[0]["symbol"].ToString(),
+                    Volume = crypto.First[0]["quote"]["USD"]["volume_24h"].ToString()
+                };
+                cryptos.Add(model);
+            }
+            return cryptos;
         }
       
     }

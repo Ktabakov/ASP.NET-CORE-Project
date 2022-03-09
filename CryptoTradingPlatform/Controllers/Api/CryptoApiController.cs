@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CryptoTradingPlatform.Controllers.Api
 {
     [ApiController]
-    [Route("api/crypto")]
     public class CryptoApiController : ControllerBase
     {
         private readonly ICryptoApiService cryptoApiService;
@@ -13,12 +12,19 @@ namespace CryptoTradingPlatform.Controllers.Api
         {
             cryptoApiService = _cryptoApiService;
         }
-        
+
         [HttpGet]
+        [Route("api/crypto/first")]
         public Task<CryptoResponseModel> First()
         {
-            var result = cryptoApiService.GetFirst();
-            return result;
+            return cryptoApiService.GetFirst();
+        }
+
+        [HttpGet]
+        [Route("api/crypto/top")]
+        public Task<IEnumerable<CryptoResponseModel>> TopFive()
+        {
+            return cryptoApiService.GetTopFive();
         }
 
     }
