@@ -1,4 +1,5 @@
 ﻿using CryptoTradingPlatform.Models;
+using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,9 +8,11 @@ namespace CryptoTradingPlatform.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IAssetService assetService;
+        public HomeController(ILogger<HomeController> logger, IAssetService _assetService)
         {
             _logger = logger;
+            assetService = _assetService;
         }
 
         public IActionResult Index()

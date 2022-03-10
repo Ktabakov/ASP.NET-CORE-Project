@@ -48,6 +48,11 @@ namespace CryptoTradingPlatfrom.Core.Services
             return (success, error);
         }
 
+        public List<string> GetIds()
+        {
+            return data.Assets.Select(x => x.Id).ToList();
+        }
+
         public List<string> GetTickers()
         {
             return data.Assets.Select(x => x.Ticker).ToList();

@@ -11,5 +11,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
     {
         (bool, string) AddAsset(CryptoResponseModel model);
         List<string> GetTickers();
+        List<string> GetIds();
     }
 }

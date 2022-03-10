@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
 <div>
     <h1 class="display-3">Buy & Sell Crypto</h1>
     <h1 class="display-4">The Best Bulgarian Trading Platform</h1>
@@ -66,10 +67,13 @@
                             '<td>' + data[i].circulatingSupply.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</td>';
                         html +=
                              '<td>' +
+                              '<a href="/Assets/Details/assetName=' + data[i].name +
+                              '"class="button btn btn-primary">Details</a>' +
+                              '&emsp;' + 
                               '<a href="/Assets/Swap" class="button btn btn-success">Buy</a>' +
                              '</td>' +
                              '</tr>';                                            
-            }
+            }            
             $('#tbody').first().append(html);
         })
     })
