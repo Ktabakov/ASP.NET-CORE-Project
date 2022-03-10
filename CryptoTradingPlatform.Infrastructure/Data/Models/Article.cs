@@ -17,6 +17,7 @@ namespace CryptoTradingPlatform.Data.Models
         public string Content { get; set; }
 
         [Required]
+        [MaxLength(DataConstants.ImageUrlMaxLength)]
         public string ImageURL { get; set; }
     }
 }

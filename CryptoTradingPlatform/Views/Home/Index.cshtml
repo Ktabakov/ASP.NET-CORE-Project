@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody id="tbody">
-    </tbody >
+    </tbody>
 </table>
 
 <div class="fc-d03c8e14-1 fc-d03c8e14-3"></div></>
@@ -37,13 +37,13 @@
             console.log(data)
             var html = '';
             for(var i = 0; i < data.length; i++){
-                 html += '<tr class="cryptotable">'+                         
+                 html += '<tr class="cryptotable">'+ 
                             '<td>' +   
                             '<picture>' +
                             '<img src="' + data[i].logo + '" alt="logo" width="36" height="36">' + 
                              '</picture>' +
                              '&emsp;' + data[i].name + '</td>' +
-                            '<td>' + data[i].ticker + '</td>' +
+                            '<td class="text-muted">' + data[i].ticker + '</td>' +
                             '<td>' + '$' + data[i].price.toFixed(2) + '</td>' +
                             '<td>' + '$' + data[i].marketCap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</td>';
                         if (data[i].percentChange >= 0){

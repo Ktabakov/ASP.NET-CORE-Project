@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CryptoTradingPlatform.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CryptoTradingPlatform.Infrastructure.Data
@@ -9,5 +10,14 @@ namespace CryptoTradingPlatform.Infrastructure.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
+        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Asset> Assets { get; set; }
     }
 }

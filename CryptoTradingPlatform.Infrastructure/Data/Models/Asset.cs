@@ -22,6 +22,7 @@ namespace CryptoTradingPlatform.Data.Models
         public string Ticker { get; set; }
 
         [Required]
+        [MaxLength(DataConstants.ImageUrlMaxLength)]
         public string ImageURL { get; set; }
 
         [Required]
@@ -30,10 +31,10 @@ namespace CryptoTradingPlatform.Data.Models
 
         [Required]
         [Range(1, long.MaxValue)]
-        public long TotalSypply { get; set; }
+        public long CirculatingSupply { get; set; }
 
         [Required]
-        [MaxLength(DataConstants.StoryMaxLength)]
-        public string Story { get; set; }
+        [MaxLength(DataConstants.DescriptionMaxLength)]
+        public string Description { get; set; }
     }
 }

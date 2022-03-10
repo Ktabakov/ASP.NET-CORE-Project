@@ -28,8 +28,8 @@ namespace CryptoTradingPlatform.Models.Assets
         public long TotalSypply { get; set; }
 
         [Required]
-        [MaxLength(DataConstants.StoryMaxLength)]
-        public string Story { get; set; }
+        [MaxLength(DataConstants.DescriptionMaxLength)]
+        public string Description { get; set; }
 
     }
 }

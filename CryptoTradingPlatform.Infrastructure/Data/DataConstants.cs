@@ -20,7 +20,9 @@
 
         public const int CreatorNameMaxLength = 50;
 
-        public const int StoryMaxLength = 2000;
+        public const int DescriptionMaxLength = 2000;
+
+        public const int ImageUrlMaxLength = 2048;
 
     }
 }
