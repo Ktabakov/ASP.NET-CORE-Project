@@ -12,17 +12,17 @@
             <h1 class="text-center">Add an asset</h1>
             <h2 class="text-center">Create a new asset to be traided on the platform</h2>
             <form method="post">
-                <div class="form-group mt-2" asp-validation-summary="ModelOnly">
-                    <label class="form-label">Ticker</label>
+                <div class="form-group mt-2">
+                    <label class="form-label">Ticker - write down the ticker of the asset and we'll do the rest!</label>
                     <input asp-for="Ticker" type="text" class="form-control">
                     <span asp-validation-for="Ticker" class="small text-danger"></span>
                 </div>
-                <div class="form-group mt-2">
+               @* <div class="form-group mt-2">
                     <label class="form-label mt-2">Name</label>
                     <input asp-for="Name" type="text" class="form-control">
                     <span asp-validation-for="Name" class="small text-danger"></span>
-                </div>
-                <div class="form-group mt-2">
+                </div>*@
+                @*<div class="form-group mt-2">
                     <label asp-for="CreatorName" class="form-label"></label>
                     <input asp-for="CreatorName" type="text" class="form-control">
                     <span asp-validation-for="CreatorName" class="small text-danger"></span>
@@ -41,7 +41,7 @@
                     <label class="form-label">Story</label>
                     <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                     <span asp-validation-for="Description" class="small text-danger"></span>
-                </div>
+                </div>*@
                 <button type="submit" class="btn btn-primary mt-2">Add</button>
             </form>
         </div>

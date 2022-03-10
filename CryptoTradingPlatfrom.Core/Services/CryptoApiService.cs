@@ -10,31 +10,6 @@ namespace CryptoTradingPlatform.Core.Services
     {
         static HttpClient client = new HttpClient();
 
-        public async Task<CryptoResponseModel> GetFirst()
-        {
-            InitRequest();
-            HttpResponseMessage response = await client.GetAsync(ApiConstants.LatestPath + "?symbol=btc");
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
-
-            var result = await response.Content.ReadAsStringAsync();
-
-            JObject json = JObject.Parse(result);
-            CryptoResponseModel model = new CryptoResponseModel()
-            {
-                CirculatingSupply = (long)json["data"]["BTC"][0]["circulating_supply"],
-                Name = json["data"]["BTC"][0]["name"].ToString(),
-                Price = (decimal)json["data"]["BTC"][0]["quote"]["USD"]["price"],
-                MarketCap = (decimal)json["data"]["BTC"][0]["quote"]["USD"]["market_cap"],
-                Ticker = json["data"]["BTC"][0]["symbol"].ToString(),
-                PercentChange = (decimal)json["data"]["BTC"][0]["quote"]["USD"]["percent_change_24h"]
-            };
-            return model;
-
-        }
 
         public async Task<List<ImageDescriptionResponseModel>> GetImgUrls(List<string> tickers)
         {
@@ -58,7 +33,9 @@ namespace CryptoTradingPlatform.Core.Services
             return list;
 
         }
-        public async Task<IEnumerable<CryptoResponseModel>> GetTopFive(List<string> tickers)
+       
+       
+        public async Task<List<CryptoResponseModel>> GetCryptos(List<string> tickers)
         {
             InitRequest();
             //change the request later for all cryptos in the database

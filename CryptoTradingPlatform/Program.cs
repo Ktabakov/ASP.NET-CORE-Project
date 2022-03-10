@@ -6,6 +6,8 @@ using CryptoTradingPlatform.ModelBinders;
 using CryptoTradingPlatfrom.Infrastructure.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using CryptoTradingPlatfrom.Core.Contracts;
+using CryptoTradingPlatfrom.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<ICryptoApiService, CryptoApiService>();
+builder.Services.AddScoped<IAssetService, AssetService>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {

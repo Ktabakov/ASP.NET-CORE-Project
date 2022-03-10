@@ -1,5 +1,6 @@
 ﻿using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoTradingPlatform.Controllers.Api
@@ -9,9 +10,11 @@ namespace CryptoTradingPlatform.Controllers.Api
     public class CryptoApiController : ControllerBase
     {
         private readonly ICryptoApiService cryptoApiService;
-        public CryptoApiController(ICryptoApiService _cryptoApiService)
+        private readonly IAssetService assetService;
+        public CryptoApiController(ICryptoApiService _cryptoApiService, IAssetService _assetService)
         {
             cryptoApiService = _cryptoApiService;
+            assetService = _assetService;
         }
 
         /*[HttpGet]
@@ -22,12 +25,14 @@ namespace CryptoTradingPlatform.Controllers.Api
         }*/
 
         [HttpGet]
-        public Task<IEnumerable<CryptoResponseModel>> TopFive()
+        public Task<List<CryptoResponseModel>> Top()
         {
-            List<string> tickers = new List<string>{ "btc", "eth", "bnb", "ada", "dot","usdt","usdc","luna","trx","xrp"};
+            /* List<string> tickers = new List<string>{ "btc", "eth", "bnb", "ada", "dot","usdt","usdc","luna","trx","xrp"};*/
+
+            List<string> tickers = assetService.GetTickers();
             //get cryptos from db and make api call
             //test with list<string>
-            return cryptoApiService.GetTopFive(tickers);
+            return cryptoApiService.GetCryptos(tickers);
         }
 
     }

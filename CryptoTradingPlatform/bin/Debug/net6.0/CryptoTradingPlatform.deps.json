@@ -9,6 +9,7 @@
       "CryptoTradingPlatform/1.0.0": {
         "dependencies": {
           "CryptoTradingPlatform.Infrastructure": "1.0.0",
+          "CryptoTradingPlatfrom.Core": "1.0.0",
           "Microsoft.AspNet.WebApi.Client": "5.2.7",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.2",
@@ -2335,7 +2336,6 @@
       },
       "CryptoTradingPlatform.Infrastructure/1.0.0": {
         "dependencies": {
-          "CryptoTradingPlatfrom.Core": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.2",
@@ -2347,6 +2347,7 @@
       },
       "CryptoTradingPlatfrom.Core/1.0.0": {
         "dependencies": {
+          "CryptoTradingPlatform.Infrastructure": "1.0.0",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {

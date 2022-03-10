@@ -26,10 +26,6 @@ namespace CryptoTradingPlatform.Data.Models
         public string ImageURL { get; set; }
 
         [Required]
-        [MaxLength(DataConstants.CreatorNameMaxLength)]
-        public string CreatorName { get; set; }
-
-        [Required]
         [Range(1, long.MaxValue)]
         public long CirculatingSupply { get; set; }
 

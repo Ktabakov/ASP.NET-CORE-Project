@@ -3208,7 +3208,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "CryptoTradingPlatfrom.Core": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.2",
@@ -3225,6 +3224,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "CryptoTradingPlatform.Infrastructure": "1.0.0",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
@@ -9995,6 +9995,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "CryptoTradingPlatform.Infrastructure >= 1.0.0",
+      "CryptoTradingPlatfrom.Core >= 1.0.0",
       "Microsoft.AspNet.WebApi.Client >= 5.2.7",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.2",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.2",
@@ -10035,6 +10036,9 @@
           "projectReferences": {
             "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform.Infrastructure\\CryptoTradingPlatform.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform.Infrastructure\\CryptoTradingPlatform.Infrastructure.csproj"
+            },
+            "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatfrom.Core\\CryptoTradingPlatfrom.Core.csproj": {
+              "projectPath": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatfrom.Core\\CryptoTradingPlatfrom.Core.csproj"
             }
           }
         }

@@ -6,14 +6,14 @@ namespace CryptoTradingPlatform.Models.Assets
     public class AddAssetFormModel
     {
 
-        [Required]
+/*        [Required]
         [MaxLength(DataConstants.AssetMaxLength)]
         public string Name { get; set; }
-
+*/
         [Required]
         [MaxLength(DataConstants.TickerMaxLength)]
         public string Ticker { get; set; }
-
+/*
         [Required]
         public string ImageURL { get; set; }
 
@@ -29,7 +29,7 @@ namespace CryptoTradingPlatform.Models.Assets
 
         [Required]
         [MaxLength(DataConstants.DescriptionMaxLength)]
-        public string Description { get; set; }
+        public string Description { get; set; }*/
 
     }
 }

@@ -1,4 +1,7 @@
-﻿using CryptoTradingPlatform.Models.Assets;
+﻿using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatform.Models.Assets;
+using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +9,14 @@ namespace CryptoTradingPlatform.Controllers
 {
     public class AssetsController : Controller
     {
+        private readonly ICryptoApiService cryptoApiService;
+        private readonly IAssetService assetService;
+
+        public AssetsController(ICryptoApiService _cryptoApiService, IAssetService _assetService)
+        {
+            cryptoApiService = _cryptoApiService;
+            assetService = _assetService;
+        }
         public IActionResult Add() => View();
 
         //when add asset maybe add only name and ticker, make the call to the api, get the rest of the infos
@@ -14,7 +25,43 @@ namespace CryptoTradingPlatform.Controllers
         [HttpPost]
         public IActionResult Add(AddAssetFormModel asset) 
         {
-            return View();
+            var isNumeric = int.TryParse(asset.Ticker, out int value);
+
+            //Maybe toaster cant be number - and refresh page
+            if (isNumeric)
+            {
+                return View();
+            }
+            //Maybe toaster random mistake - and refresh page
+            if (!ModelState.IsValid)
+            {   
+                return View();
+            }
+
+            List<string> assets = new List<string>();
+            assets.Add(asset.Ticker);
+
+            Task<List<CryptoResponseModel>> models = cryptoApiService.GetCryptos(assets);
+
+            //Maybe toaster invalid asset - and refresh page
+            if (models.Result == null)
+            {
+                return View();
+            }
+
+            //Call assetservice and save model into DB
+            //Aater that redirect to home and list all assets
+            CryptoResponseModel model = models.Result.FirstOrDefault();
+            (bool success, string error) = assetService.AddAsset(model);
+
+            if (!success)
+            {
+                return View();
+            }
+            
+            return Redirect("/");
         }
+
+        public IActionResult Trade() => View();
     }
 }

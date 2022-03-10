@@ -4,16 +4,18 @@ using CryptoTradingPlatform.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
+namespace CryptoTradingPlatform.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220310114252_AddAssets")]
+    partial class AddAssets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,6 +53,11 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
                     b.Property<long>("CirculatingSupply")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CreatorName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(2000)
@@ -80,6 +87,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
                         {
                             Id = "1",
                             CirculatingSupply = 18978012L,
+                            CreatorName = "Satoshi Nakamoto",
                             Description = "Bitcoin (BTC) is a cryptocurrency . Users are able to generate BTC through the process of mining.",
                             ImageURL = "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png",
                             Name = "Bitcoin",
@@ -89,6 +97,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
                         {
                             Id = "2",
                             CirculatingSupply = 987579314L,
+                            CreatorName = "Vitalik Buterin",
                             Description = "Ethereum (ETH) is a cryptocurrency . Users are able to generate ETH through the process of mining.",
                             ImageURL = "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png",
                             Name = "Ethereum",
