@@ -20,11 +20,11 @@ namespace CryptoTradingPlatfrom.Core.Services
             string error = string.Empty;
             if (model == null)
             {
-                return (success, error);
+                return (success, "The Asset can't be empty");
             }
             if (data.Assets.Any(c => c.Ticker == model.Ticker))
             {
-                return (success, error);
+                return (success, "That Asset already exists on the plattform");
             }
             Asset asset = new Asset()
             {
