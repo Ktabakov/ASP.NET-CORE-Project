@@ -1,5 +1,6 @@
 ﻿using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatform.Models;
 using CryptoTradingPlatform.Models.Assets;
 using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Authorization;
@@ -30,12 +31,12 @@ namespace CryptoTradingPlatform.Controllers
             //Maybe toaster cant be number - and refresh page
             if (isNumeric)
             {
-                return View();
+                return View("Error", new ErrorViewModel { Message = "Ticker cannot but a number" });
             }
             //Maybe toaster random mistake - and refresh page
             if (!ModelState.IsValid)
-            {   
-                return View();
+            {
+                return View("Error", new ErrorViewModel { Message = "An unexpected error has occurred" });
             }
 
             List<string> assets = new List<string>();
@@ -46,7 +47,7 @@ namespace CryptoTradingPlatform.Controllers
             //Maybe toaster invalid asset - and refresh page
             if (models.Result == null)
             {
-                return View();
+                return View("Error", new ErrorViewModel { Message = "Ticker is Invalid"});
             }
 
             //Call assetservice and save model into DB
@@ -56,9 +57,9 @@ namespace CryptoTradingPlatform.Controllers
 
             if (!success)
             {
-                return View();
+                return View("Error", new ErrorViewModel { Message = "An unexpected error has occurred" });
             }
-            
+
             return Redirect("/");
         }
 
