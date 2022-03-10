@@ -74,6 +74,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "AssetDetails",
+    pattern: "{controller=Assets}/{action=Details}/{assetName}");
 app.MapRazorPages();
 
 app.Run();

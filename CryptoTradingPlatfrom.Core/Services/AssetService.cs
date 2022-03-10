@@ -2,6 +2,7 @@
 using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Data.Models;
+using CryptoTradingPlatfrom.Core.Models.Assets;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
@@ -46,6 +47,21 @@ namespace CryptoTradingPlatfrom.Core.Services
                 throw;
             }
             return (success, error);
+        }
+
+        public AssetDetailsViewModel GetDetails(string assetName)
+        {
+            return data.
+                Assets
+                .Where(c => c.Name == assetName)
+                .Select(c => new AssetDetailsViewModel
+                {
+                    Description = c.Description,
+                    Logo = c.ImageURL,
+                    Name = c.Name,
+                    Ticker = c.Ticker
+                })
+               .First();
         }
 
         public List<string> GetIds()

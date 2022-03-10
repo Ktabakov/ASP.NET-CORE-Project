@@ -1,0 +1,26 @@
+﻿@using CryptoTradingPlatfrom.Core.Models.Assets
+@model AssetDetailsViewModel
+
+@*<h1>@Model.Name</h1>
+    <p>@Model.Description</p>*@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-2 col-sm-1 mt-4">
+            <img src="@Model.Logo" alt="@Model.Ticker">
+        </div>
+        <div class="col-2 col-sm-1 mt-4 text-muted fs-1">
+            @Model.Ticker
+        </div>
+        <div class="col-2 col-md-1 mt-4 fw-bold fs-1">
+            @Model.Name
+        </div>
+    </div>
+    <div class="row col-8 mt-3 cryptotable">
+        <p>@Model.Description</p>
+    </div>
+   <a href="/Assets/Swap" class="button btn btn-success mt-2">Trade now</a>
+</div>
+
+

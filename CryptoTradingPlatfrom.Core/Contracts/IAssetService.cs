@@ -1,4 +1,5 @@
 ﻿using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatfrom.Core.Models.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         (bool, string) AddAsset(CryptoResponseModel model);
         List<string> GetTickers();
         List<string> GetIds();
+        AssetDetailsViewModel GetDetails(string assetName);
     }
 }

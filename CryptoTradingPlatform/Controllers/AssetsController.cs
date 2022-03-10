@@ -3,6 +3,7 @@ using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Models;
 using CryptoTradingPlatform.Models.Assets;
 using CryptoTradingPlatfrom.Core.Contracts;
+using CryptoTradingPlatfrom.Core.Models.Assets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -69,6 +70,17 @@ namespace CryptoTradingPlatform.Controllers
         public IActionResult Swap()
         {
             return View();
+        }
+
+        public IActionResult Details(string assetName)
+        {
+            AssetDetailsViewModel model = assetService.GetDetails(assetName);
+            if (model == null)
+            {
+                return View("Error", new ErrorViewModel { Message = "Asset doesn't exist on the platform" });
+            }
+            ViewBag.Model = model;
+            return View(model);
         }
     }
 }
