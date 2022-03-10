@@ -64,5 +64,11 @@ namespace CryptoTradingPlatform.Controllers
         }
 
         public IActionResult Trade() => View();
+
+        [Authorize]
+        public IActionResult Swap()
+        {
+            return View();
+        }
     }
 }
