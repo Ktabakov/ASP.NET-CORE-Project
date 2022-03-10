@@ -27,12 +27,16 @@
     </tbody>
 </table>
 
-<div class="fc-d03c8e14-1 fc-d03c8e14-3"></div></>
-<div class=" mb-5">
-    <a data-bn-type="button" aria-label="register" class="btn btn-primary" href="/Identity/Account/Register">Get Started</a>
-</div>
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="fc-d03c8e14-1 fc-d03c8e14-3"></div>
+    <div class=" mb-5">
+        <a data-bn-type="button" aria-label="register" class="btn btn-primary" href="/Identity/Account/Register">Get Started</a>
+    </div>
 
-<!--Rewrite that ugly mess maybe with document.createElement - maybe use a model -->
+}
+
+<!--Rewrite this ugly mess maybe with document.createElement - maybe use a model -->
 @section Scripts {
 <script>
     $(document).ready(function(){
@@ -68,13 +72,13 @@
                             '<td>' + data[i].circulatingSupply.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</td>';
                         html +=
                              '<td>' +
-                              '<a href="/Assets/Details?assetName=' + data[i].name + 
+                              '<a href="/Assets/Details?assetName=' + data[i].name +
                               '"class="button btn btn-primary">Details</a>' +
-                              '&emsp;' + 
+                              '&emsp;' +
                               '<a href="/Assets/Swap" class="button btn btn-success">Buy</a>' +
                              '</td>' +
-                             '</tr>';                                            
-            }       
+                             '</tr>';
+            }
             $('#tbody').first().append(html);
         })
     })
