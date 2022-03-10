@@ -1,6 +1,7 @@
 ﻿using CryptoTradingPlatform.Core.Constants;
 using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatfrom.Core.Models.Api;
 using Newtonsoft.Json.Linq;
 
 namespace CryptoTradingPlatform.Core.Services
@@ -35,10 +36,10 @@ namespace CryptoTradingPlatform.Core.Services
 
         }
 
-        public async Task<List<string>> GetImgUrls(List<string> tickers)
+        public async Task<List<ImageDescriptionResponseModel>> GetImgUrls(List<string> tickers)
         {
             HttpResponseMessage response = await client.GetAsync(ApiConstants.InfoPath + "?symbol=" + string.Join(',', tickers));
-            List<string> list = new List<string>();
+            List<ImageDescriptionResponseModel> list = new List<ImageDescriptionResponseModel>();
             if (!response.IsSuccessStatusCode)
             {
                 return null;
@@ -47,7 +48,12 @@ namespace CryptoTradingPlatform.Core.Services
             JObject json = JObject.Parse(result);
             foreach (var item in json["data"])
             {
-                list.Add(item.First["logo"].ToString());
+                ImageDescriptionResponseModel model = new ImageDescriptionResponseModel()
+                {
+                    ImageUrl = item.First["logo"].ToString(),
+                    Description = item.First["description"].ToString()
+                };
+                list.Add(model);
             }
             return list;
 
@@ -86,10 +92,11 @@ namespace CryptoTradingPlatform.Core.Services
                 cryptos.Add(model);
                 list.Add(model.Ticker);
             }
-            var urls = await GetImgUrls(list);
+            List<ImageDescriptionResponseModel> urls = await GetImgUrls(list);
             for (int i = 0; i < cryptos.Count; i++)
             {
-                cryptos[i].Logo = urls[i];
+                cryptos[i].Logo = urls[i].ImageUrl;
+                cryptos[i].Description = urls[i].Description;
             }
             return cryptos;
         }

@@ -15,5 +15,7 @@
         public decimal PercentChange { get; init; }
 
         public string Logo { get; set; }
+
+        public string Description { get; set; }
     }
 }
