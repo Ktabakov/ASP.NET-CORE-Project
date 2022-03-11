@@ -25,3 +25,13 @@ body {
 .cryptotable {
     font-size: 18px;
 }
+.buysell {
+    font-size: 80px;
+    color: white;
+    font-weight: bold;
+}
+.crypto {
+    font-size: 80px;
+    color: #ffd11a;
+    font-weight: bold;
+}
