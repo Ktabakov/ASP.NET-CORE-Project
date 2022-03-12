@@ -19,10 +19,11 @@
             <th scope="col">Market Cap</th>
             <th scope="col">Change 24h</th>
             <th scope="col">Circulating Supply</th>
+            <th scope="col" class="text-center">Info</th>
             <th scope="col">Trade</th>
         </tr>
     </thead>
-    <tbody id="tbody">
+    <tbody id="tbody" class="bg-black p-2 text-dark bg-opacity-10 text-white">
     </tbody>
 </table>
 
@@ -70,11 +71,12 @@
                              html +=
                             '<td>' + data[i].circulatingSupply.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</td>';
                         html +=
-                             '<td>' +
+                             '<td class=" text-center">' +
                               '<a href="/Assets/Details?assetName=' + data[i].name +
-                              '"class="button btn btn-primary">Details</a>' +
-                              '&emsp;' +
-                              '<a href="/Assets/Swap" class="button btn btn-success">Buy</a>' +
+                              '"class="button btn btn-primary rounded-pill">Details</a>' +
+                              '</td>' +
+                              '<td>' +
+                              '<a href="/Assets/Swap" class="button btn btn-success rounded-pill">Buy</a>' +
                              '</td>' +
                              '</tr>';
             }
