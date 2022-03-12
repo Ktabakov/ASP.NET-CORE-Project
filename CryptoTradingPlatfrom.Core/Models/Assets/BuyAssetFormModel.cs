@@ -21,7 +21,7 @@ namespace CryptoTradingPlatfrom.Core.Models.Assets
         [Required]
         public decimal BuyAssetQuantity { get; set; }
 
-        public string Calculate { get; set; }
+        public string? Calculate { get; set; }
 
     }
 }

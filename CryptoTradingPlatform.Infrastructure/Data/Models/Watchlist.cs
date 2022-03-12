@@ -12,7 +12,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Models
 
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
-        public User User { get; set; }
+        public User User { get; set; }  
     }
 }
 */

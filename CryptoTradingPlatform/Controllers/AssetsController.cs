@@ -84,14 +84,12 @@ namespace CryptoTradingPlatform.Controllers
         //Add another page for buying and selling all
         public async Task<IActionResult> Swap(BuyAssetFormModel model)
         {
+            //check asset quantity to be for the user. He has to have this much to convert
             //rewrite to swap only user crypros
             // add a new page to buy any crypto with usd
             SwapAssetsListViewModel customModel = assetService.ListForSwap(User.Identity.Name);
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.Assets = customModel.Assets.ToList();
-
-            string sellAssetId = model.SellAssetId;
-            string buyAssetId = model.BuyAssetId;
 
             decimal buyQuantity =  Math.Round(await assetService.CalculateTransaction(model), 2);
             model.BuyAssetQuantity = buyQuantity;
