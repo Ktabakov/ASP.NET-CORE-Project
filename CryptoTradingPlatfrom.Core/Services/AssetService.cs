@@ -73,5 +73,14 @@ namespace CryptoTradingPlatfrom.Core.Services
         {
             return data.Assets.Select(x => x.Ticker).ToList();
         }
+
+        public SwapAssetsListViewModel ListForSwap(string name)
+        {
+            SwapAssetsListViewModel modelList = new SwapAssetsListViewModel();
+            modelList.Assets = data.Assets.Select(c => new SwapAssetViewModel{ AssetName = c.Name, AssetQuantity = c.CirculatingSupply, AssetId = c.Id}).ToList();
+            modelList.UserMoney = 10000;
+
+            return modelList;
+        }
     }
 }

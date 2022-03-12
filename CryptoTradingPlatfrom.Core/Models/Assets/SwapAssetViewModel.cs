@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CryptoTradingPlatfrom.Core.Models.Assets
 {
     public class SwapAssetViewModel
     {
-        public string Name { get; set; }
+        [Required]
+        public string AssetId { get; set; }
 
-        public decimal Quality { get; set; }
+        [Required]
+        public string AssetName { get; set; }
+
+        [Required]
+        public decimal AssetQuantity { get; set; }
+
     }
 }

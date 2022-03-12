@@ -70,15 +70,29 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize]
         public IActionResult Swap()
         {
+            SwapAssetsListViewModel model = assetService.ListForSwap(User.Identity.Name);
+            ViewBag.UserMoney = model.UserMoney;
+            ViewBag.Assets = model.Assets.ToList();
+
             return View();
         }
 
         [Authorize]
         [HttpPost]
-        public IActionResult Swap(SwapAssetViewModel)
+        public IActionResult Swap(BuyAssetFormModel model)
         {
-            return View();
+            SwapAssetsListViewModel customModel = assetService.ListForSwap(User.Identity.Name);
+            ViewBag.UserMoney = customModel.UserMoney;
+            ViewBag.Assets = customModel.Assets.ToList();
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return Redirect("/");
         }
+
 
         public IActionResult Details(string assetName)
         {

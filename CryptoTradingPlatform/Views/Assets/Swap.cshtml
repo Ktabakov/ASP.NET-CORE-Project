@@ -1,20 +1,32 @@
-﻿<div class="container">
+﻿@using CryptoTradingPlatfrom.Core.Models.Assets
+@model BuyAssetFormModel
+
+@{
+    var Assets = (List<SwapAssetViewModel>)ViewBag.Assets;
+}
+
+<div class="container">
     <h3 class="text-center font-weight-bold text-white">Swap</h3>
     <div class="offset-md-4 col-md-4 col-sm-12">
-        <form method="post">
+        <form method="post" asp-controller="Assets" asp-action="Swap">
             <div class="row form-group">
                 <div class="col-6">
-                    <select class="form-select form-select-lg rounded-pill" aria-label=".form-select-lg example">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select asp-for="SellAssetId" class="rounded-pill form-select form-select-lg" aria-label="form-select-lg example">
+                        <option value="" disabled selected>Select a crypto</option>
+                        @foreach (var asset in Assets)
+                        {
+                            <option value="@asset.AssetId">@asset.AssetName</option>
+                        }
                     </select>
-
+                    <div class="ms-2">
+                        <span asp-validation-for="SellAssetId" class="small text-danger"></span>
+                    </div>
                 </div>
                 <div class="col-6">
-                    <input type="number" class="form-control-lg rounded-pill border-0" placeholder="Enter Amount">
+                    <input asp-for="SellAssetQyantity" type="number" class="form-control-lg rounded-pill border-0" placeholder="Enter Amount">
+                    <div class="ms-2">
+                        <span asp-validation-for="SellAssetQyantity" class="small text-danger"></span>
+                    </div>
                 </div>
             </div>
             <div class="form-group text-center">
@@ -22,21 +34,25 @@
             </div>
             <div class="row form-group">
                 <div class="col-6">
-                    <select class="form-select form-select-lg rounded-pill" aria-label="form-select-lg">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select asp-for="BuyAssetId" class="rounded-pill form-select form-select-lg" aria-label="form-select-lg example">
+                        <option value="" disabled selected>Select a crypto</option>
+                        @foreach (var asset in Assets)
+                        {
+                            <option value="@asset.AssetId">@asset.AssetName</option>
+                        }
                     </select>
+                    <div class="ms-2">
+                        <span asp-validation-for="BuyAssetId" class="small text-danger"></span>
+                    </div>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="border-0 form-control-lg rounded-pill" disabled placeholder="Calculating...">
+                    <input asp-for="BuyAssetQuantity" type="text" class="border-0 form-control-lg rounded-pill" disabled placeholder="Calculating...">
+                    <span asp-validation-for="BuyAssetQuantity" class="small text-danger"></span>
                 </div>
             </div>
-           <div class="text-center">
+            <div class="text-center">
                 <button type="submit" class="btn btn-success btn-lg btn-block mt-2 rounded-pill">Swap</button>
-           </div>
+            </div>
         </form>
     </div>
 </div>

@@ -14,5 +14,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         List<string> GetTickers();
         List<string> GetIds();
         AssetDetailsViewModel GetDetails(string assetName);
+        public SwapAssetsListViewModel ListForSwap(string name);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CryptoTradingPlatform.Data.Models
 {
@@ -32,5 +33,6 @@ namespace CryptoTradingPlatform.Data.Models
         [Required]
         [MaxLength(DataConstants.DescriptionMaxLength)]
         public string Description { get; set; }
+
     }
 }

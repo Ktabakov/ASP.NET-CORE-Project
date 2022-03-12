@@ -2,12 +2,12 @@
 {
     public class AssetDetailsViewModel
     {
-        public string Name { get; set; }
+        public string Name { get; init; }
 
-        public string Description { get; set; }
+        public string Description { get; init; }
 
-        public string Logo { get; set; }
+        public string Logo { get; init; }
 
-        public string Ticker { get; set; }
+        public string Ticker { get; init; }
     }
 }
