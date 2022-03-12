@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <input asp-for="SellAssetQyantity" type="number" class="form-control-lg rounded-pill border-0" placeholder="Enter Amount">
+                    <input asp-for="SellAssetQyantity" step="0.001"type="number" class="form-control-lg rounded-pill border-0" placeholder="Enter Amount">
                     <div class="ms-2">
                         <span asp-validation-for="SellAssetQyantity" class="small text-danger"></span>
                     </div>
@@ -46,12 +46,17 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <input asp-for="BuyAssetQuantity" type="text" class="border-0 form-control-lg rounded-pill" disabled placeholder="Calculating...">
+                    <input asp-for="@ViewData["BuyQuantity"]" type="text" class="border-0 form-control-lg rounded-pill" disabled placeholder="Calculating...">
                     <span asp-validation-for="BuyAssetQuantity" class="small text-danger"></span>
                 </div>
             </div>
-            <div class="text-center">
+            <div class="row">
+                <div class="col text-center">
                 <button type="submit" class="btn btn-success btn-lg btn-block mt-2 rounded-pill">Swap</button>
+            </div>
+             <div class="col text-center">
+                <p><input asp-for="Calculate" value="Calculate" type="submit" class="btn btn-primary btn-lg btn-block mt-2 rounded-pill"/></p>
+            </div>
             </div>
         </form>
     </div>

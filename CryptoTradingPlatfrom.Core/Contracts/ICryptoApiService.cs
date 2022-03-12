@@ -8,5 +8,7 @@ namespace CryptoTradingPlatform.Core.Contracts
         Task<List<CryptoResponseModel>> GetCryptos(List<string> tickers);
 
         Task<List<ImageDescriptionResponseModel>> GetImgUrls(List<string> tickers);
+
+        Task<BuyAssetResponseModel> GetPrices(List<string> tickers);
     }
 }

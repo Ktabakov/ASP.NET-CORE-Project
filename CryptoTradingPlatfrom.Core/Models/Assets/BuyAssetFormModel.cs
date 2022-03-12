@@ -11,7 +11,7 @@ namespace CryptoTradingPlatfrom.Core.Models.Assets
         public string SellAssetId { get; set; }
 
         [Required]
-        [Range(1, double.MaxValue, ErrorMessage = "Quantity must be more than 0")]
+        [Range(0.001, double.MaxValue, ErrorMessage = "Quantity must be more than 0")]
         public decimal SellAssetQyantity { get; set; }
 
         [Required]
@@ -20,6 +20,8 @@ namespace CryptoTradingPlatfrom.Core.Models.Assets
 
         [Required]
         public decimal BuyAssetQuantity { get; set; }
+
+        public string Calculate { get; set; }
 
     }
 }

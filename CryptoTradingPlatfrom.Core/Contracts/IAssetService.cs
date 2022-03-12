@@ -1,4 +1,5 @@
 ﻿using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Models.Assets;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,7 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         List<string> GetIds();
         AssetDetailsViewModel GetDetails(string assetName);
         public SwapAssetsListViewModel ListForSwap(string name);
+        Task<decimal> CalculateTransaction(BuyAssetFormModel model);
+        bool SaveSwap(BuyAssetFormModel model);
     }
 }

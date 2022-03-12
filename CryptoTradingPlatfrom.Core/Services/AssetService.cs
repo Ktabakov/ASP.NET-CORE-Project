@@ -3,16 +3,20 @@ using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatfrom.Core.Models.Assets;
+using CryptoTradingPlatfrom.Core.Models.Api;
+using CryptoTradingPlatform.Core.Contracts;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
     public class AssetService : IAssetService
     {
         private readonly ApplicationDbContext data;
+        private readonly ICryptoApiService apiService;
 
-        public AssetService(ApplicationDbContext _data)
+        public AssetService(ApplicationDbContext _data, ICryptoApiService _apiService)
         {
             data = _data;
+            apiService = _apiService;
         }
 
         public (bool, string) AddAsset(CryptoResponseModel model)
@@ -49,6 +53,21 @@ namespace CryptoTradingPlatfrom.Core.Services
             return (success, error);
         }
 
+        public async Task<decimal> CalculateTransaction(BuyAssetFormModel model)
+        {
+            string sellAssetTicker = data.Assets.FirstOrDefault(a => a.Id == model.SellAssetId).Ticker;
+            string buyAssetTicker = data.Assets.FirstOrDefault(a => a.Id == model.BuyAssetId).Ticker;
+
+            List<string> tickers = new List<string> { buyAssetTicker, sellAssetTicker };
+            BuyAssetResponseModel responseModel = await apiService.GetPrices(tickers);
+
+            decimal sellAssetPriceUSD = model.SellAssetQyantity * responseModel.SellAssetPrice;
+            decimal buyAssetQuantity = sellAssetPriceUSD / responseModel.BuyAssetPrice;
+            
+            return buyAssetQuantity;
+        }
+
+        
         public AssetDetailsViewModel GetDetails(string assetName)
         {
             return data.
@@ -81,6 +100,11 @@ namespace CryptoTradingPlatfrom.Core.Services
             modelList.UserMoney = 10000;
 
             return modelList;
+        }
+
+        public bool SaveSwap(BuyAssetFormModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

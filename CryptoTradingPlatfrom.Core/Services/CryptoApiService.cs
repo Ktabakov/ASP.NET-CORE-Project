@@ -85,6 +85,19 @@ namespace CryptoTradingPlatform.Core.Services
                 client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
             }
         }
+
+        public async Task<BuyAssetResponseModel> GetPrices(List<string> tickers)
+        {
+            BuyAssetResponseModel result = new BuyAssetResponseModel();
+            List<CryptoResponseModel> model = await GetCryptos(tickers);
+
+            result.BuyAssetPrice = model.Find(a => a.Ticker == tickers[0]).Price;
+            result.BuyAssetTicker = model.Find(a => a.Ticker == tickers[0]).Ticker;
+            result.SellAssetPrice = model.Find(a => a.Ticker == tickers[1]).Price;
+            result.SellAssetTicker = model.Find(a => a.Ticker == tickers[1]).Ticker;
+
+            return result;
+        }
     }
 }
 

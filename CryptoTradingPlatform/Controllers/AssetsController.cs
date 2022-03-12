@@ -3,6 +3,7 @@ using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Models;
 using CryptoTradingPlatform.Models.Assets;
 using CryptoTradingPlatfrom.Core.Contracts;
+using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Models.Assets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -79,16 +80,35 @@ namespace CryptoTradingPlatform.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult Swap(BuyAssetFormModel model)
+        //Swap only user assets
+        //Add another page for buying and selling all
+        public async Task<IActionResult> Swap(BuyAssetFormModel model)
         {
+            //rewrite to swap only user crypros
+            // add a new page to buy any crypto with usd
             SwapAssetsListViewModel customModel = assetService.ListForSwap(User.Identity.Name);
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.Assets = customModel.Assets.ToList();
+
+            string sellAssetId = model.SellAssetId;
+            string buyAssetId = model.BuyAssetId;
+
+            decimal buyQuantity =  Math.Round(await assetService.CalculateTransaction(model), 2);
+            model.BuyAssetQuantity = buyQuantity;
+            ViewData["BuyQuantity"] = buyQuantity;
+
+            if (model.Calculate == "Calculate")
+            {
+                return View(model);
+            }
 
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+
+            //needs to be coded
+            bool success = assetService.SaveSwap(model);
 
             return Redirect("/");
         }
