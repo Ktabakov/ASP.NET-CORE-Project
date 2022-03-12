@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using CryptoTradingPlatform.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<ICryptoApiService, CryptoApiService>();
 builder.Services.AddScoped<IAssetService, AssetService>();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     //options.SignIn.RequireConfirmedAccount = true;
     //use the following for testing

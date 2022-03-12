@@ -1,4 +1,4 @@
-﻿/*using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,12 +14,7 @@ namespace CryptoTradingPlatform.Data.Models
         }
 
         [Required]
-        [MaxLength(DataConstants.CreditCardMaxLength)]
-        public string CreditCard { get; set; }
-        //do Regex client validation
-
-        [Required]
-        [Column(TypeName ="money")]
+        [Column(TypeName = "money")]
         public decimal Money { get; set; }
 
         public List<Asset> Assets { get; set; }
@@ -27,4 +22,3 @@ namespace CryptoTradingPlatform.Data.Models
         public List<Transaction> Transactions { get; set; }
     }
 }
-*/

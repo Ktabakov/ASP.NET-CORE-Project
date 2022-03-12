@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CryptoTradingPlatform.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -19,5 +19,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data
         public DbSet<Article> Articles { get; set; }
 
         public DbSet<Asset> Assets { get; set; }
+
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }
