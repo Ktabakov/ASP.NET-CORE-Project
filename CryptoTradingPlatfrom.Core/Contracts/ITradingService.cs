@@ -9,6 +9,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
 {
     public interface ITradingService
     {
-        bool SaveTransaction(TradingFormModel model);
+        bool SaveTransaction(TradingFormModel model, string userName);
     }
 }

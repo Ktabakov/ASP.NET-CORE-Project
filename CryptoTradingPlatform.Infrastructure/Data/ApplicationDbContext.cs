@@ -13,7 +13,9 @@ namespace CryptoTradingPlatform.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);       
+            base.OnModelCreating(builder);
+            builder.Entity<UserAsset>()
+                .HasKey(c => new { c.AssetId, c.ApplicationUserId });
         }
 
         public DbSet<Article> Articles { get; set; }
@@ -21,5 +23,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data
         public DbSet<Asset> Assets { get; set; }
 
         public DbSet<Transaction> Transactions { get; set; }
+
+        public DbSet<UserAsset> UserAssets { get; set; }
     }
 }

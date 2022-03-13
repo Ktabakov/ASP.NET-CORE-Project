@@ -1,4 +1,4 @@
-﻿/*using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CryptoTradingPlatform.Data.Models
@@ -15,10 +15,8 @@ namespace CryptoTradingPlatform.Data.Models
         public double Quantity { get; set; }
 
         [ForeignKey(nameof(ApplicationUser))]
-        [MaxLength(DataConstants.Idlength)]
         public string ApplicationUserId { get; set; }
 
         public ApplicationUser User { get; set; }
     }
 }
-*/

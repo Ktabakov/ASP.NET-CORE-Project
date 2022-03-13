@@ -90,7 +90,7 @@ namespace CryptoTradingPlatform.Controllers
             {
                 return View(model);
             }
-            bool success = tradingService.SaveTransaction(model);
+            bool success = tradingService.SaveTransaction(model, User.Identity.Name);
 
             if (!success)
             {
