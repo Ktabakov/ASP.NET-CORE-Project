@@ -1,4 +1,6 @@
-﻿using CryptoTradingPlatform.Models;
+﻿using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatform.Models;
 using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,15 +11,20 @@ namespace CryptoTradingPlatform.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IAssetService assetService;
-        public HomeController(ILogger<HomeController> logger, IAssetService _assetService)
+        private readonly ICryptoApiService cryptoService;
+        public HomeController(ILogger<HomeController> logger, IAssetService _assetService, ICryptoApiService _cryptoService)
         {
             _logger = logger;
             assetService = _assetService;
+            cryptoService = _cryptoService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            //pass cryptos to index page trough viewbag
+            List<string> tickers = assetService.GetAllAssetTickers();
+            List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
+
+            ViewBag.Assets = cryptos;
             return View();
         }
 

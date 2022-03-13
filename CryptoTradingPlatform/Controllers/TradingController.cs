@@ -7,6 +7,7 @@ using CryptoTradingPlatfrom.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace CryptoTradingPlatform.Controllers
 {
@@ -79,6 +80,7 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize]
         public async Task<IActionResult> Trade(TradingFormModel model)
         {
+            //
             Console.Write(model);
             return View();
         }
