@@ -24,7 +24,7 @@
 
         public const int ImageUrlMaxLength = 2048;
 
-        public const int TransactionType = 3;
+        public const int TransactionType = 4;
 
     }
 }
