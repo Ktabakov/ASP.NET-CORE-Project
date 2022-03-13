@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CryptoTradingPlatform.Models.Articles
+namespace CryptoTradingPlatform.Core.Models.Articles
 {
-    public class AddArticleFormModel
+    public class ArticleViewModel
     {
         [Required]
         public string Content { get; set; }

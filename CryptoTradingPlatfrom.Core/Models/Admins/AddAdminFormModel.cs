@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CryptoTradingPlatform.Models.Admins
+namespace CryptoTradingPlatform.Core.Models.Admins
 {
     public class AddAdminFormModel
     {

@@ -1,7 +1,7 @@
 ﻿using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatform.Infrastructure.Data;
-using CryptoTradingPlatform.Models.Trading;
+using CryptoTradingPlatform.Core.Models.Trading;
 using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Assets;
 

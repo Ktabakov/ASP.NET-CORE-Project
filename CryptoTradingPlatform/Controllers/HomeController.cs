@@ -1,6 +1,6 @@
 ﻿using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Core.Models;
 using CryptoTradingPlatform.Core.Models.Api;
-using CryptoTradingPlatform.Models;
 using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;

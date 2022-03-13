@@ -1,7 +1,7 @@
 ﻿using CryptoTradingPlatform.Data;
 using System.ComponentModel.DataAnnotations;
 
-namespace CryptoTradingPlatform.Models.Assets
+namespace CryptoTradingPlatform.Core.Models.Assets
 {
     public class AddAssetFormModel
     {

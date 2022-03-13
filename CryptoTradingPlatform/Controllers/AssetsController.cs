@@ -1,9 +1,8 @@
 ﻿using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Core.Models;
 using CryptoTradingPlatform.Core.Models.Api;
-using CryptoTradingPlatform.Models;
-using CryptoTradingPlatform.Models.Assets;
+using CryptoTradingPlatform.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Contracts;
-using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Models.Assets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

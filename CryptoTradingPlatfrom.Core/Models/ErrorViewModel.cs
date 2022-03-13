@@ -1,4 +1,4 @@
-namespace CryptoTradingPlatform.Models
+namespace CryptoTradingPlatform.Core.Models
 {
     public class ErrorViewModel
     {

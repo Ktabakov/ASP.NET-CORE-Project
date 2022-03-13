@@ -1,4 +1,4 @@
-﻿using CryptoTradingPlatform.Models.Admins;
+﻿using CryptoTradingPlatform.Core.Models.Admins;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

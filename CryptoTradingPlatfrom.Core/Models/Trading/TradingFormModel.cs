@@ -1,4 +1,4 @@
-﻿namespace CryptoTradingPlatform.Models.Trading
+﻿namespace CryptoTradingPlatform.Core.Models.Trading
 {
     public class TradingFormModel
     {

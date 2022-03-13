@@ -1,13 +1,10 @@
 ﻿using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models.Api;
-using CryptoTradingPlatform.Models.Trading;
+using CryptoTradingPlatform.Core.Models.Trading;
 using CryptoTradingPlatfrom.Core.Contracts;
-using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Models.Assets;
-using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
 
 namespace CryptoTradingPlatform.Controllers
 {
@@ -100,6 +97,12 @@ namespace CryptoTradingPlatform.Controllers
             }
 
             return Redirect("/");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> History()
+        {
+            return View();
         }
     }
 }

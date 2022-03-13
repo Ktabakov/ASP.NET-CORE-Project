@@ -1,5 +1,4 @@
-﻿@using CryptoTradingPlatform.Models.Trading
-@model TradingFormModel
+﻿@model TradingFormModel
 @{
     ViewData["Title"] = "Trade Now";
     var Assets = (List<CryptoResponseModel>)ViewBag.Assets;
@@ -28,7 +27,10 @@
                             </div>
                         }
                     }
-                    <a href="/Identity/Account/Manage" class="btn btn-primary mt-2 rounded-pill">Account</a>
+                    <div>
+                        <a href="/Identity/Account/Manage" class="btn btn-primary mt-2 rounded-pill">Account</a>
+                        <a href="/Trading/History" class="btn btn-success mt-2 rounded-pill">Transaction History</a>
+                    </div>
                 </div>
             </div>
         </div>

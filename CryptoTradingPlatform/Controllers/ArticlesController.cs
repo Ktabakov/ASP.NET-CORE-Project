@@ -1,5 +1,4 @@
-﻿using CryptoTradingPlatform.Models.Articles;
-using Microsoft.AspNetCore.Authorization;
+﻿using CryptoTradingPlatform.Core.Models.Articles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoTradingPlatform.Controllers
@@ -14,5 +13,7 @@ namespace CryptoTradingPlatform.Controllers
         {
             return View();
         }
+
+        public IActionResult All() => View();
     }
 }
