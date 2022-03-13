@@ -16,7 +16,7 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         List<string> GetTickers();
         List<string> GetIds();
         AssetDetailsViewModel GetDetails(string assetName);
-        public SwapAssetsListViewModel ListForSwap(string name);
+        public SwapAssetsListViewModel GetUserAssets(string name);
         Task<decimal> CalculateTransaction(BuyAssetFormModel model);
         bool SaveSwap(BuyAssetFormModel model);
         bool RemoveAsset(string assetName);

@@ -26,7 +26,7 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize]
         public IActionResult Swap()
         {
-            SwapAssetsListViewModel model = assetService.ListForSwap(User.Identity.Name);
+            SwapAssetsListViewModel model = assetService.GetUserAssets(User.Identity.Name);
             ViewBag.UserMoney = model.UserMoney;
             ViewBag.Assets = model.Assets.ToList();
 
@@ -42,7 +42,7 @@ namespace CryptoTradingPlatform.Controllers
             //check asset quantity to be for the user. He has to have this much to convert
             //rewrite to swap only user crypros
             // add a new page to buy any crypto with usd
-            SwapAssetsListViewModel customModel = assetService.ListForSwap(User.Identity.Name);
+            SwapAssetsListViewModel customModel = assetService.GetUserAssets(User.Identity.Name);
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.Assets = customModel.Assets.ToList();
 

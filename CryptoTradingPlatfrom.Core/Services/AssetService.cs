@@ -6,6 +6,7 @@ using CryptoTradingPlatfrom.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Trading;
+using Microsoft.EntityFrameworkCore;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
@@ -107,11 +108,19 @@ namespace CryptoTradingPlatfrom.Core.Services
             return Math.Round(data.Users.Where(c => c.UserName == name).FirstOrDefault().Money, 2);
         }
 
-        public SwapAssetsListViewModel ListForSwap(string name)
+        public SwapAssetsListViewModel GetUserAssets(string name)
         {
             SwapAssetsListViewModel modelList = new SwapAssetsListViewModel();
-            modelList.Assets = data.Assets.Select(c => new SwapAssetViewModel{ AssetName = c.Name, AssetQuantity = c.CirculatingSupply, AssetId = c.Id}).ToList();
-            modelList.UserMoney = 10000;
+            var user = data.Users.Where(c => c.UserName == name).FirstOrDefault();
+            modelList.Assets = data
+                .UserAssets
+                .Where(c => c.ApplicationUserId == user.Id)          
+                .Select(c => new SwapAssetViewModel { AssetName = c.Asset.Name, AssetQuantity = Convert.ToDecimal(c.Quantity), AssetId = c.AssetId })
+                .ToList();
+            modelList.UserMoney = data.Users.FirstOrDefault(c => c.UserName == name).Money;
+
+            /*            modelList.Assets = data.Assets.Select(c => new SwapAssetViewModel{ AssetName = c.Name, AssetQuantity = c.CirculatingSupply, AssetId = c.Id}).ToList();
+            */
             //get assets from user. I need their quantity. For this method I wont need his usd money
             return modelList;
         }
