@@ -15,10 +15,12 @@ namespace CryptoTradingPlatform.Controllers
     {
         private readonly IAssetService assetService;
         private readonly ICryptoApiService cryptoService;
-        public TradingController(IAssetService _assetService, ICryptoApiService _cryptoService)
+        private readonly ITradingService tradingService;
+        public TradingController(IAssetService _assetService, ICryptoApiService _cryptoService, ITradingService _tradingService)
         {
             assetService = _assetService;
             cryptoService = _cryptoService;
+            tradingService = _tradingService;
         }
 
         [Authorize]
@@ -80,9 +82,22 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize]
         public async Task<IActionResult> Trade(TradingFormModel model)
         {
-            //
-            Console.Write(model);
-            return View();
+            //get price again. Make sure price from form was not changed
+            List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(new List<string> { model.Ticker });
+            model.Price = cryptos[0].Price;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            bool success = tradingService.SaveTransaction(model);
+
+            if (!success)
+            {
+                return View(model);
+            }
+
+            return Redirect("/");
         }
     }
 }

@@ -5,7 +5,7 @@
     var Assets = (List<CryptoResponseModel>)ViewBag.Assets;
 }
 
-<!--make it a partial view later-->
+<!--make it a partial view later maybe-->
 
 <div class="container">
     <div class="row">
@@ -48,7 +48,10 @@
                                         </label>
                                     </td>
                                     <td class="text-muted">
-                                        @asset.Ticker
+                                        <label>
+                                            @asset.Ticker
+                                            <input type="hidden" asp-for="Ticker" value="@asset.Ticker">
+                                        </label>
                                     </td>
                                     <td>
                                         @asset.CirculatingSupply.ToString("N0",new CultureInfo("en-US"))
