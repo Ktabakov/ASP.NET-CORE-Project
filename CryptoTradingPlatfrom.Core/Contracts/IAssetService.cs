@@ -18,7 +18,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         AssetDetailsViewModel GetDetails(string assetName);
         public SwapAssetsListViewModel GetUserAssets(string name);
         Task<decimal> CalculateTransaction(BuyAssetFormModel model);
-        bool SaveSwap(BuyAssetFormModel model);
         bool RemoveAsset(string assetName);
         List<string> GetAllAssetTickers();
         decimal GetUserMoney(string? name);

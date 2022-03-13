@@ -138,10 +138,5 @@ namespace CryptoTradingPlatfrom.Core.Services
             return success;
             
         }
-
-        public bool SaveSwap(BuyAssetFormModel model)
-        {
-            return false;
-        }
     }
 }

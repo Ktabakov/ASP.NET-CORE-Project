@@ -57,7 +57,12 @@ namespace CryptoTradingPlatform.Controllers
             }
 
             //needs to be coded
-            bool success = assetService.SaveSwap(model);
+            bool success = await tradingService.SaveSwap(model, User.Identity.Name);
+
+            if (!success)
+            {
+                return View(model);
+            }
 
             return Redirect("/");
         }

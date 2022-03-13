@@ -1,17 +1,85 @@
-﻿using CryptoTradingPlatform.Data.Models;
+﻿using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.Models.Trading;
 using CryptoTradingPlatfrom.Core.Contracts;
+using CryptoTradingPlatfrom.Core.Models.Assets;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
     public class TradingService : ITradingService
     {
         private readonly ApplicationDbContext data;
-        public TradingService(ApplicationDbContext _data)
+        private readonly ICryptoApiService cryptoService;
+        public TradingService(ApplicationDbContext _data, ICryptoApiService _cryptoService)
         {
             data = _data;
+            cryptoService = _cryptoService;
         }
+
+        public async Task<bool> SaveSwap (BuyAssetFormModel model, string userName)
+        {
+            var user = data.Users.FirstOrDefault(c => c.UserName == userName);
+            var sellAsset = data.Assets.FirstOrDefault(c => c.Id == model.SellAssetId);
+            var buyAsset = data.Assets.FirstOrDefault(c => c.Id == model.BuyAssetId);
+            var sellQuantity = Convert.ToDouble(model.SellAssetQyantity);
+            var buyQuantity = Convert.ToDouble(model.BuyAssetQuantity);
+            bool success = false;
+
+            var buyCryptoResponseModel = await cryptoService.GetCryptos(new List<string> { buyAsset.Ticker });
+            var buyAssetPrice = buyCryptoResponseModel.FirstOrDefault().Price;
+
+            if (buyAsset == null || sellAsset == null)
+            {
+                return false;
+            }
+
+            bool sellAssetExists = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == model.SellAssetId) != null;
+            bool buyssetExists = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == model.BuyAssetId) != null;
+
+            if (!sellAssetExists || !buyssetExists)
+            {
+                return false;
+            }
+
+            var sellAssetUserQuantity = data
+                .UserAssets
+                .Where(c => c.ApplicationUserId == user.Id)
+                .FirstOrDefault(c => c.AssetId == model.SellAssetId)
+                .Quantity;
+
+            if (sellAssetUserQuantity - sellQuantity < 0)
+            {
+                return false;
+            }
+            
+            
+            Transaction transaction = new Transaction()
+            {
+                ApplicationUserId = user.Id,
+                AssetId = buyAsset.Id,
+                Date = DateTime.Now,
+                Price = buyAssetPrice,
+                Quantity = buyQuantity,
+                Type = "Buy"
+            };
+
+            try
+            {
+                data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == sellAsset.Id).Quantity -= sellQuantity;
+                data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == buyAsset.Id).Quantity += buyQuantity;
+                data.Transactions.AddAsync(transaction);
+                data.SaveChangesAsync();
+                success = true;
+                
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return success;
+        }   
+
         public bool SaveTransaction(TradingFormModel model, string userName)
         {
             var user = data.Users.FirstOrDefault(c => c.UserName == userName);
@@ -68,7 +136,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 return false;
             }
-
+            
             Transaction transaction = new Transaction()
             {
                 ApplicationUser = user,
@@ -78,11 +146,10 @@ namespace CryptoTradingPlatfrom.Core.Services
                 Quantity = quantityToDouble,
                 Type = model.Type,
             };
-
             try
             {
-                data.Transactions.Add(transaction);
-                data.SaveChanges();
+                data.Transactions.AddAsync(transaction);
+                data.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)
