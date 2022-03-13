@@ -24,7 +24,7 @@ builder.Services.AddScoped<IAssetService, AssetService>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
-    //options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedAccount = true;
     //use the following for testing
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;

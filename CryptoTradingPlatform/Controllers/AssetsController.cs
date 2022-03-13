@@ -26,6 +26,7 @@ namespace CryptoTradingPlatform.Controllers
         //maybe get the full crypto model. When buy is clicked, get the infos again and save them in the buy model.
         //Save the price infos in Transaction table - Save in Asset table only name, ticker
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddAssetFormModel asset) 
         {
             var isNumeric = int.TryParse(asset.Ticker, out int value);

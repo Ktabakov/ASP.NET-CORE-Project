@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CryptoTradingPlatform.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220312232139_ApplicationUser")]
+    [Migration("20220312234201_ApplicationUser")]
     partial class ApplicationUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
