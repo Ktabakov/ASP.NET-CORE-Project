@@ -35,13 +35,9 @@ namespace CryptoTradingPlatform.Controllers
 
         [Authorize]
         [HttpPost]
-        //Swap only user assets
-        //Add another page for buying and selling all
         public async Task<IActionResult> Swap(BuyAssetFormModel model)
         {
             //check asset quantity to be for the user. He has to have this much to convert
-            //rewrite to swap only user crypros
-            // add a new page to buy any crypto with usd
             SwapAssetsListViewModel customModel = assetService.GetUserAssets(User.Identity.Name);
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.Assets = customModel.Assets.ToList();
@@ -70,11 +66,12 @@ namespace CryptoTradingPlatform.Controllers
         public async Task<IActionResult> Trade()
         {
             List<string> tickers = assetService.GetAllAssetTickers();
-            decimal userMoney = assetService.GetUserMoney(User.Identity.Name);
             List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
-
+            SwapAssetsListViewModel customModel = assetService.GetUserAssets(User.Identity.Name);
+            ViewBag.UserMoney = customModel.UserMoney;
+            ViewBag.UserAssets = customModel.Assets.ToList();
             ViewBag.Assets = cryptos;
-            ViewBag.UserMoney = userMoney;
+
             return View();
         }
 
@@ -82,7 +79,7 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize]
         public async Task<IActionResult> Trade(TradingFormModel model)
         {
-            //get price again. Make sure price from form was not changed
+            //Done! Get price again. Make sure price from form was not changed
             List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(new List<string> { model.Ticker });
             model.Price = cryptos[0].Price;
 

@@ -119,9 +119,6 @@ namespace CryptoTradingPlatfrom.Core.Services
                 .ToList();
             modelList.UserMoney = data.Users.FirstOrDefault(c => c.UserName == name).Money;
 
-            /*            modelList.Assets = data.Assets.Select(c => new SwapAssetViewModel{ AssetName = c.Name, AssetQuantity = c.CirculatingSupply, AssetId = c.Id}).ToList();
-            */
-            //get assets from user. I need their quantity. For this method I wont need his usd money
             return modelList;
         }
 

@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Trade Now";
     var Assets = (List<CryptoResponseModel>)ViewBag.Assets;
+    var UserAssets = (List<SwapAssetViewModel>)ViewBag.UserAssets;
+
 }
 
 <!--make it a partial view later maybe-->
@@ -15,6 +17,11 @@
                 <div class="card-body">
                     <h5 class="card-title">@User.Identity.Name</h5>
                     <p class="card-text">Your current account balance is: <p class="font-weight-bolder">$@ViewBag.UserMoney</p></p>
+                    <p>Your current assets: </p>
+                    @foreach (var asset in UserAssets)
+                    {
+                       <p class="font-weight-bolder">@asset.AssetName: @asset.AssetQuantity</p>
+                    }
                     <a href="/Identity/Account/Manage" class="btn btn-primary rounded-pill">Account</a>
                 </div>
             </div>
