@@ -27,6 +27,10 @@ namespace CryptoTradingPlatform.Data.Models
         public DateTime Date { get; set; }
 
         [Required]
+        [MaxLength(DataConstants.TransactionType)]
+        public string Type { get; set; }
+
+        [Required]
         [ForeignKey(nameof(Asset))]
         [MaxLength(DataConstants.Idlength)]
         public string AssetId { get; set; }

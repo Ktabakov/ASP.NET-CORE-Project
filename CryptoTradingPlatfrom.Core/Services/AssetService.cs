@@ -5,6 +5,7 @@ using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatfrom.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatfrom.Core.Models.Trading;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
@@ -67,7 +68,11 @@ namespace CryptoTradingPlatfrom.Core.Services
             return buyAssetQuantity;
         }
 
-        
+        public List<string> GetAllAssetTickers()
+        {
+            return data.Assets.Select(c => c.Ticker).ToList();
+        }
+
         public AssetDetailsViewModel GetDetails(string assetName)
         {
             return data.
@@ -91,6 +96,15 @@ namespace CryptoTradingPlatfrom.Core.Services
         public List<string> GetTickers()
         {
             return data.Assets.Select(x => x.Ticker).ToList();
+        }
+
+        public decimal GetUserMoney(string? name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return 0M;
+            }
+            return Math.Round(data.Users.Where(c => c.UserName == name).FirstOrDefault().Money, 2);
         }
 
         public SwapAssetsListViewModel ListForSwap(string name)

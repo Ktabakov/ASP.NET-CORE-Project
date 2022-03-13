@@ -17,6 +17,7 @@ namespace CryptoTradingPlatform.Controllers
 
         public IActionResult Index()
         {
+            //pass cryptos to index page trough viewbag
             return View();
         }
 

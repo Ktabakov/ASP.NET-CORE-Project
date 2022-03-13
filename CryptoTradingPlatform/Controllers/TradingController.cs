@@ -1,5 +1,10 @@
-﻿using CryptoTradingPlatfrom.Core.Contracts;
+﻿using CryptoTradingPlatform.Core.Contracts;
+using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatform.Models.Trading;
+using CryptoTradingPlatfrom.Core.Contracts;
+using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Models.Assets;
+using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +13,11 @@ namespace CryptoTradingPlatform.Controllers
     public class TradingController : Controller
     {
         private readonly IAssetService assetService;
-        public TradingController(IAssetService _assetService)
+        private readonly ICryptoApiService cryptoService;
+        public TradingController(IAssetService _assetService, ICryptoApiService _cryptoService)
         {
             assetService = _assetService;
+            cryptoService = _cryptoService;
         }
 
         [Authorize]
@@ -55,6 +62,24 @@ namespace CryptoTradingPlatform.Controllers
 
             return Redirect("/");
         }
-        public IActionResult Trade() => View();
+
+        [Authorize]
+        public async Task<IActionResult> Trade()
+        {
+            List<string> tickers = assetService.GetAllAssetTickers();
+            decimal userMoney = assetService.GetUserMoney(User.Identity.Name);
+            List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
+
+            ViewBag.Assets = cryptos;
+            ViewBag.UserMoney = userMoney;
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Trade(TradingFormModel model)
+        {
+            return View();
+        }
     }
 }

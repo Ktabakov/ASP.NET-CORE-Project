@@ -1,6 +1,7 @@
 ﻿using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Models.Assets;
+using CryptoTradingPlatfrom.Core.Models.Trading;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         Task<decimal> CalculateTransaction(BuyAssetFormModel model);
         bool SaveSwap(BuyAssetFormModel model);
         bool RemoveAsset(string assetName);
+        List<string> GetAllAssetTickers();
+        decimal GetUserMoney(string? name);
     }
 }
