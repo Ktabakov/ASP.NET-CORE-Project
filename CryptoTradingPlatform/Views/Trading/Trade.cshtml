@@ -17,13 +17,16 @@
                 <div class="card-body">
                     <h5 class="card-title">@User.Identity.Name</h5>
                     <p class="card-text mb-1">Your current account balance is: <p class="font-weight-bolder">$@ViewBag.UserMoney.ToString("f2")</p></p>
-                    <p>Your current assets: </p>
-                    @for (int i = 0; i < @UserAssets.Count; i++)
+                    @if (UserAssets.Count > 0)
                     {
-                        <div>
-                            <img style="float: left;" src=@UserAssets[i].ImageUrl alt="logo" width="16" height="16">
-                            <p class="mb-1">&thinsp; @UserAssets[i].AssetName: @UserAssets[i].AssetQuantity</p>
-                        </div>
+                        <p>Your current assets: </p>
+                        @for (int i = 0; i < @UserAssets.Count; i++)
+                        {
+                            <div>
+                                <img style="float: left;" src=@UserAssets[i].ImageUrl alt="logo" width="16" height="16">
+                                <p class="mb-1">&thinsp; @UserAssets[i].AssetName: @UserAssets[i].AssetQuantity</p>
+                            </div>
+                        }
                     }
                     <a href="/Identity/Account/Manage" class="btn btn-primary mt-2 rounded-pill">Account</a>
                 </div>
