@@ -115,7 +115,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             modelList.Assets = data
                 .UserAssets
                 .Where(c => c.ApplicationUserId == user.Id)          
-                .Select(c => new SwapAssetViewModel { AssetName = c.Asset.Name, AssetQuantity = Convert.ToDecimal(c.Quantity), AssetId = c.AssetId })
+                .Select(c => new SwapAssetViewModel { AssetName = c.Asset.Name, AssetQuantity = Convert.ToDecimal(c.Quantity), AssetId = c.AssetId, ImageUrl = c.Asset.ImageURL })
                 .ToList();
             modelList.UserMoney = data.Users.FirstOrDefault(c => c.UserName == name).Money;
 

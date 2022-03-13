@@ -13,16 +13,19 @@
     <div class="row">
         <div class="col">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Card image cap">
+                <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">@User.Identity.Name</h5>
-                    <p class="card-text">Your current account balance is: <p class="font-weight-bolder">$@ViewBag.UserMoney</p></p>
+                    <p class="card-text mb-1">Your current account balance is: <p class="font-weight-bolder">$@ViewBag.UserMoney.ToString("f2")</p></p>
                     <p>Your current assets: </p>
-                    @foreach (var asset in UserAssets)
+                    @for (int i = 0; i < @UserAssets.Count; i++)
                     {
-                       <p class="font-weight-bolder">@asset.AssetName: @asset.AssetQuantity</p>
+                        <div>
+                            <img style="float: left;" src=@UserAssets[i].ImageUrl alt="logo" width="16" height="16">
+                            <p class="mb-1">&thinsp; @UserAssets[i].AssetName: @UserAssets[i].AssetQuantity</p>
+                        </div>
                     }
-                    <a href="/Identity/Account/Manage" class="btn btn-primary rounded-pill">Account</a>
+                    <a href="/Identity/Account/Manage" class="btn btn-primary mt-2 rounded-pill">Account</a>
                 </div>
             </div>
         </div>
@@ -40,6 +43,7 @@
                             <th scope="col">Sell</th>
                         </tr>
                     </thead>
+                    <!--Use AJAX-->
                     <tbody id="tbody" class="bg-black p-2 text-dark bg-opacity-10 text-white">
                         @foreach (var asset in Assets)
                         {

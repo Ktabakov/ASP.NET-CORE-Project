@@ -85,13 +85,13 @@ namespace CryptoTradingPlatform.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return Redirect("/Trading/Trade");
             }
             bool success = tradingService.SaveTransaction(model, User.Identity.Name);
 
             if (!success)
             {
-                return View(model);
+                return Redirect("/Trading/Trade");
             }
 
             return Redirect("/");

@@ -13,5 +13,7 @@ namespace CryptoTradingPlatfrom.Core.Models.Assets
         [Required]
         public decimal AssetQuantity { get; set; }
 
+        public string ImageUrl { get; set; }
+
     }
 }
