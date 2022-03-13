@@ -42,7 +42,10 @@
                                         <picture>
                                             <img src=@asset.Logo alt="logo" width="36" height="36">
                                         </picture>
-                                        @asset.Name
+                                        <label>
+                                            @asset.Name
+                                            <input type="hidden" asp-for="Name" value="@asset.Name">
+                                        </label>
                                     </td>
                                     <td class="text-muted">
                                         @asset.Ticker
@@ -51,10 +54,13 @@
                                         @asset.CirculatingSupply.ToString("N0",new CultureInfo("en-US"))
                                     </td>
                                     <td>
-                                        @asset.Price.ToString("C",new CultureInfo("en-US"))
+                                        <label>
+                                            @asset.Price.ToString("C",new CultureInfo("en-US"))
+                                            <input type="hidden" asp-for="Price" value="@asset.Price">
+                                        </label>
                                     </td>
                                     <td>
-                                        <input style="width:100%" step="0.001" type="number" class="rounded-pill"/>
+                                        <input asp-for="Quantity" style="width:100%" step="0.001" type="number" class="rounded-pill" />
                                     </td>
                                     <td>
                                         <p><input asp-for="Type" value="Buy" type="submit" class="btn btn-success btn btn-block rounded-pill border-0" /></p>

@@ -79,6 +79,7 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize]
         public async Task<IActionResult> Trade(TradingFormModel model)
         {
+            Console.Write(model);
             return View();
         }
     }
