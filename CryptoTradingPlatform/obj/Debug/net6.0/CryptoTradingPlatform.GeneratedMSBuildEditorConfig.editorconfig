@@ -195,14 +195,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXRzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Assets/Swap.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXRzXFN3YXAuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Assets/Trade.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXRzXFRyYWRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -221,6 +213,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Trading/Swap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhZGluZ1xTd2FwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Trading/Trade.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhZGluZ1xUcmFkZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/_ViewImports.cshtml]

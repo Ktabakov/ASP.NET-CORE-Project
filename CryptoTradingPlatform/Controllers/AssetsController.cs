@@ -66,52 +66,6 @@ namespace CryptoTradingPlatform.Controllers
             return Redirect("/");
         }
 
-        public IActionResult Trade() => View();
-
-
-        [Authorize]
-        public IActionResult Swap()
-        {
-            SwapAssetsListViewModel model = assetService.ListForSwap(User.Identity.Name);
-            ViewBag.UserMoney = model.UserMoney;
-            ViewBag.Assets = model.Assets.ToList();
-
-            return View();
-        }
-
-        [Authorize]
-        [HttpPost]
-        //Swap only user assets
-        //Add another page for buying and selling all
-        public async Task<IActionResult> Swap(BuyAssetFormModel model)
-        {
-            //check asset quantity to be for the user. He has to have this much to convert
-            //rewrite to swap only user crypros
-            // add a new page to buy any crypto with usd
-            SwapAssetsListViewModel customModel = assetService.ListForSwap(User.Identity.Name);
-            ViewBag.UserMoney = customModel.UserMoney;
-            ViewBag.Assets = customModel.Assets.ToList();
-
-            decimal buyQuantity =  Math.Round(await assetService.CalculateTransaction(model), 2);
-            model.BuyAssetQuantity = buyQuantity;
-            ViewData["BuyQuantity"] = buyQuantity;
-
-            if (model.Calculate == "Calculate")
-            {
-                return View(model);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            //needs to be coded
-            bool success = assetService.SaveSwap(model);
-
-            return Redirect("/");
-        }
-
 
         public IActionResult Details(string assetName)
         {
@@ -122,6 +76,23 @@ namespace CryptoTradingPlatform.Controllers
             }
             ViewBag.Model = model;
             return View(model);
+        }
+
+        public IActionResult Remove(string assetName)
+        {
+            if (string.IsNullOrEmpty(assetName))
+            {
+                return View();
+            }
+
+            bool success = assetService.RemoveAsset(assetName);
+
+            if (!success)
+            {
+                return View();
+            }
+            return Redirect("/");
+
         }
     }
 }

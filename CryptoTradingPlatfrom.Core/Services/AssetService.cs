@@ -102,6 +102,23 @@ namespace CryptoTradingPlatfrom.Core.Services
             return modelList;
         }
 
+        public bool RemoveAsset(string assetName)
+        {
+            var asset = data.Assets.FirstOrDefault(a => a.Name == assetName);
+            bool success = false;
+
+            try
+            {
+                data.Remove(asset);
+                data.SaveChanges();
+                success = true;
+            }
+            catch (Exception)
+            {}
+            return success;
+            
+        }
+
         public bool SaveSwap(BuyAssetFormModel model)
         {
             return false;
