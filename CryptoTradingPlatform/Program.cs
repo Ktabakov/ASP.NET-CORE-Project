@@ -82,3 +82,8 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+//my todos
+//change user card to view component
+//make crypto tables ajax
+//add toaster errors for trading

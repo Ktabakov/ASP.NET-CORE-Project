@@ -61,7 +61,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                 Date = DateTime.Now,
                 Price = buyAssetPrice,
                 Quantity = buyQuantity,
-                Type = "Buy"
+                Type = "Swap"
             };
 
             try

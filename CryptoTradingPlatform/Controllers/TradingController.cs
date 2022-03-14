@@ -39,9 +39,9 @@ namespace CryptoTradingPlatform.Controllers
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.Assets = customModel.Assets.ToList();
 
-            decimal buyQuantity = Math.Round(await assetService.CalculateTransaction(model), 2);
+            decimal buyQuantity = await assetService.CalculateTransaction(model);
             model.BuyAssetQuantity = buyQuantity;
-            ViewData["BuyQuantity"] = buyQuantity;
+            ViewData["BuyQuantity"] = Math.Round(buyQuantity, 8);
 
             if (model.Calculate == "Calculate")
             {

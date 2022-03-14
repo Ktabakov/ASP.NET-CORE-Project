@@ -28,8 +28,4 @@
     <ProjectReference Include="..\CryptoTradingPlatfrom.Core\CryptoTradingPlatfrom.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>
