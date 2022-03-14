@@ -34,10 +34,10 @@ namespace CryptoTradingPlatfrom.Core.Services
                 return false;
             }
 
-            bool sellAssetExists = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == model.SellAssetId) != null;
-            bool buyssetExists = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == model.BuyAssetId) != null;
+            var sellUserAsset = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == model.SellAssetId);
+            var buyUserAsset = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == model.BuyAssetId);
 
-            if (!sellAssetExists || !buyssetExists)
+            if (sellUserAsset == null || buyUserAsset == null)
             {
                 return false;
             }
@@ -66,8 +66,8 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == sellAsset.Id).Quantity -= sellQuantity;
-                data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == buyAsset.Id).Quantity += buyQuantity;
+                sellUserAsset.Quantity -= sellQuantity;
+                buyUserAsset.Quantity += buyQuantity;
                 data.Transactions.AddAsync(transaction);
                 data.SaveChangesAsync();
                 success = true;
@@ -101,33 +101,33 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                bool assetExists = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == asset.Id) != null;
+                var userAsset = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == asset.Id);
 
                 if (model.Type == "Buy")
                 {
-                    if (!assetExists)
+                    if (userAsset == null)
                     {
                         data.UserAssets.Add(new UserAsset() { ApplicationUserId = user.Id, AssetId = asset.Id, Quantity = quantityToDouble });
                     }
                     else
                     {
-                        data.UserAssets.Where(c => c.ApplicationUserId == user.Id).First(c => c.AssetId == asset.Id).Quantity += quantityToDouble;
+                        userAsset.Quantity += quantityToDouble;
                     }
                     user.Money -= sum;
                 }
                 else if (model.Type == "Sell")
                 {
-                    if (!assetExists)
+                    if (userAsset == null)
                     {
                         return false;
                     }
                     else
                     {
-                        if (data.UserAssets.Where(c => c.ApplicationUserId == user.Id).First(c => c.AssetId == asset.Id).Quantity - quantityToDouble < 0)
+                        if (userAsset.Quantity - quantityToDouble < 0)
                         {
                             return false;
                         }
-                        data.UserAssets.Where(c => c.ApplicationUserId == user.Id).First(c => c.AssetId == asset.Id).Quantity -= quantityToDouble;
+                        userAsset.Quantity -= quantityToDouble;
                     }
                     user.Money += sum;
                 }
