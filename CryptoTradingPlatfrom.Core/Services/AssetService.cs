@@ -57,8 +57,15 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<decimal> CalculateTransaction(BuyAssetFormModel model)
         {
-            string sellAssetTicker = data.Assets.FirstOrDefault(a => a.Id == model.SellAssetId).Ticker;
-            string buyAssetTicker = data.Assets.FirstOrDefault(a => a.Id == model.BuyAssetId).Ticker;
+            string sellAssetTicker = data
+                .Assets
+                .FirstOrDefault(a => a.Id == model.SellAssetId)
+                .Ticker;
+
+            string buyAssetTicker = data
+                .Assets
+                .FirstOrDefault(a => a.Id == model.BuyAssetId)
+                .Ticker;
 
             List<string> tickers = new List<string> { buyAssetTicker, sellAssetTicker };
             BuyAssetResponseModel responseModel = await apiService.GetPrices(tickers);
@@ -69,9 +76,9 @@ namespace CryptoTradingPlatfrom.Core.Services
             return buyAssetQuantity;
         }
 
-        public List<string> GetAllAssetTickers()
+        public async Task<List<string>> GetAllAssetTickers()
         {
-            return data.Assets.Select(c => c.Ticker).ToList();
+            return await data.Assets.Select(c => c.Ticker).ToListAsync();
         }
 
         public AssetDetailsViewModel GetDetails(string assetName)
@@ -94,9 +101,9 @@ namespace CryptoTradingPlatfrom.Core.Services
             return data.Assets.Select(x => x.Id).ToList();
         }
 
-        public List<string> GetTickers()
+        public async Task<List<string>> GetTickers()
         {
-            return data.Assets.Select(x => x.Ticker).ToList();
+            return await data.Assets.Select(x => x.Ticker).ToListAsync();
         }
 
         public decimal GetUserMoney(string? name)
@@ -105,10 +112,15 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 return 0M;
             }
-            return Math.Round(data.Users.Where(c => c.UserName == name).FirstOrDefault().Money, 2);
+            return Math.Round(
+                 data
+                .Users
+                .Where(c => c.UserName == name)
+                .FirstOrDefault()
+                .Money, 2);
         }
 
-        public SwapAssetsListViewModel GetUserAssets(string name)
+        public async Task<SwapAssetsListViewModel> GetUserAssets(string name)
         {
             SwapAssetsListViewModel modelList = new SwapAssetsListViewModel();
             var user = data.Users.Where(c => c.UserName == name).FirstOrDefault();
@@ -116,9 +128,19 @@ namespace CryptoTradingPlatfrom.Core.Services
                 .UserAssets
                 .Where(c => c.ApplicationUserId == user.Id)        
                 .Where(c => c.Quantity > 0)
-                .Select(c => new SwapAssetViewModel { AssetName = c.Asset.Name, AssetQuantity = Convert.ToDecimal(c.Quantity), AssetId = c.AssetId, ImageUrl = c.Asset.ImageURL })
-                .ToList();
-            modelList.UserMoney = data.Users.FirstOrDefault(c => c.UserName == name).Money;
+                .Select(c => new SwapAssetViewModel
+                {
+                    AssetName = c.Asset.Name,
+                    AssetQuantity = Convert.ToDecimal(c.Quantity),
+                    AssetId = c.AssetId,
+                    ImageUrl = c.Asset.ImageURL
+                })
+               .ToList();
+
+            modelList.UserMoney = data
+                .Users
+                .FirstOrDefault(c => c.UserName == name)
+                .Money;
 
             return modelList;
         }

@@ -17,22 +17,14 @@ namespace CryptoTradingPlatform.Controllers.Api
             assetService = _assetService;
         }
 
-        /*[HttpGet]
-        [Route("api/crypto/first")]
-        public Task<CryptoResponseModel> First()
-        {
-            return cryptoApiService.GetFirst();
-        }*/
 
         [HttpGet]
-        public Task<List<CryptoResponseModel>> Top()
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<List<CryptoResponseModel>>> Top()
         {
-            /* List<string> tickers = new List<string>{ "btc", "eth", "bnb", "ada", "dot","usdt","usdc","luna","trx","xrp"};*/
-
-            List<string> tickers = assetService.GetTickers();
-            //get cryptos from db and make api call
-            //test with list<string>
-            return cryptoApiService.GetCryptos(tickers);
+            List<string> tickers = await assetService.GetTickers();
+            return await cryptoApiService.GetCryptos(tickers);
         }
 
     }

@@ -21,9 +21,9 @@ namespace CryptoTradingPlatform.Controllers
         }
 
         [Authorize]
-        public IActionResult Swap()
+        public async Task<IActionResult> Swap()
         {
-            SwapAssetsListViewModel model = assetService.GetUserAssets(User.Identity.Name);
+            SwapAssetsListViewModel model = await assetService.GetUserAssets(User.Identity.Name);
             ViewBag.UserMoney = model.UserMoney;
             ViewBag.Assets = model.Assets.ToList();
 
@@ -35,7 +35,7 @@ namespace CryptoTradingPlatform.Controllers
         public async Task<IActionResult> Swap(BuyAssetFormModel model)
         {
             //check asset quantity to be for the user. He has to have this much to convert
-            SwapAssetsListViewModel customModel = assetService.GetUserAssets(User.Identity.Name);
+            SwapAssetsListViewModel customModel = await assetService.GetUserAssets(User.Identity.Name);
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.Assets = customModel.Assets.ToList();
 
@@ -67,9 +67,9 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize]
         public async Task<IActionResult> Trade()
         {
-            List<string> tickers = assetService.GetAllAssetTickers();
+            List<string> tickers = await assetService.GetAllAssetTickers();
             List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
-            SwapAssetsListViewModel customModel = assetService.GetUserAssets(User.Identity.Name);
+            SwapAssetsListViewModel customModel = await assetService.GetUserAssets(User.Identity.Name);
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.UserAssets = customModel.Assets.ToList();
             ViewBag.Assets = cryptos;

@@ -21,7 +21,7 @@ namespace CryptoTradingPlatform.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<string> tickers = assetService.GetAllAssetTickers();
+            List<string> tickers = await assetService.GetAllAssetTickers();
             List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
 
             ViewBag.Assets = cryptos;

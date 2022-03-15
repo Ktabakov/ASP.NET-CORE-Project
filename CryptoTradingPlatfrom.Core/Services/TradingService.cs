@@ -34,8 +34,15 @@ namespace CryptoTradingPlatfrom.Core.Services
                 return false;
             }
 
-            var sellUserAsset = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == model.SellAssetId);
-            var buyUserAsset = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == model.BuyAssetId);
+            var sellUserAsset = data
+                .UserAssets
+                .Where(c => c.ApplicationUserId == user.Id)
+                .FirstOrDefault(c => c.AssetId == model.SellAssetId);
+
+            var buyUserAsset = data
+                .UserAssets
+                .Where(c => c.ApplicationUserId == user.Id)
+                .FirstOrDefault(c => c.AssetId == model.BuyAssetId);
 
             if (sellUserAsset == null || buyUserAsset == null)
             {
@@ -101,13 +108,22 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                var userAsset = data.UserAssets.Where(c => c.ApplicationUserId == user.Id).FirstOrDefault(c => c.AssetId == asset.Id);
+                var userAsset = data
+                    .UserAssets
+                    .Where(c => c.ApplicationUserId == user.Id)
+                    .FirstOrDefault(c => c.AssetId == asset.Id);
 
                 if (model.Type == "Buy")
                 {
                     if (userAsset == null)
                     {
-                        data.UserAssets.Add(new UserAsset() { ApplicationUserId = user.Id, AssetId = asset.Id, Quantity = quantityToDouble });
+                        data.UserAssets
+                            .Add(new UserAsset()
+                            {
+                                ApplicationUserId = user.Id,
+                                AssetId = asset.Id,
+                                Quantity = quantityToDouble
+                            });
                     }
                     else
                     {
