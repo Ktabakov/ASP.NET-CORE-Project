@@ -46,9 +46,6 @@ body {
     color: white;
     cursor: pointer;
 }
-.fa-star:hover {
-    color: gold;
-}
 .fa-star.fill {
     color: #ffd700
 }

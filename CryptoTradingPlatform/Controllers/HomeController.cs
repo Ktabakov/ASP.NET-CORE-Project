@@ -23,6 +23,7 @@ namespace CryptoTradingPlatform.Controllers
         {
             List<string> tickers = await assetService.GetAllAssetTickers();
             List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
+            cryptos = await assetService.CheckIfFavorites(cryptos, User.Identity.Name);
 
             ViewBag.Assets = cryptos;
             return View();

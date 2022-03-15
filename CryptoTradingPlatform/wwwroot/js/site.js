@@ -45,7 +45,25 @@
     })
 }
 
-function favorite(item) {
-    $(item).toggleClass("fill");
-    //make ajax post
-}
+
+function Fav(asssetTicker, item) {
+
+    var t = $("input[name='__RequestVerificationToken']").val();
+    $.ajax({
+        url: '/Favorites/Add',
+        type: 'POST',
+        data: {
+            ticker: asssetTicker
+        },
+        headers: {
+            "RequestVerificationToken": t
+        },
+        success: function (data) {
+            $(item).toggleClass("fill");
+        },
+        error: function (jqXHR) { // Http Status is not 200
+        },
+        complete: function (jqXHR, status) { // Whether success or error it enters here
+        }
+    });
+};

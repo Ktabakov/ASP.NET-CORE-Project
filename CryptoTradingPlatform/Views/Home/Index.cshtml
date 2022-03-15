@@ -30,7 +30,13 @@
         {
             <tr class="cryptotable">
                 <td>
-                    <span id="favorites" class="fas fa-star" style="font-size:15px"></span>
+                    @if (asset.IsInFavorites)
+                    {
+                        <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star" style="font-size:15px"></a>
+                    }else
+                    {
+                        <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star fill" style="font-size:15px"></a>
+                    }
                     <picture>
                         <img src=@asset.Logo alt="logo" width="36" height="36">
                     </picture>
@@ -75,13 +81,10 @@
 </table>
 
 @section Scripts{
-<script>
-    $('body').on('click', ".fa-star", function () {
-         favorite(this);
-    });
-</script>
+    <script>
+      
+    </script>
 }
-
 @*@section Scripts{
     <script>
     $(document).ready(function(){

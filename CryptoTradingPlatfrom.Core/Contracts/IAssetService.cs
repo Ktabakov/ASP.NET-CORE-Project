@@ -21,5 +21,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         bool RemoveAsset(string assetName);
         Task<List<string>> GetAllAssetTickers();
         decimal GetUserMoney(string? name);
+        Task<List<CryptoResponseModel>> CheckIfFavorites(List<CryptoResponseModel> cryptos, string userName);
     }
 }

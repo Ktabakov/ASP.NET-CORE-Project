@@ -161,5 +161,18 @@ namespace CryptoTradingPlatfrom.Core.Services
             return success;
             
         }
+
+        public async Task<List<CryptoResponseModel>> CheckIfFavorites(List<CryptoResponseModel> cryptos, string userName)
+        {
+            var user = data.Users.FirstOrDefault(c => c.UserName == userName);
+
+            for (int i = 0; i < cryptos.Count; i++)
+            {
+                var cr = cryptos[i];
+                var assetId = data.Assets.FirstOrDefault(c => c.Ticker == cr.Ticker).Id;
+                cr.IsInFavorites = data.UserFavorites.FirstOrDefault(c => c.ApplicationUserId == user.Id && c.AssetId == assetId) == null;
+            }
+            return cryptos;
+        }
     }
 }

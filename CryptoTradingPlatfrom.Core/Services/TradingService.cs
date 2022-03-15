@@ -85,8 +85,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                 return false;
             }
             return success;
-        }   
-
+        }
         public bool SaveTransaction(TradingFormModel model, string userName)
         {
             var user = data.Users.FirstOrDefault(c => c.UserName == userName);
@@ -171,6 +170,39 @@ namespace CryptoTradingPlatfrom.Core.Services
             catch (Exception)
             {
                 return false;
+            }
+
+            return success;
+        }
+
+        public async Task<bool> SaveToFavorites(string ticker, string? userName)
+        {
+            var userId = data.Users.FirstOrDefault(c => c.UserName == userName).Id;
+            var assetId = data.Assets.FirstOrDefault(c => c.Ticker == ticker).Id;
+            bool success = false;
+
+            if (String.IsNullOrEmpty(userId) || String.IsNullOrEmpty(assetId))
+            {
+                return success;
+            }
+            var userFavoriteEntry = data.UserFavorites.FirstOrDefault(c => c.ApplicationUserId == userId && c.AssetId == assetId);
+
+            try
+            {
+                if (userFavoriteEntry == null)
+                {
+                    data.UserFavorites.Add(new UserFovorites { ApplicationUserId = userId, AssetId = assetId });
+                }
+                else
+                {
+                    data.UserFavorites.Remove(userFavoriteEntry);
+                }
+                data.SaveChanges();
+                success = true;
+            }
+            catch (Exception)
+            {
+                return success;
             }
 
             return success;
