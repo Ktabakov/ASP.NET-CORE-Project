@@ -16,6 +16,9 @@ namespace CryptoTradingPlatform.Infrastructure.Data
             base.OnModelCreating(builder);
             builder.Entity<UserAsset>()
                 .HasKey(c => new { c.AssetId, c.ApplicationUserId });
+
+            builder.Entity<UserFovorites>()
+                .HasKey(c => new {c.ApplicationUserId, c.AssetId});
         }
 
         public DbSet<Article> Articles { get; set; }
@@ -25,5 +28,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data
         public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<UserAsset> UserAssets { get; set; }
+
+        public DbSet<UserFovorites> UserFavorites { get; set; }
     }
 }
