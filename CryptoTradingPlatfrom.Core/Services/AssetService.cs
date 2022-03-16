@@ -174,5 +174,14 @@ namespace CryptoTradingPlatfrom.Core.Services
             }
             return cryptos;
         }
+
+        public async Task<List<string>> GetAllFavoritesTickers(string? name)
+        {
+            return await data.UserFavorites
+                .Where(c => c.User.UserName == name)
+                .Include(c => c.Asset)
+                .Select(c => c.Asset.Ticker)
+                .ToListAsync();
+        }
     }
 }

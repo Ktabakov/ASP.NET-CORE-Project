@@ -1,0 +1,10 @@
+﻿@model List<CryptoResponseModel>
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+<h1 class="text-center">Your Favorite Cryptos</h1>
+
+@foreach(var item in Model){
+    <h2>@item.Ticker</h2>
+}

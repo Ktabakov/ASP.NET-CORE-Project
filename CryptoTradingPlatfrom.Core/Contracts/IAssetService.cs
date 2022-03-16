@@ -22,5 +22,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         Task<List<string>> GetAllAssetTickers();
         decimal GetUserMoney(string? name);
         Task<List<CryptoResponseModel>> CheckIfFavorites(List<CryptoResponseModel> cryptos, string userName);
+        Task<List<string>> GetAllFavoritesTickers(string? name);
     }
 }

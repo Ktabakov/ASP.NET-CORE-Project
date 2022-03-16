@@ -122,5 +122,13 @@ namespace CryptoTradingPlatform.Controllers
             return Json(new { success = true });
 
         }
+
+        public async Task<IActionResult> Favorites()
+        {
+            List<string> tickers = await assetService.GetAllFavoritesTickers(User.Identity.Name);
+            List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
+
+            return View(cryptos);
+        }
     }
 }
