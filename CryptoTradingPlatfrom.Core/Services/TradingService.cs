@@ -4,6 +4,8 @@ using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.Core.Models.Trading;
 using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Assets;
+using CryptoTradingPlatfrom.Core.Models.Trading;
+using Microsoft.EntityFrameworkCore;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
@@ -206,6 +208,23 @@ namespace CryptoTradingPlatfrom.Core.Services
             }
 
             return success;
+        }
+
+        public async Task<List<TransactionHistoryViewModel>> GetUserTradingHistory(string? name)
+        {
+            return await data
+                .Transactions
+                .Where(c => c.ApplicationUser.UserName == name)
+                .Include(c => c.Asset)
+                .Select(c => new TransactionHistoryViewModel
+                {
+                    AssetName = c.Asset.Name,
+                    Date = c.Date,
+                    Price = c.Price,
+                    Quantity = c.Quantity,
+                    Type = c.Type,
+                })
+               .ToListAsync();
         }
     }
 }

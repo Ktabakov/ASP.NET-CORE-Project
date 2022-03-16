@@ -50,7 +50,7 @@ function Fav(asssetTicker, item) {
 
     var t = $("input[name='__RequestVerificationToken']").val();
     $.ajax({
-        url: '/Favorites/Add',
+        url: '/Trading/AddToFavorites',
         type: 'POST',
         data: {
             ticker: asssetTicker

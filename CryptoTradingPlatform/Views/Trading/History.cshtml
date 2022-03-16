@@ -1,1 +1,7 @@
-﻿<h1 class="text-center"><i class="fas fa-comment-dollar text-success fa-xs" style="font-size:30px"></i>Transaction History</h1>
+﻿@model List<TransactionHistoryViewModel>
+
+<h1 class="text-center"><i class="fas fa-comment-dollar text-success fa-xs" style="font-size:30px"></i>Transaction History</h1>
+
+@foreach(var item in Model){
+    <h2>@item.AssetName</h2>
+}

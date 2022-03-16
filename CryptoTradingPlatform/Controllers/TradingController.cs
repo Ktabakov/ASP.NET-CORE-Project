@@ -3,8 +3,10 @@ using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Core.Models.Trading;
 using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Assets;
+using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace CryptoTradingPlatform.Controllers
 {
@@ -102,7 +104,23 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize]
         public async Task<IActionResult> History()
         {
-            return View();
+            List<TransactionHistoryViewModel> transactions = await tradingService.GetUserTradingHistory(User.Identity.Name);
+            return View(transactions);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> AddToFavorites(string ticker)
+        {
+            bool result = await tradingService.SaveToFavorites(ticker, User.Identity.Name);
+
+            if (!ModelState.IsValid || result == false)
+            {
+                return Json(new { success = false });
+            }
+
+            return Json(new { success = true });
+
         }
     }
 }
