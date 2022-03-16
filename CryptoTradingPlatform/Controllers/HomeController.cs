@@ -1,4 +1,5 @@
-﻿using CryptoTradingPlatform.Core.Contracts;
+﻿using CryptoTradingPlatform.Constants;
+using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models;
 using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Contracts;

@@ -1,4 +1,5 @@
-﻿using CryptoTradingPlatform.Core.Contracts;
+﻿using CryptoTradingPlatform.Constants;
+using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Core.Models.Trading;
 using CryptoTradingPlatfrom.Core.Contracts;
@@ -52,17 +53,19 @@ namespace CryptoTradingPlatform.Controllers
 
             if (!ModelState.IsValid)
             {
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return View(model);
             }
 
-            //needs to be coded
             bool success = await tradingService.SaveSwap(model, User.Identity.Name);
 
             if (!success)
             {
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return View(model);
             }
 
+            TempData[MessageConstants.Success] = "Swap Successful!";
             return Redirect("/");
         }
 
@@ -89,15 +92,18 @@ namespace CryptoTradingPlatform.Controllers
 
             if (!ModelState.IsValid)
             {
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return Redirect("/Trading/Trade");
             }
             bool success = tradingService.SaveTransaction(model, User.Identity.Name);
 
             if (!success)
             {
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return Redirect("/Trading/Trade");
             }
 
+            TempData[MessageConstants.Success] = "Transaction Successful";
             return Redirect("/");
         }
 

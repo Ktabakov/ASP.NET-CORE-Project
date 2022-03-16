@@ -224,6 +224,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                     Quantity = c.Quantity,
                     Type = c.Type,
                 })
+               .OrderByDescending(c => c.Date)
                .ToListAsync();
         }
     }

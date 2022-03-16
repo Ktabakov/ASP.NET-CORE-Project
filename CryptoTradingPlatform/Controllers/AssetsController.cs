@@ -1,4 +1,5 @@
-﻿using CryptoTradingPlatform.Core.Contracts;
+﻿using CryptoTradingPlatform.Constants;
+using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models;
 using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Core.Models.Assets;
@@ -33,12 +34,14 @@ namespace CryptoTradingPlatform.Controllers
             //Maybe toaster cant be number - and refresh page
             if (isNumeric)
             {
-                return View("Error", new ErrorViewModel { Message = "Ticker cannot but a number" });
+                ViewData[MessageConstants.UnexpectedError] = "Ticker cannot but a number";
+                return View();
             }
             //Maybe toaster random mistake - and refresh page
             if (!ModelState.IsValid)
             {
-                return View("Error", new ErrorViewModel { Message = "An unexpected error has occurred" });
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
+                return View();
             }
 
             List<string> assets = new List<string>();
@@ -46,10 +49,10 @@ namespace CryptoTradingPlatform.Controllers
 
             Task<List<CryptoResponseModel>> models = cryptoApiService.GetCryptos(assets);
 
-            //Maybe toaster invalid asset - and refresh page
             if (models.Result == null)
             {
-                return View("Error", new ErrorViewModel { Message = "Ticker is Invalid"});
+                ViewData[MessageConstants.UnexpectedError] = "Ticker is Invalid";
+                return View();
             }
 
             //Call assetservice and save model into DB
@@ -59,9 +62,11 @@ namespace CryptoTradingPlatform.Controllers
 
             if (!success)
             {
-                return View("Error", new ErrorViewModel { Message = "An unexpected error has occurred" });
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
+                return View();
             }
 
+            TempData[MessageConstants.Success] = "Crypto Added!";
             return Redirect("/");
         }
 
@@ -71,9 +76,9 @@ namespace CryptoTradingPlatform.Controllers
             AssetDetailsViewModel model = assetService.GetDetails(assetName);
             if (model == null)
             {
-                return View("Error", new ErrorViewModel { Message = "Asset doesn't exist on the platform" });
+                ViewData[MessageConstants.UnexpectedError] = "Asset doesn't exist on the platform";
+                return View();
             }
-            ViewBag.Model = model;
             return View(model);
         }
 
@@ -88,8 +93,11 @@ namespace CryptoTradingPlatform.Controllers
 
             if (!success)
             {
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return View();
             }
+
+            TempData[MessageConstants.Success] = "Assst Removed!";
             return Redirect("/");
 
         }

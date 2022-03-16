@@ -145,6 +145,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             return modelList;
         }
 
+        //maybe to cascade delete - remove from userfavorites also
         public bool RemoveAsset(string assetName)
         {
             var asset = data.Assets.FirstOrDefault(a => a.Name == assetName);
