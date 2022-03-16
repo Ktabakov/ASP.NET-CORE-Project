@@ -6,16 +6,16 @@
 }
 
 <div class="container">
-    <h3 class="text-center font-weight-bold text-white">Swap</h3>
+    <h3 class="text-center font-weight-bold">Swap</h3>
     <div class="offset-md-4 col-md-4 col-sm-12">
         <form method="post" asp-controller="Trading" asp-action="Swap">
             <div class="row form-group">
                 <div class="col-6">
                     <select asp-for="SellAssetId" class="rounded-pill form-select form-select-lg" aria-label="form-select-lg example">
-                        <option value="" disabled selected>Select a crypto</option>
+                        <option class="text-dark" value="" disabled selected>Select a crypto</option>
                         @foreach (var asset in Assets)
                         {
-                            <option value="@asset.AssetId">@asset.AssetName</option>
+                            <option class="text-dark" value="@asset.AssetId">@asset.AssetName</option>
                         }
                     </select>
                     <div class="ms-2">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <input asp-for="SellAssetQyantity" step="0.001" type="number" class="form-control-lg rounded-pill border-0" placeholder="Enter Amount">
+                    <input asp-for="SellAssetQyantity" step="0.001" type="number" class="form-control-lg rounded-pill border-0 text-dark" placeholder="Enter Amount">
                     <div class="ms-2">
                         <span asp-validation-for="SellAssetQyantity" class="small text-danger"></span>
                     </div>
@@ -35,18 +35,18 @@
             <div class="row form-group">
                 <div class="col-6">
                     <select asp-for="BuyAssetId" class="rounded-pill form-select form-select-lg" aria-label="form-select-lg example">
-                        <option value="" disabled selected>Select a crypto</option>
+                        <option class="text-dark" value="" disabled selected>Select a crypto</option>
                         @foreach (var asset in Assets)
                         {
-                            <option value="@asset.AssetId">@asset.AssetName</option>
+                            <option class="text-dark" value="@asset.AssetId">@asset.AssetName</option>
                         }
                     </select>
                     <div class="ms-2">
                         <span asp-validation-for="BuyAssetId" class="small text-danger"></span>
                     </div>
                 </div>
-                <div class="col-6">
-                    <input asp-for="@ViewData["BuyQuantity"]" type="text" class="border-0 form-control-lg rounded-pill" disabled placeholder="Calculating...">
+                <div class="col-6 text-dark">
+                    <input asp-for="@ViewData["BuyQuantity"]" type="text" class="text-dark border-0 form-control-lg rounded-pill" disabled placeholder="Calculating...">
                     <span asp-validation-for="BuyAssetQuantity" class="small text-danger"></span>
                 </div>
             </div>

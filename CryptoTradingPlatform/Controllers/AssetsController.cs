@@ -20,24 +20,21 @@ namespace CryptoTradingPlatform.Controllers
             cryptoApiService = _cryptoApiService;
             assetService = _assetService;
         }
+
+        [Authorize]
         public IActionResult Add() => View();
 
-        //when add asset maybe add only name and ticker, make the call to the api, get the rest of the infos
-        //maybe get the full crypto model. When buy is clicked, get the infos again and save them in the buy model.
-        //Save the price infos in Transaction table - Save in Asset table only name, ticker
         [HttpPost]
         [Authorize]
         public IActionResult Add(AddAssetFormModel asset) 
         {
             var isNumeric = int.TryParse(asset.Ticker, out int value);
 
-            //Maybe toaster cant be number - and refresh page
             if (isNumeric)
             {
                 ViewData[MessageConstants.UnexpectedError] = "Ticker cannot but a number";
                 return View();
             }
-            //Maybe toaster random mistake - and refresh page
             if (!ModelState.IsValid)
             {
                 ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
@@ -55,14 +52,12 @@ namespace CryptoTradingPlatform.Controllers
                 return View();
             }
 
-            //Call assetservice and save model into DB
-            //Aater that redirect to home and list all assets
             CryptoResponseModel model = models.Result.FirstOrDefault();
             (bool success, string error) = assetService.AddAsset(model);
 
             if (!success)
             {
-                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
+                ViewData[MessageConstants.UnexpectedError] = error;
                 return View();
             }
 
@@ -70,7 +65,7 @@ namespace CryptoTradingPlatform.Controllers
             return Redirect("/");
         }
 
-
+        [Authorize]
         public IActionResult Details(string assetName)
         {
             AssetDetailsViewModel model = assetService.GetDetails(assetName);
@@ -82,6 +77,7 @@ namespace CryptoTradingPlatform.Controllers
             return View(model);
         }
 
+        [Authorize]
         public IActionResult Remove(string assetName)
         {
             if (string.IsNullOrEmpty(assetName))

@@ -1,4 +1,4 @@
-﻿html {
+﻿/*html {
     height: 100%;
 }
 
@@ -52,7 +52,7 @@ h1 {
     100% {
         transform: translateX(25%);
     }
-}
+}*/
 
 /*.box{
     background: linear-gradient(45deg, #EE7752, #E73C7E, #2EA6D5, #23D5AB);

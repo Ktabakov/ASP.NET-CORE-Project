@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "J1/PM23ALYPnkiNuAwu5y5bdnvPEs7N1r9JKpF5ZwiI=",
+  "Hash": "D2Aw3hAobCdtuDdtnS0XiqFQdX8mIQ3bxA0okdMKX78=",
   "Source": "CryptoTradingPlatform",
   "BasePath": "_content/CryptoTradingPlatform",
   "Mode": "Default",
@@ -1120,6 +1120,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\Images\\rm314-adj-02.jpg",
+      "SourceId": "CryptoTradingPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\",
+      "BasePath": "_content/CryptoTradingPlatform",
+      "RelativePath": "Images/rm314-adj-02.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\rm314-adj-02.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\js\\site.js",

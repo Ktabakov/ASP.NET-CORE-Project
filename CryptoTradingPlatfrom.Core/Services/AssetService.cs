@@ -27,11 +27,11 @@ namespace CryptoTradingPlatfrom.Core.Services
             string error = string.Empty;
             if (model == null)
             {
-                return (success, "The Asset can't be empty");
+                return (success, "The Asset can't be an empty field");
             }
             if (data.Assets.Any(c => c.Ticker == model.Ticker))
             {
-                return (success, "That Asset already exists on the plattform");
+                return (success, "This asset already exists on the plattform");
             }
             Asset asset = new Asset()
             {
@@ -49,7 +49,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             }
             catch (Exception ex)
             {
-                error = ex.Message;
+                error = "Unexpected error";
                 throw;
             }
             return (success, error);
