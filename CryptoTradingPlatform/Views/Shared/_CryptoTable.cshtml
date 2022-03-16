@@ -19,14 +19,22 @@
         {
             <tr class="cryptotable">
                 <td>
-                    @if (asset.IsInFavorites)
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star" style="font-size:15px"></a>
+                        @if (asset.IsInFavorites)
+                        {
+                            <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star" style="font-size:15px"></a>
+                        }
+                        else
+                        {
+                            <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star fill" style="font-size:15px"></a>
+                        }
                     }
                     else
                     {
-                        <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star fill" style="font-size:15px"></a>
+                        <a href="/Identity/Account/Login" id="favorites" class="fas fa-star" style="font-size:15px"></a>
                     }
+
                     <picture>
                         <img src=@asset.Logo alt="logo" width="36" height="36">
                     </picture>

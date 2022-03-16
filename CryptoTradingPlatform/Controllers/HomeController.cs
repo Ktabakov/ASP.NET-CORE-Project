@@ -34,12 +34,9 @@ namespace CryptoTradingPlatform.Controllers
             }
             else
             {
-                List<string> tickers = await assetService.GetAllAssetTickers();
-                if (tickers.Count == 0)
-                {
-                    tickers = new List<string> { "BTC", "ETH", "BNB", "ADA" };
-                }
+                List<string> tickers = new List<string> { "BTC", "ETH", "BNB", "ADA" };
                 List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
+
                 return View(cryptos);
             }
         }
