@@ -1,6 +1,7 @@
-﻿@{
+﻿@model List<CryptoResponseModel> 
+
+@{
     ViewData["Title"] = "Home Page";
-    var Assets = (List<CryptoResponseModel>)ViewBag.Assets;
 }
 
 <div class="row">
@@ -12,75 +13,7 @@
     <p class="lead text-white">Sign up today and get a 300,000 USD Bonus!</p>
 </div>
 
-<table class="table table-hover text-nowrap mt-4 cryptotable">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Ticker</th>
-            <th scope="col">Price</th>
-            <th scope="col">Market Cap</th>
-            <th scope="col">Change 24h</th>
-            <th scope="col">Circulating Supply</th>
-            <th scope="col" class="text-center">Info</th>
-            <th scope="col">Trade</th>
-        </tr>
-    </thead>
-    <tbody id="tbody" class="bg-black p-2 text-dark bg-opacity-10 text-white">
-        @foreach (var asset in Assets)
-        {
-            <tr class="cryptotable">
-                <td>
-                    @if (asset.IsInFavorites)
-                    {
-                        <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star" style="font-size:15px"></a>
-                    }else
-                    {
-                        <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star fill" style="font-size:15px"></a>
-                    }
-                    <picture>
-                        <img src=@asset.Logo alt="logo" width="36" height="36">
-                    </picture>
-                    @asset.Name
-                </td>
-                <td class="text-muted">
-                    @asset.Ticker
-                </td>
-                <td>
-                    @asset.Price.ToString("C",new CultureInfo("en-US"))
-                </td>
-                <td>
-                    @asset.MarketCap.ToString("N0",new CultureInfo("en-US"))
-                </td>
-                <td>
-                    @if (asset.PercentChange >= 0)
-                    {
-                        <span class="text-success">
-                            <i class="fas fa-caret-up me-1">@asset.PercentChange.ToString("f2")%</i>
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="text-danger">
-                            <i class="fas fa-caret-down me-1">@asset.PercentChange.ToString("f2")%</i>
-                        </span>
-                    }
-                </td>
-                <td>
-                    @asset.CirculatingSupply.ToString("N0",new CultureInfo("en-US"))
-                </td>
-                <td class="text-center">
-                    <a href="/Assets/Details?assetName=@asset.Name" class="button btn btn-primary rounded-pill">Details</a>
-                </td>
-                <td>
-                    <a href="/Assets/Swap" class="button btn btn-success rounded-pill">Buy</a>
-                </td>
-            </tr>
-        }
-
-    </tbody>
-</table>
-
-
+<partial name="_CryptoTable" />
 
 @if (!User.Identity.IsAuthenticated)
 {

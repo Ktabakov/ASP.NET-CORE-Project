@@ -2,6 +2,52 @@
 
 <h1 class="text-center"><i class="fas fa-comment-dollar text-success fa-xs" style="font-size:30px"></i>Transaction History</h1>
 
-@foreach(var item in Model){
-    <h2>@item.AssetName</h2>
-}
+<table class="table table-hover text-nowrap mt-4 cryptotable">
+    <thead>
+        <tr>
+            <th scope="col">Asset Name</th>
+            <th scope="col">Trade Date</th>
+            <th scope="col">Price Traded For</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Transaction Type</th>
+        </tr>
+    </thead>
+    <tbody class="bg-black p-2 text-dark bg-opacity-10 text-white">
+
+        @foreach (var tr in Model)
+        {
+            <tr>
+                <td>
+                    @tr.AssetName
+                </td>
+                <td>
+                    @tr.Date
+                </td>
+                <td>
+                    @tr.Price.ToString("C",new CultureInfo("en-US"))
+                </td>
+                <td>
+                    @tr.Quantity
+                </td>
+                @if(tr.Type == "Buy")
+                {
+                    <td class="text-danger">
+                    @tr.Type
+                    </td>
+                }
+                else if(tr.Type == "Sell")
+                {
+                    <td class="text-success">
+                    @tr.Type
+                    </td>
+                }
+                else if(tr.Type == "Swap")
+                {
+                    <td  class="text-info"> 
+                    @tr.Type
+                    </td>
+                }
+            </tr>
+        }
+    <tbody>
+</table>

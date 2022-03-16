@@ -25,8 +25,7 @@ namespace CryptoTradingPlatform.Controllers
             List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
             cryptos = await assetService.CheckIfFavorites(cryptos, User.Identity.Name);
 
-            ViewBag.Assets = cryptos;
-            return View();
+            return View(cryptos);
         }
 
         public IActionResult Privacy()
