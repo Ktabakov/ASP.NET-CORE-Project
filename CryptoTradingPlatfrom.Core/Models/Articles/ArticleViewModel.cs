@@ -5,10 +5,13 @@ namespace CryptoTradingPlatform.Core.Models.Articles
     public class ArticleViewModel
     {
         [Required]
-        public string Content { get; set; }
+        public string Title { get; set; }
 
         [Required]
-        [Display(Name = "Image URL")]
-        public string ImageURL { get; set; }
+        [Display(Name = "Published At")]
+        public string DatePublished { get; set; }
+
+        [Required]
+        public string Url { get; set; }
     }
 }

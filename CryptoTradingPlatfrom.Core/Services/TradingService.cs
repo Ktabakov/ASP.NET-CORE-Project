@@ -6,6 +6,7 @@ using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.EntityFrameworkCore;
+using CryptoTradingPlatfrom.Core.Models.Api;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
@@ -226,6 +227,26 @@ namespace CryptoTradingPlatfrom.Core.Services
                 })
                .OrderByDescending(c => c.Date)
                .ToListAsync();
+        }
+        public async Task<decimal> CalculateTransaction(BuyAssetFormModel model)
+        {
+            string sellAssetTicker = data
+                .Assets
+                .FirstOrDefault(a => a.Id == model.SellAssetId)
+                .Ticker;
+
+            string buyAssetTicker = data
+                .Assets
+                .FirstOrDefault(a => a.Id == model.BuyAssetId)
+                .Ticker;
+
+            List<string> tickers = new List<string> { buyAssetTicker, sellAssetTicker };
+            BuyAssetResponseModel responseModel = await cryptoService.GetPrices(tickers);
+
+            decimal sellAssetPriceUSD = model.SellAssetQyantity * responseModel.SellAssetPrice;
+            decimal buyAssetQuantity = sellAssetPriceUSD / responseModel.BuyAssetPrice;
+
+            return buyAssetQuantity;
         }
     }
 }

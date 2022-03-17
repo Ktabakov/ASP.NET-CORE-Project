@@ -21,6 +21,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<ICryptoApiService, CryptoApiService>();
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<ITradingService, TradingService>();
+builder.Services.AddScoped<IArticlesService, ArticlesService>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
@@ -66,6 +67,7 @@ else
 app.UseCors(options =>
 {
     options.WithOrigins("https://pro-api.coinmarketcap.com");
+    options.WithOrigins("https://cryptopanic.com");
 });
 
 app.UseHttpsRedirection();

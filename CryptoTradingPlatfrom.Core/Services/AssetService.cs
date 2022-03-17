@@ -55,27 +55,6 @@ namespace CryptoTradingPlatfrom.Core.Services
             return (success, error);
         }
 
-        public async Task<decimal> CalculateTransaction(BuyAssetFormModel model)
-        {
-            string sellAssetTicker = data
-                .Assets
-                .FirstOrDefault(a => a.Id == model.SellAssetId)
-                .Ticker;
-
-            string buyAssetTicker = data
-                .Assets
-                .FirstOrDefault(a => a.Id == model.BuyAssetId)
-                .Ticker;
-
-            List<string> tickers = new List<string> { buyAssetTicker, sellAssetTicker };
-            BuyAssetResponseModel responseModel = await apiService.GetPrices(tickers);
-
-            decimal sellAssetPriceUSD = model.SellAssetQyantity * responseModel.SellAssetPrice;
-            decimal buyAssetQuantity = sellAssetPriceUSD / responseModel.BuyAssetPrice;
-            
-            return buyAssetQuantity;
-        }
-
         public async Task<List<string>> GetAllAssetTickers()
         {
             return await data.Assets.Select(c => c.Ticker).ToListAsync();

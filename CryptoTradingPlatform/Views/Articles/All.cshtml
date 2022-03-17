@@ -1,1 +1,6 @@
-﻿<h1>All Articles</h1>
+﻿@model List<ArticleViewModel>
+
+@foreach(var ar in Model)
+{
+    <p>@ar.Title</p>
+}
