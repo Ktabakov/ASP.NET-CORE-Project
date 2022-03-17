@@ -6,6 +6,7 @@ using CryptoTradingPlatform.ModelBinders;
 using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Services;
 using CryptoTradingPlatfrom.Infrastructure.Constants;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +33,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();
+    /*.AddRoles<IdentityRole>();*/
+
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
@@ -90,4 +93,4 @@ app.Run();
 //add user roles 
 //write tests
 //save asset prices in assetPrice and maybe make graph
-//get transaction history between dates 
+//get transaction history between dates     

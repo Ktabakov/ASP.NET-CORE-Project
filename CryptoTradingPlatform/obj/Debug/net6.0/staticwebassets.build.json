@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "D2Aw3hAobCdtuDdtnS0XiqFQdX8mIQ3bxA0okdMKX78=",
+  "Hash": "2tnL5XDKtz/O667fZeE3WbiiFeUeQvrKwHFUjemPmI8=",
   "Source": "CryptoTradingPlatform",
   "BasePath": "_content/CryptoTradingPlatform",
   "Mode": "Default",
@@ -1120,6 +1120,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\Images\\BitcoinWallet.png",
+      "SourceId": "CryptoTradingPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\",
+      "BasePath": "_content/CryptoTradingPlatform",
+      "RelativePath": "Images/BitcoinWallet.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\BitcoinWallet.png"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\Images\\BitfigoLogoTextSmall.png",
+      "SourceId": "CryptoTradingPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\",
+      "BasePath": "_content/CryptoTradingPlatform",
+      "RelativePath": "Images/BitfigoLogoTextSmall.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\BitfigoLogoTextSmall.png"
     },
     {
       "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\Images\\rm314-adj-02.jpg",
