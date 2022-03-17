@@ -13,5 +13,9 @@ namespace CryptoTradingPlatform.Core.Models.Articles
 
         [Required]
         public string Url { get; set; }
+
+        public int PictureId { get; set; }
+
+        public string Source { get; set; }
     }
 }

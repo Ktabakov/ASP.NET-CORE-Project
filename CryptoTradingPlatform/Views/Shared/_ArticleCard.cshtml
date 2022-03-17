@@ -1,0 +1,15 @@
+﻿@model List<ArticleViewModel>
+
+<div class="card-group mt-5">
+    @foreach (var article in Model)
+    {
+        <div class="card">
+            <img class="card-img-top" src="/ArticlesImages/@(article.PictureId).jpg" alt="Card image cap">
+            <div class="card-body">
+                <a href="@article.Url"> <h5 class="card-title text-dark">Source: @article.Source</h5></a>
+                <p class="card-text text-dark">@article.Title</p>
+                <p class="card-text"><small class="text-muted">@article.DatePublished</small></p>
+            </div>
+        </div>
+    }
+</div>
