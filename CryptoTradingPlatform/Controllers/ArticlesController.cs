@@ -1,16 +1,10 @@
 ﻿using CryptoTradingPlatform.Core.Models.Articles;
-using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoTradingPlatform.Controllers
 {
-    public class ArticlesController : Controller
+    public class ArticlesController : BaseController
     {
-        private readonly IArticlesService articlesService;
-        public ArticlesController(IArticlesService _articlesService)
-        {
-            articlesService = _articlesService;
-        }
         public IActionResult Add() => View();
 
 
@@ -22,8 +16,6 @@ namespace CryptoTradingPlatform.Controllers
 
         public async Task<IActionResult> All()
         {
-            List<ArticleViewModel> model = await articlesService.GetArticles();
-            ViewBag.Articles = model;
             return View();
         }
     }

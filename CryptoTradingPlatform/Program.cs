@@ -20,8 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<ITradingService, TradingService>();
+builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddHttpClient<ICryptoApiService, CryptoApiService>();
-builder.Services.AddHttpClient<IArticlesService, ArticlesService>();
+//builder.Services.AddHttpClient<IArticlesService, ArticlesService>();
 
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>

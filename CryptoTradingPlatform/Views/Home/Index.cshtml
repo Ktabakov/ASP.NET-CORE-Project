@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    var Articles = (List<ArticleViewModel>)ViewBag.Articles;
+    var News = (List<NewsViewModel>)ViewBag.News;
 }
 
 <div class="row">
@@ -25,7 +25,7 @@
     <h3>News</h3>
 </div>
 
-<partial name="_ArticleCard" />
+<partial name="_NewsCard" />
 
 <partial name="_FAQ" />
 

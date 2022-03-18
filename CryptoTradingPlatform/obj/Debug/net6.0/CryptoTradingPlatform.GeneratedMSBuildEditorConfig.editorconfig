@@ -203,12 +203,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/News/All.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xBbGwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/_ArticleCard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BcnRpY2xlQ2FyZC5jc2h0bWw=
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/_CryptoTable.cshtml]
@@ -221,6 +221,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/_NewsCard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OZXdzQ2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/_UserMessages.cshtml]

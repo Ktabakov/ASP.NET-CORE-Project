@@ -2,7 +2,7 @@
 
 namespace CryptoTradingPlatform.Core.Models.Articles
 {
-    public class ArticleViewModel
+    public class NewsViewModel
     {
         [Required]
         public string Title { get; set; }

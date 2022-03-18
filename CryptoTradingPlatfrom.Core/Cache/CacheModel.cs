@@ -7,7 +7,7 @@ namespace CryptoTradingPlatfrom.Core.Cache
     {
         private static IMemoryCache memoryCache = new MemoryCache(new MemoryCacheOptions());
 
-        public static void Add(string cacheKey, List<ArticleViewModel> model)
+        public static void Add(string cacheKey, List<NewsViewModel> model)
         {
             var cacheExpiryOptions = new MemoryCacheEntryOptions()
             {
@@ -18,10 +18,10 @@ namespace CryptoTradingPlatfrom.Core.Cache
             memoryCache.Set(cacheKey, model, cacheExpiryOptions);
         }
 
-        public static List<ArticleViewModel> Get(string cacheKey)
+        public static List<NewsViewModel> Get(string cacheKey)
         {
             var result = memoryCache.Get(cacheKey);
-            return (List<ArticleViewModel>)result;
+            return (List<NewsViewModel>)result;
         }
 
         public static void Delete(string cacheKey)

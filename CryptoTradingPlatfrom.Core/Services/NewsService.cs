@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
-    public class ArticlesService : IArticlesService
+    public class NewsService : INewsService
     {
         private readonly HttpClient client;
-        public ArticlesService(HttpClient _httpClient)
+        public NewsService(HttpClient _httpClient)
         {
             client = _httpClient;
         }
 
-        public async Task<List<ArticleViewModel>> GetArticles()
+        public async Task<List<NewsViewModel>> GetNews()
         {
             var rnd = new Random();
 
             HttpResponseMessage response = await client.GetAsync("https://cryptopanic.com/api/v1/posts/?auth_token=1580eb35061a2d6c12b22fe766bbc5c3cb3bfe8f&public=true");
-            List<ArticleViewModel> list = new List<ArticleViewModel>();
+            List<NewsViewModel> list = new List<NewsViewModel>();
             if (!response.IsSuccessStatusCode)
             {
                 return null;
@@ -41,7 +41,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                     continue;
                 }
                 
-                ArticleViewModel model = new ArticleViewModel()
+                NewsViewModel model = new NewsViewModel()
                 {
                     DatePublished = json["results"][arNum]["published_at"].ToString(),
                     Title = json["results"][arNum]["title"].ToString(),

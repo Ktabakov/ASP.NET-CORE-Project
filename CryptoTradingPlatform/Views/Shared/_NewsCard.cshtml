@@ -1,0 +1,17 @@
+﻿@{
+    var News = (List<NewsViewModel>)ViewBag.News;
+}
+
+<div class="card-group mt-5">
+    @foreach (var n in News)
+    {
+        <div class="card mb-5">
+            <img class="card-img-top" src="/ArticlesImages/@(n.PictureId).jpg" alt="Card image cap">
+            <div class="card-body bg-dark">
+                <a href="@n.Url"> <h5 class="card-title">Source: @n.Source</h5></a>
+                <p class="card-text">@n.Title</p>
+                <p class="card-text"><small class="text-muted">@n.DatePublished</small></p>
+            </div>
+        </div>
+    }
+</div>

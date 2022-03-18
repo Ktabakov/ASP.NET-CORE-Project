@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoTradingPlatform.Controllers
 {
-    public class AssetsController : Controller
+    public class AssetsController : BaseController
     {
         private readonly ICryptoApiService cryptoApiService;
         private readonly IAssetService assetService;
@@ -21,11 +21,9 @@ namespace CryptoTradingPlatform.Controllers
             assetService = _assetService;
         }
 
-        [Authorize]
         public IActionResult Add() => View();
 
         [HttpPost]
-        [Authorize]
         public IActionResult Add(AddAssetFormModel asset) 
         {
             var isNumeric = int.TryParse(asset.Ticker, out int value);
@@ -65,7 +63,6 @@ namespace CryptoTradingPlatform.Controllers
             return Redirect("/");
         }
 
-        [Authorize]
         public IActionResult Details(string assetName)
         {
             AssetDetailsViewModel model = assetService.GetDetails(assetName);
@@ -77,7 +74,6 @@ namespace CryptoTradingPlatform.Controllers
             return View(model);
         }
 
-        [Authorize]
         public IActionResult Remove(string assetName)
         {
             if (string.IsNullOrEmpty(assetName))

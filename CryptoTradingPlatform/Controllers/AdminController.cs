@@ -4,15 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoTradingPlatform.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
-        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
         [HttpPost]
         public IActionResult Create(AddAdminFormModel model)
         {

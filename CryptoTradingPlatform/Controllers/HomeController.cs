@@ -10,25 +10,26 @@ using System.Diagnostics;
 
 namespace CryptoTradingPlatform.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IAssetService assetService;
         private readonly ICryptoApiService cryptoService;
-        private readonly IArticlesService articlesService;
-        public HomeController(ILogger<HomeController> logger, IAssetService _assetService, ICryptoApiService _cryptoService, IArticlesService _articlesService)
+        private readonly INewsService newsService;
+        public HomeController(ILogger<HomeController> logger, IAssetService _assetService, ICryptoApiService _cryptoService, INewsService _newsService)
         {
             _logger = logger;
             assetService = _assetService;
             cryptoService = _cryptoService;
-            articlesService = _articlesService;
+            newsService = _newsService;
         }
 
+        [AllowAnonymous]
         //seed these 4 assets when creating DB - problem solved
         public async Task<IActionResult> Index()
         {
-            List<ArticleViewModel> articles = await articlesService.GetArticles();
-            ViewBag.Articles = articles;
+            List<NewsViewModel> news = await newsService.GetNews();
+            ViewBag.News = news;
 
             if (User.Identity.IsAuthenticated)
             {

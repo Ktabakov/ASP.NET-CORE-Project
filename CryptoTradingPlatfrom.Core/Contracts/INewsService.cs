@@ -2,8 +2,8 @@
 
 namespace CryptoTradingPlatfrom.Core.Contracts
 {
-    public interface IArticlesService
+    public interface INewsService
     {
-        Task<List<ArticleViewModel>> GetArticles();
+        Task<List<NewsViewModel>> GetNews();
     }
 }

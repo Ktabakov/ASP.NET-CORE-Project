@@ -7,11 +7,10 @@ using CryptoTradingPlatfrom.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace CryptoTradingPlatform.Controllers
 {
-    public class TradingController : Controller
+    public class TradingController : BaseController
     {
         private readonly IAssetService assetService;
         private readonly ICryptoApiService cryptoService;
@@ -23,7 +22,6 @@ namespace CryptoTradingPlatform.Controllers
             tradingService = _tradingService;
         }
 
-        [Authorize]
         public async Task<IActionResult> Swap()
         {
             SwapAssetsListViewModel model = await assetService.GetUserAssets(User.Identity.Name);
@@ -33,7 +31,6 @@ namespace CryptoTradingPlatform.Controllers
             return View();
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Swap(BuyAssetFormModel model)
         {
@@ -69,7 +66,6 @@ namespace CryptoTradingPlatform.Controllers
             return Redirect("/");
         }
 
-        [Authorize]
         public async Task<IActionResult> Trade()
         {
             List<string> tickers = await assetService.GetAllAssetTickers();
@@ -83,7 +79,6 @@ namespace CryptoTradingPlatform.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Trade(TradingFormModel model)
         {
             //Done! Get price again. Make sure price from form was not changed
@@ -107,14 +102,12 @@ namespace CryptoTradingPlatform.Controllers
             return Redirect("/");
         }
 
-        [Authorize]
         public async Task<IActionResult> History()
         {
             List<TransactionHistoryViewModel> transactions = await tradingService.GetUserTradingHistory(User.Identity.Name);
             return View(transactions);
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<ActionResult> AddToFavorites(string ticker)
         {
