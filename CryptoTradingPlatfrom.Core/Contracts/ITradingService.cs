@@ -11,5 +11,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         Task<bool> SaveToFavorites(string ticker, string? name);
         Task<List<TransactionHistoryViewModel>> GetUserTradingHistory(string? name);
         Task<decimal> CalculateTransaction(BuyAssetFormModel model);
+        List<TransactionHistoryViewModel> SortTransactions(string sortOrder, List<TransactionHistoryViewModel> transactions);
     }
 }

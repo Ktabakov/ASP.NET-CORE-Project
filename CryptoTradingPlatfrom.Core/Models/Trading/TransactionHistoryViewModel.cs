@@ -15,12 +15,15 @@ namespace CryptoTradingPlatfrom.Core.Models.Trading
         public double Quantity { get; set; }
 
         [Required]
+        [Display(Name = "Trade Date")]
         public DateTime Date { get; set; }
 
         [Required]
         [MaxLength(DataConstants.TransactionType)]
+        [Display(Name = "Transaction Type")]
         public string Type { get; set; }
 
+        [Display(Name = "Asset Name")]
         public string AssetName { get; set; }
 
     }

@@ -102,9 +102,18 @@ namespace CryptoTradingPlatform.Controllers
             return Redirect("/");
         }
 
-        public async Task<IActionResult> History()
+        public async Task<IActionResult> History(string sortOrder)
         {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["TypeSortParm"] = sortOrder == "Type" ? "type_desc" : "Type";
+            ViewData["QuantitySortParm"] = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+
             List<TransactionHistoryViewModel> transactions = await tradingService.GetUserTradingHistory(User.Identity.Name);
+
+            transactions = tradingService.SortTransactions(sortOrder, transactions);
+            
             return View(transactions);
         }
 

@@ -1,15 +1,25 @@
-﻿@model List<TransactionHistoryViewModel>
+﻿@model IEnumerable<TransactionHistoryViewModel>
 
 <h1 class="text-center"><i class="fas fa-comment-dollar text-success fa-xs" style="font-size:30px"></i>Transaction History</h1>
 
 <table class="table text-nowrap mt-4 cryptotable">
     <thead>
         <tr>
-            <th scope="col">Asset Name</th>
-            <th scope="col">Trade Date</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Transaction Type</th>
+            <th scope="col">
+                <a class="text-white" style="text-decoration:none" asp-action="History" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.AssetName)</a>
+            </th>
+            <th scope="col">
+                <a class="text-white" style="text-decoration:none" asp-action="History" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.Date)</a>
+            </th>
+            <th scope="col">
+                <a class="text-white" style="text-decoration:none" asp-action="History" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Price)</a>
+            </th>
+            <th scope="col">
+                <a class="text-white" style="text-decoration:none" asp-action="History" asp-route-sortOrder="@ViewData["QuantitySortParm"]">@Html.DisplayNameFor(model => model.Quantity)</a>
+            </th>
+            <th scope="col">
+                <a class="text-white" style="text-decoration:none" asp-action="History" asp-route-sortOrder="@ViewData["TypeSortParm"]">@Html.DisplayNameFor(model => model.Type)</a>
+            </th>
         </tr>
     </thead>
     <tbody class="bg-black p-2 text-dark bg-opacity-10 text-white">
@@ -29,22 +39,22 @@
                 <td>
                     @tr.Quantity
                 </td>
-                @if(tr.Type == "Buy")
+                @if (tr.Type == "Buy")
                 {
                     <td class="text-danger">
-                    @tr.Type
+                        @tr.Type
                     </td>
                 }
-                else if(tr.Type == "Sell")
+                else if (tr.Type == "Sell")
                 {
                     <td class="text-success">
-                    @tr.Type
+                        @tr.Type
                     </td>
                 }
-                else if(tr.Type == "Swap")
+                else if (tr.Type == "Swap")
                 {
-                    <td  class="text-info"> 
-                    @tr.Type
+                    <td class="text-info">
+                        @tr.Type
                     </td>
                 }
             </tr>

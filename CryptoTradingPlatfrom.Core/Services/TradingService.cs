@@ -248,5 +248,45 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             return buyAssetQuantity;
         }
+
+     
+        public List<TransactionHistoryViewModel> SortTransactions(string sortOrder, List<TransactionHistoryViewModel> transactions)
+        {
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    transactions = transactions.OrderByDescending(s => s.AssetName).ToList();
+                    break;
+                case "Date":
+                    transactions = transactions.OrderBy(s => s.Date).ToList();
+                    break;
+                case "date_desc":
+                    transactions = transactions.OrderByDescending(s => s.Date).ToList();
+                    break;
+                case "Type":
+                    transactions = transactions.OrderBy(s => s.Type).ToList();
+                    break;
+                case "type_desc":
+                    transactions = transactions.OrderByDescending(s => s.Type).ToList();
+                    break;
+                case "Quantity":
+                    transactions = transactions.OrderBy(s => s.Quantity).ToList();
+                    break;
+                case "quantity_desc":
+                    transactions = transactions.OrderByDescending(s => s.Quantity).ToList();
+                    break;
+                case "Price":
+                    transactions = transactions.OrderBy(s => s.Price).ToList();
+                    break;
+                case "price_desc":
+                    transactions = transactions.OrderByDescending(s => s.Price).ToList();
+                    break;
+                default:
+                    transactions = transactions.OrderBy(s => s.AssetName).ToList();
+                    break;
+            }
+            return transactions;
+        }
     }
 }
