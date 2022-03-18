@@ -20,9 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<ITradingService, TradingService>();
-builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddHttpClient<ICryptoApiService, CryptoApiService>();
-//builder.Services.AddHttpClient<IArticlesService, ArticlesService>();
+builder.Services.AddHttpClient<INewsService, NewsService>();
 
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
@@ -35,8 +35,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequireUppercase = false;
 
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-    /*.AddRoles<IdentityRole>();*/
+
 
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
@@ -63,7 +64,6 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
 
 //try configure cors
 app.UseCors(options =>

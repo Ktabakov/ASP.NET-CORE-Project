@@ -5,6 +5,7 @@ namespace CryptoTradingPlatform.Controllers
 {
     public class ArticlesController : BaseController
     {
+        
         public IActionResult Add() => View();
 
 

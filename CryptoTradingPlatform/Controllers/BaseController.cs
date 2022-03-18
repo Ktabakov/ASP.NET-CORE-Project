@@ -6,6 +6,6 @@ namespace CryptoTradingPlatform.Controllers
     [Authorize]
     public class BaseController : Controller
     {
-        
+      
     }
 }

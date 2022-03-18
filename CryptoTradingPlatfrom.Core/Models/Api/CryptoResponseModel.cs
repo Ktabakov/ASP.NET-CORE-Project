@@ -18,6 +18,5 @@
 
         public string Description { get; set; }
 
-        public bool IsInFavorites { get; set; }
     }
 }

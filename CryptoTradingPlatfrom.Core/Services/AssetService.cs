@@ -142,7 +142,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             
         }
 
-        public async Task<List<CryptoResponseModel>> CheckIfFavorites(List<CryptoResponseModel> cryptos, string userName)
+       /* public async Task<List<CryptoResponseModel>> CheckIfFavorites(List<CryptoResponseModel> cryptos, string userName)
         {
             var user = data.Users.FirstOrDefault(c => c.UserName == userName);
 
@@ -153,7 +153,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                 cr.IsInFavorites = data.UserFavorites.FirstOrDefault(c => c.ApplicationUserId == user.Id && c.AssetId == assetId) == null;
             }
             return cryptos;
-        }
+        }*/
 
         public async Task<List<string>> GetAllFavoritesTickers(string? name)
         {
@@ -162,6 +162,14 @@ namespace CryptoTradingPlatfrom.Core.Services
                 .Include(c => c.Asset)
                 .Select(c => c.Asset.Ticker)
                 .ToListAsync();
+        }
+
+        public bool IsAssetFavorite(string userName, string assetTicker)
+        {
+             return data
+                .UserFavorites
+                .Where(u => u.User.UserName == userName)
+                .Any(c => c.Asset.Ticker == assetTicker);
         }
     }
 }

@@ -12,19 +12,18 @@ namespace CryptoTradingPlatform.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
         private readonly IAssetService assetService;
         private readonly ICryptoApiService cryptoService;
         private readonly INewsService newsService;
-        public HomeController(ILogger<HomeController> logger, IAssetService _assetService, ICryptoApiService _cryptoService, INewsService _newsService)
+        public HomeController(ILogger<HomeController> _logger, IAssetService _assetService, ICryptoApiService _cryptoService, INewsService _newsService)
         {
-            _logger = logger;
+            logger = _logger;
             assetService = _assetService;
             cryptoService = _cryptoService;
             newsService = _newsService;
         }
 
-        [AllowAnonymous]
         //seed these 4 assets when creating DB - problem solved
         public async Task<IActionResult> Index()
         {
@@ -35,7 +34,6 @@ namespace CryptoTradingPlatform.Controllers
             {
                 List<string> tickers = await assetService.GetAllAssetTickers();
                 List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
-                cryptos = await assetService.CheckIfFavorites(cryptos, User.Identity.Name);
 
                 return View(cryptos);
             }
