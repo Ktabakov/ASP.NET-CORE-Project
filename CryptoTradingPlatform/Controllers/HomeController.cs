@@ -2,6 +2,7 @@
 using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models;
 using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatform.Core.Models.Articles;
 using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +15,21 @@ namespace CryptoTradingPlatform.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IAssetService assetService;
         private readonly ICryptoApiService cryptoService;
-        public HomeController(ILogger<HomeController> logger, IAssetService _assetService, ICryptoApiService _cryptoService)
+        private readonly IArticlesService articlesService;
+        public HomeController(ILogger<HomeController> logger, IAssetService _assetService, ICryptoApiService _cryptoService, IArticlesService _articlesService)
         {
             _logger = logger;
             assetService = _assetService;
             cryptoService = _cryptoService;
+            articlesService = _articlesService;
         }
 
         //seed these 4 assets when creating DB - problem solved
         public async Task<IActionResult> Index()
         {
+            List<ArticleViewModel> articles = await articlesService.GetArticles();
+            ViewBag.Articles = articles;
+
             if (User.Identity.IsAuthenticated)
             {
                 List<string> tickers = await assetService.GetAllAssetTickers();

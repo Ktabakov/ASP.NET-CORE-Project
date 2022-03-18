@@ -23,7 +23,8 @@ namespace CryptoTradingPlatform.Controllers
         public async Task<IActionResult> All()
         {
             List<ArticleViewModel> model = await articlesService.GetArticles();
-            return View(model);
+            ViewBag.Articles = model;
+            return View();
         }
     }
 }
