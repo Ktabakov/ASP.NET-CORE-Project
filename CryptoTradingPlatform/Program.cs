@@ -1,6 +1,7 @@
 using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Services;
 using CryptoTradingPlatform.Data.Models;
+using CryptoTradingPlatform.Extensions;
 using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.ModelBinders;
 using CryptoTradingPlatfrom.Core.Contracts;
@@ -9,6 +10,7 @@ using CryptoTradingPlatfrom.Infrastructure.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +53,7 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddCors();
 
 var app = builder.Build();
+app.PrepareDatabase();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -71,6 +74,7 @@ app.UseCors(options =>
     options.WithOrigins("https://pro-api.coinmarketcap.com");
     options.WithOrigins("https://cryptopanic.com");
 });
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
