@@ -18,10 +18,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddScoped<ICryptoApiService, CryptoApiService>();
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<ITradingService, TradingService>();
-builder.Services.AddScoped<IArticlesService, ArticlesService>();
+builder.Services.AddHttpClient<ICryptoApiService, CryptoApiService>();
+builder.Services.AddHttpClient<IArticlesService, ArticlesService>();
+
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {

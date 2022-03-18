@@ -11,7 +11,11 @@ namespace CryptoTradingPlatfrom.Core.Services
 {
     public class ArticlesService : IArticlesService
     {
-        static HttpClient client = new HttpClient();
+        private readonly HttpClient client;
+        public ArticlesService(HttpClient _httpClient)
+        {
+            client = _httpClient;
+        }
 
         public async Task<List<ArticleViewModel>> GetArticles()
         {

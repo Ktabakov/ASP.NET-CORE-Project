@@ -8,8 +8,11 @@ namespace CryptoTradingPlatform.Core.Services
 {
     public class CryptoApiService : ICryptoApiService
     {
-        static HttpClient client = new HttpClient();
-
+        private readonly HttpClient client;
+        public CryptoApiService(HttpClient _client)
+        {
+            client = _client;
+        }
 
         public async Task<List<ImageDescriptionResponseModel>> GetImgUrls(List<string> tickers)
         {
@@ -37,10 +40,12 @@ namespace CryptoTradingPlatform.Core.Services
        
         public async Task<List<CryptoResponseModel>> GetCryptos(List<string> tickers)
         {
-            InitRequest();
-            //change the request later for all cryptos in the database
-            //take the tickers and add in request
-            //foreach them on the page
+
+            if (!client.DefaultRequestHeaders.Contains("Accepts"))
+            {
+                client.DefaultRequestHeaders.Add("Accepts", "application/json");
+                client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
+            }
 
             HttpResponseMessage response = await client.GetAsync(ApiConstants.LatestPath + "?symbol=" + string.Join(',',tickers));
 
@@ -77,14 +82,7 @@ namespace CryptoTradingPlatform.Core.Services
             }
             return cryptos;
         }
-        private static void InitRequest()
-        {
-            if (!client.DefaultRequestHeaders.Contains("Accepts"))
-            {
-                client.DefaultRequestHeaders.Add("Accepts", "application/json");
-                client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
-            }
-        }
+
 
         public async Task<BuyAssetResponseModel> GetPrices(List<string> tickers)
         {
