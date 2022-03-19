@@ -1,5 +1,6 @@
 ﻿using CryptoTradingPlatform.Core.Models.Articles;
 using CryptoTradingPlatfrom.Core.Contracts;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,20 @@ namespace CryptoTradingPlatfrom.Core.Services
     public class NewsService : INewsService
     {
         private readonly HttpClient client;
-        public NewsService(HttpClient _httpClient)
+        private readonly IConfiguration config;
+
+        public NewsService(HttpClient _httpClient, IConfiguration _config)
         {
             client = _httpClient;
+            config = _config;
         }
 
         public async Task<List<NewsViewModel>> GetNews()
         {
             var rnd = new Random();
+            var apiKey = config.GetValue<string>("newsKey");
 
-            HttpResponseMessage response = await client.GetAsync("https://cryptopanic.com/api/v1/posts/?auth_token=1580eb35061a2d6c12b22fe766bbc5c3cb3bfe8f&public=true");
+            HttpResponseMessage response = await client.GetAsync($"https://cryptopanic.com/api/v1/posts/?auth_token={apiKey}&public=true");
             List<NewsViewModel> list = new List<NewsViewModel>();
             if (!response.IsSuccessStatusCode)
             {

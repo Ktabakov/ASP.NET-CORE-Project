@@ -1,7 +1,9 @@
 ﻿using CryptoTradingPlatform.Core.Constants;
 using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatfrom.Core.Models.Api;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
 namespace CryptoTradingPlatform.Core.Services
@@ -9,9 +11,12 @@ namespace CryptoTradingPlatform.Core.Services
     public class CryptoApiService : ICryptoApiService
     {
         private readonly HttpClient client;
-        public CryptoApiService(HttpClient _client)
+        private readonly IConfiguration config;
+
+        public CryptoApiService(HttpClient _client, IConfiguration _config)
         {
             client = _client;
+            config = _config;
         }
 
         public async Task<List<ImageDescriptionResponseModel>> GetImgUrls(List<string> tickers)
@@ -40,13 +45,8 @@ namespace CryptoTradingPlatform.Core.Services
        
         public async Task<List<CryptoResponseModel>> GetCryptos(List<string> tickers)
         {
-
-            if (!client.DefaultRequestHeaders.Contains("Accepts"))
-            {
-                client.DefaultRequestHeaders.Add("Accepts", "application/json");
-                client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", ApiConstants.ApiKey);
-            }
-
+            Init();
+            
             HttpResponseMessage response = await client.GetAsync(ApiConstants.LatestPath + "?symbol=" + string.Join(',',tickers));
 
             if (!response.IsSuccessStatusCode)
@@ -83,7 +83,15 @@ namespace CryptoTradingPlatform.Core.Services
             return cryptos;
         }
 
-
+        private void Init()
+        {
+            var apikey = config.GetValue<string>("coinmarketcapKey");
+            if (!client.DefaultRequestHeaders.Contains("Accepts"))
+            {
+                client.DefaultRequestHeaders.Add("Accepts", "application/json");
+                client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", apikey);
+            }
+        }
         public async Task<BuyAssetResponseModel> GetPrices(List<string> tickers)
         {
             BuyAssetResponseModel result = new BuyAssetResponseModel();
