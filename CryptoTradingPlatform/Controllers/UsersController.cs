@@ -22,6 +22,7 @@ namespace CryptoTradingPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AddManagerFormModel model)
         {
+
             if (!ModelState.IsValid)
             {
                 ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
