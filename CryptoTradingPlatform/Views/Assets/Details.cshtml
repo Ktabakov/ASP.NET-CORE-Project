@@ -16,8 +16,9 @@
     <div class="row col-8 mt-3 cryptotable">
         <p>@Model.Description</p>
     </div>
-   <a href="/Trading/Trade" class="button btn btn-success mt-2 rounded-pill">Trade now</a>
-   <a href="/Assets/Remove?assetName=@Model.Name" class="button btn btn-danger mt-2 rounded-pill">Remove</a>
+    <a href="/Trading/Trade" class="button btn btn-success mt-2 rounded-pill">Trade now</a>
+    @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+    {
+        <a href="/Assets/Remove?assetName=@Model.Name" class="button btn btn-danger mt-2 rounded-pill">Remove</a>
+    }
 </div>
-<!--If user is in role admin see button-->
-

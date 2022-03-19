@@ -21,9 +21,11 @@ namespace CryptoTradingPlatform.Controllers
             assetService = _assetService;
         }
 
+        [Authorize(Roles = "Administrator, Manager")]
         public IActionResult Add() => View();
 
         [HttpPost]
+        [Authorize(Roles = "Administrator, Manager")]
         public IActionResult Add(AddAssetFormModel asset) 
         {
             var isNumeric = int.TryParse(asset.Ticker, out int value);
@@ -74,6 +76,7 @@ namespace CryptoTradingPlatform.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Administrator, Manager")]
         public IActionResult Remove(string assetName)
         {
             if (string.IsNullOrEmpty(assetName))
