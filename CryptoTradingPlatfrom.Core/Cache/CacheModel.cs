@@ -1,4 +1,4 @@
-﻿using CryptoTradingPlatform.Core.Models.Articles;
+﻿using CryptoTradingPlatform.Core.Models.Api;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace CryptoTradingPlatfrom.Core.Cache
@@ -7,21 +7,21 @@ namespace CryptoTradingPlatfrom.Core.Cache
     {
         private static IMemoryCache memoryCache = new MemoryCache(new MemoryCacheOptions());
 
-        public static void Add(string cacheKey, List<NewsViewModel> model)
+        public static void Add(string cacheKey, List<CryptoResponseModel> model)
         {
             var cacheExpiryOptions = new MemoryCacheEntryOptions()
             {
-                AbsoluteExpiration = DateTime.Now.AddSeconds(30),
+                AbsoluteExpiration = DateTime.Now.AddSeconds(40),
                 Priority = CacheItemPriority.High,
                 SlidingExpiration = TimeSpan.FromSeconds(20),
             };
             memoryCache.Set(cacheKey, model, cacheExpiryOptions);
         }
 
-        public static List<NewsViewModel> Get(string cacheKey)
+        public static List<CryptoResponseModel> Get(string cacheKey)
         {
             var result = memoryCache.Get(cacheKey);
-            return (List<NewsViewModel>)result;
+            return (List<CryptoResponseModel>)result;
         }
 
         public static void Delete(string cacheKey)

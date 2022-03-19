@@ -3,6 +3,7 @@ using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models;
 using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Core.Models.Articles;
+using CryptoTradingPlatfrom.Core.Cache;
 using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ namespace CryptoTradingPlatform.Controllers
         }
 
         //seed these 4 assets when creating DB - problem solved
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             List<NewsViewModel> news = await newsService.GetNews();
@@ -32,17 +34,26 @@ namespace CryptoTradingPlatform.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
+
                 List<string> tickers = await assetService.GetAllAssetTickers();
                 List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
-
                 return View(cryptos);
+
             }
             else
             {
                 List<string> tickers = new List<string> { "BTC", "ETH", "BNB", "ADA" };
-                List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
-
-                return View(cryptos);
+                var result = CacheModel.Get("cryptos");
+                if (result == null)
+                {
+                    List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
+                    CacheModel.Add("cryptos", cryptos);
+                    return View(cryptos);
+                }
+                else
+                {
+                    return View(result);
+                }
             }
         }
 

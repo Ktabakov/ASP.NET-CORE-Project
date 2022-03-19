@@ -292,13 +292,6 @@ namespace CryptoTradingPlatfrom.Core.Services
             }
             return transactions;
         }
-
-       /* public async Task<FileContentResult> DownloadUserTransactionHistory(string? name)
-        {
-            List<TransactionHistoryViewModel> history = await GetUserTradingHistory(name);
-
-            return new FileContentResult(string.Join(", ", history), "application/pdf");
-        }*/
     }
     
 }
