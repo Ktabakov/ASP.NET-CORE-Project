@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CryptoTradingPlatform.Core.Models.Admins
+namespace CryptoTradingPlatform.Core.Models.Users
 {
-    public class AddAdminFormModel
+    public class AddManagerFormModel
     {
         [Required]
         public string Experience { get; set; }
 
         [Required]
-        [MaxLength(ModelsConstants.QuestionMaxLength)]
+        [StringLength(ModelsConstants.QuestionMaxLength, MinimumLength = ModelsConstants.QuestionMinLength)]
         public string Question { get; set; }
     }
 }

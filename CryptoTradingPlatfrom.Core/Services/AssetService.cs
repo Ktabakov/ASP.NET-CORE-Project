@@ -13,12 +13,10 @@ namespace CryptoTradingPlatfrom.Core.Services
     public class AssetService : IAssetService
     {
         private readonly ApplicationDbContext data;
-        private readonly ICryptoApiService apiService;
 
-        public AssetService(ApplicationDbContext _data, ICryptoApiService _apiService)
+        public AssetService(ApplicationDbContext _data)
         {
             data = _data;
-            apiService = _apiService;
         }
 
         public (bool, string) AddAsset(CryptoResponseModel model)

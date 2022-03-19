@@ -23,6 +23,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<ITradingService, TradingService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
+builder.Services.AddScoped<IUserService, UserService>();    
 builder.Services.AddHttpClient<ICryptoApiService, CryptoApiService>();
 builder.Services.AddHttpClient<INewsService, NewsService>();
 
@@ -85,11 +86,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "Area",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapControllerRoute(
-    name: "AssetDetails",
-    pattern: "{controller=Assets}/{action=Details}/{assetName}");
 app.MapRazorPages();
 
 app.Run();

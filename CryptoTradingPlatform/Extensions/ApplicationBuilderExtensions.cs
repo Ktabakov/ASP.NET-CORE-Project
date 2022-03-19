@@ -73,14 +73,18 @@ namespace CryptoTradingPlatform.Extensions
             Task
                 .Run(async () =>
                 {
-                    if (await roleManager.RoleExistsAsync("Admin"))
+                    if (await roleManager.RoleExistsAsync("Administrator") && await roleManager.RoleExistsAsync("Manager"))
                     {
                         return;
                     }
 
-                    var role = new IdentityRole { Name = "Admin" };
+                    var adminRole = new IdentityRole { Name = "Administrator" };
+                    var managerRole = new IdentityRole { Name = "Manager" };
 
-                    await roleManager.CreateAsync(role);
+
+                    await roleManager.CreateAsync(adminRole);
+                    await roleManager.CreateAsync(managerRole);
+
 
                     const string adminEmail = "admin@abv.bg";
                     const string adminPassword = "admin123";
@@ -89,11 +93,12 @@ namespace CryptoTradingPlatform.Extensions
                     {
                         Email = adminEmail,
                         UserName = adminEmail,
+                        EmailConfirmed = true,
                     };
 
                     await userManager.CreateAsync(user, adminPassword);
 
-                    await userManager.AddToRoleAsync(user, role.Name);
+                    await userManager.AddToRoleAsync(user, adminRole.Name);
                 })
                 .GetAwaiter()
                 .GetResult();

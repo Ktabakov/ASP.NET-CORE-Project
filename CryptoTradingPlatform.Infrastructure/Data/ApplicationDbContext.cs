@@ -1,4 +1,5 @@
 ﻿using CryptoTradingPlatform.Data.Models;
+using CryptoTradingPlatform.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,5 +31,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data
         public DbSet<UserAsset> UserAssets { get; set; }
 
         public DbSet<UserFovorites> UserFavorites { get; set; }
+
+        public DbSet<ManagerApplication> ManagerApplications { get; set; }
     }
 }

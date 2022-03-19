@@ -11,5 +11,7 @@
         public const int AssetTickerMaxLength = 8;
 
         public const int QuestionMaxLength = 100;
+
+        public const int QuestionMinLength = 10;
     }
 }

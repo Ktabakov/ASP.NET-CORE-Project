@@ -26,5 +26,10 @@
 
         public const int TransactionType = 4;
 
+        public const int QuestionMaxLength = 100;
+
+        public const int ExperienceMaxLength = 20;
+
+
     }
 }
