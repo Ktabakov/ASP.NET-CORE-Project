@@ -7,6 +7,8 @@ using CryptoTradingPlatfrom.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
+using System.Text;
 
 namespace CryptoTradingPlatform.Controllers
 {
@@ -34,7 +36,6 @@ namespace CryptoTradingPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Swap(BuyAssetFormModel model)
         {
-            //check asset quantity to be for the user. He has to have this much to convert
             SwapAssetsListViewModel customModel = await assetService.GetUserAssets(User.Identity.Name);
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.Assets = customModel.Assets.ToList();
@@ -81,7 +82,6 @@ namespace CryptoTradingPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Trade(TradingFormModel model)
         {
-            //Done! Get price again. Make sure price from form was not changed
             List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(new List<string> { model.Ticker });
             model.Price = cryptos[0].Price;
 
@@ -104,8 +104,8 @@ namespace CryptoTradingPlatform.Controllers
 
         public async Task<IActionResult> History(string sortOrder)
         {
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["TypeSortParm"] = sortOrder == "Type" ? "type_desc" : "Type";
             ViewData["QuantitySortParm"] = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
@@ -113,7 +113,7 @@ namespace CryptoTradingPlatform.Controllers
             List<TransactionHistoryViewModel> transactions = await tradingService.GetUserTradingHistory(User.Identity.Name);
 
             transactions = tradingService.SortTransactions(sortOrder, transactions);
-            
+
             return View(transactions);
         }
 
@@ -128,7 +128,6 @@ namespace CryptoTradingPlatform.Controllers
             }
 
             return Json(new { success = true });
-
         }
 
         public async Task<IActionResult> Favorites()
@@ -138,5 +137,21 @@ namespace CryptoTradingPlatform.Controllers
 
             return View(cryptos);
         }
+        public async Task<IActionResult> Download()
+        {
+            List<TransactionHistoryViewModel> transactions = await tradingService.GetUserTradingHistory(User.Identity.Name);
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("AssetName,Date,Price,Quantity,Type");
+            foreach (var item in transactions)
+            {
+                sb.AppendLine(item.AssetName + ", " + item.Date + ", " + item.Price + ", " + item.Quantity + ", " + item.Type);
+
+            }
+
+            return File(new UTF8Encoding().GetBytes(sb.ToString()), "text/csv", $"{User.Identity.Name}_Trading_History.csv");
+
+        }
+
     }
 }

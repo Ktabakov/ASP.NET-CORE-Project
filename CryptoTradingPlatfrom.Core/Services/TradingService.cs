@@ -7,6 +7,7 @@ using CryptoTradingPlatfrom.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.EntityFrameworkCore;
 using CryptoTradingPlatfrom.Core.Models.Api;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
@@ -255,6 +256,9 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             switch (sortOrder)
             {
+                case "Name":
+                    transactions = transactions.OrderBy(s => s.AssetName).ToList();
+                    break;
                 case "name_desc":
                     transactions = transactions.OrderByDescending(s => s.AssetName).ToList();
                     break;
@@ -283,10 +287,18 @@ namespace CryptoTradingPlatfrom.Core.Services
                     transactions = transactions.OrderByDescending(s => s.Price).ToList();
                     break;
                 default:
-                    transactions = transactions.OrderBy(s => s.AssetName).ToList();
+                    transactions = transactions.OrderByDescending(s => s.Date).ToList();
                     break;
             }
             return transactions;
         }
+
+       /* public async Task<FileContentResult> DownloadUserTransactionHistory(string? name)
+        {
+            List<TransactionHistoryViewModel> history = await GetUserTradingHistory(name);
+
+            return new FileContentResult(string.Join(", ", history), "application/pdf");
+        }*/
     }
+    
 }
