@@ -14,8 +14,10 @@ namespace CryptoTradingPlatform.Controllers
             userService = _userService;
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            bool applicationSent = await userService.IsApplicationSent(User.Identity.Name);
+            ViewBag.ApplicationSent = applicationSent;
             return View();
         }
 

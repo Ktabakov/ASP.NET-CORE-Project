@@ -42,6 +42,7 @@ namespace CryptoTradingPlatform.Controllers
             }
             else
             {
+                //use the seed
                 List<string> tickers = new List<string> { "BTC", "ETH", "BNB", "ADA" };
                 var result = CacheModel.Get("cryptos");
                 if (result == null)

@@ -15,8 +15,32 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/Control/AllApplicatnts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udHJvbFxBbGxBcHBsaWNhdG50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/Control/AllUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udHJvbFxBbGxVc2Vycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/Shared/_UserMessages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9Vc2VyTWVzc2FnZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/_ViewImports.cshtml]
@@ -282,6 +306,10 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-zwv8gvfhgn
 
 [C:/Users/User/OneDrive/Desktop/SoftUni/C\# Web/ASP.NET Core/CryptoTradingPlatform/CryptoTradingPlatform/CryptoTradingPlatform/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s

@@ -1,0 +1,24 @@
+﻿@model List<ManagerApplicationViewModel>
+
+<div class="row">
+    <div class="card-group mt-5">
+        @foreach (var n in Model)
+        {
+            <div>
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image cap">
+                    <div class="card-body bg-dark">
+                        <h5 class="card-title">Username: @n.Username</h5>
+                        <p class="card-text">Experience: @n.Experience</p>
+                        <p class="card-text">Answer: @n.Question</p>
+                        <p class="card-text"><small class="text-muted">@n.DateApplied</small></p>
+                        <div class="row">
+                            <a asp-area="Admin" asp-action="DeleteApplication" asp-controller="Control" asp-route-id="@n.UserId" class="btn btn-danger mt-2 rounded-pill">Delete Application</a>
+                            <a asp-area="Admin" asp-action="PromoteApplicant" asp-controller="Control" asp-route-id="@n.UserId" class="btn btn-success mt-2 rounded-pill">Promote to Manager</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

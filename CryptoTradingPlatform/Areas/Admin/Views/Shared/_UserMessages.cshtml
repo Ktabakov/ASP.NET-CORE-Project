@@ -1,0 +1,29 @@
+﻿@using CryptoTradingPlatform.Constants
+
+@if (ViewData[MessageConstants.UnexpectedError] != null)
+{
+    <script>
+        $(function(){
+            toastr.error('@ViewData[MessageConstants.UnexpectedError]?.ToString()');
+        });
+    </script>
+}
+@if (ViewData[MessageConstants.Success] != null)
+{
+    <script>
+        $(function(){
+            toastr.success('@ViewData[MessageConstants.Success]?.ToString()');
+        });
+    </script>
+}
+
+
+@if (TempData[MessageConstants.Success] != null)
+{
+   <script type="text/javascript">toastr.success("@TempData[MessageConstants.Success]");</script>
+}
+
+@if (TempData[MessageConstants.UnexpectedError] != null)
+{
+   <script type="text/javascript">toastr.error("@TempData[MessageConstants.UnexpectedError]");</script>
+}

@@ -21,6 +21,9 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Models
         public string Experience { get; set; }
 
         [Required]
+        public DateTime DateApplied { get; set; }
+
+        [Required]
         [MaxLength(DataConstants.QuestionMaxLength)]
         public string Question { get; set; }
 

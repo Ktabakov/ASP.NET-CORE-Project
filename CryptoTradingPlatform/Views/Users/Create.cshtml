@@ -4,28 +4,35 @@
     ViewData["Title"] = "Become a manager";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="offset-md-3 col-md-6 col-sm-12">
-            <h2 class="text-center text-white">Fill the form and apply to become a manager on our Exchange</h2>
-            <form method="post">
-                <div class="form-group">
-                    <label class="text-white">How much experience do you have as a manager?</label>
-                    <select asp-for="Experience" class="form-control">
-                        <option class="text-dark">0 - 6 Months</option>
-                        <option class="text-dark">6 - 12 Months</option>
-                        <option class="text-dark">1 - 2 Years</option>
-                        <option class="text-dark">2 - 5 Years</option>
-                        <option class="text-dark">5 +</option>
-                    </select>
-                </div>
-                <div class="form-group mt-2">
-                    <label class="text-white">Why do you wish to become a manager?</label>
-                    <textarea asp-for="Question" class="form-control"></textarea>
-                    <span asp-validation-for="Question" class="small text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary mt-2">Apply</button>
-            </form>
+@if (ViewBag.ApplicationSent)
+{
+    <h1 class="text-center">Application Already Sent! Plase come back at a later time</h1>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-3 col-md-6 col-sm-12">
+                <h2 class="text-center text-white">Fill the form and apply to become a manager on our Exchange</h2>
+                <form method="post">
+                    <div class="form-group">
+                        <label class="text-white">How much experience do you have as a manager?</label>
+                        <select asp-for="Experience" class="form-control">
+                            <option class="text-dark">0 - 6 Months</option>
+                            <option class="text-dark">6 - 12 Months</option>
+                            <option class="text-dark">1 - 2 Years</option>
+                            <option class="text-dark">2 - 5 Years</option>
+                            <option class="text-dark">5 +</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="text-white">Why do you wish to become a manager?</label>
+                        <textarea asp-for="Question" class="form-control"></textarea>
+                        <span asp-validation-for="Question" class="small text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Apply</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+}
