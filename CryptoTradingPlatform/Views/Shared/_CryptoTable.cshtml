@@ -2,7 +2,8 @@
 
 @using CryptoTradingPlatfrom.Core.Contracts
 
-@inject IAssetService assetService 
+@inject IAssetService assetService
+
 
 <table class="table mt-4 cryptotable">
     <thead>
@@ -24,8 +25,8 @@
                 <td>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        
-                        @if (!@assetService.IsAssetFavorite(User.Identity.Name, @asset.Ticker   ))
+
+                        @if (!@assetService.IsAssetFavorite(User.Identity.Name, @asset.Ticker))
                         {
                             <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star" style="font-size:15px"></a>
                         }

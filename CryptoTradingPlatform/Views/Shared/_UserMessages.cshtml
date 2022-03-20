@@ -16,6 +16,15 @@
         });
     </script>
 }
+@if (ViewData[MessageConstants.Warning] != null)
+{
+    <script>
+        $(function(){
+            toastr.warning('@ViewData[MessageConstants.Warning]?.ToString()');
+        });
+    </script>
+}
+
 
 
 @if (TempData[MessageConstants.Success] != null)
@@ -26,4 +35,8 @@
 @if (TempData[MessageConstants.UnexpectedError] != null)
 {
    <script type="text/javascript">toastr.error("@TempData[MessageConstants.UnexpectedError]");</script>
+}
+@if (TempData[MessageConstants.Warning] != null)
+{
+   <script type="text/javascript">toastr.warning("@TempData[MessageConstants.Warning]");</script>
 }

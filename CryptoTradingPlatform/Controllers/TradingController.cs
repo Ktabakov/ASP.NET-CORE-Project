@@ -133,6 +133,11 @@ namespace CryptoTradingPlatform.Controllers
         public async Task<IActionResult> Favorites()
         {
             List<string> tickers = await assetService.GetAllFavoritesTickers(User.Identity.Name);
+            if (tickers.Count == 0)
+            {
+                TempData[MessageConstants.Warning] = "You currently don't have any favorites!";
+                return Redirect("/");
+            }
             List<CryptoResponseModel> cryptos = await cryptoService.GetCryptos(tickers);
 
             return View(cryptos);
