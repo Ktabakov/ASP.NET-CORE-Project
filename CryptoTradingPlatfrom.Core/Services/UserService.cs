@@ -6,12 +6,6 @@ using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
@@ -61,6 +55,26 @@ namespace CryptoTradingPlatfrom.Core.Services
                     UserId = c.User.Id
                 })
                 .ToListAsync();
+        }
+
+        public async Task<List<string>> GetAllRoles()
+        {
+            return await data.Roles.Select(c => c.Name).ToListAsync();
+        }
+
+        public async Task<List<UserViewModel>> GetAllUsers()
+        {
+            return await data
+                .Users
+                .Where(c => c.UserName != "admin@abv.bg")
+                .Select(c => new UserViewModel
+                {
+                    Username = c.UserName,
+                    UserId = c.Id,
+                    Role = data.Roles.FirstOrDefault(r => r.Id == data.UserRoles.FirstOrDefault(u => u.UserId == c.Id).RoleId).Name
+                })
+                .ToListAsync();
+
         }
 
         public async Task<bool> IsApplicationSent(string? name)

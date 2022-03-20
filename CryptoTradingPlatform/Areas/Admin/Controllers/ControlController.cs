@@ -18,9 +18,13 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
             List<ManagerApplicationViewModel> model = await userService.GetAllApplications();
             return View(model);
         }
-        public IActionResult AllUsers()
+        public async Task<IActionResult> AllUsers()
         {
-            return View();
+            List<string> roles = await userService.GetAllRoles();
+            ViewBag.Roles = roles;
+            List<UserViewModel> users = await userService.GetAllUsers();
+
+            return View(users);
         }
 
         public async Task<IActionResult> DeleteApplication(string id)

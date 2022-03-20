@@ -1,5 +1,10 @@
 ﻿@model List<ManagerApplicationViewModel>
 
+<div class="text-center">
+    <h1>All Manager Applications</h1>
+    <h3>Here you can see all the manager applications. Choose what action, you would like to take</h3>
+</div>
+
 <div class="row">
     <div class="card-group mt-5">
         @foreach (var n in Model)
@@ -11,7 +16,7 @@
                         <h5 class="card-title">Username: @n.Username</h5>
                         <p class="card-text">Experience: @n.Experience</p>
                         <p class="card-text">Answer: @n.Question</p>
-                        <p class="card-text"><small class="text-muted">@n.DateApplied</small></p>
+                        <p class="card-text"><small class="text-muted">Applied on: @n.DateApplied.ToString("d")</small></p>
                         <div class="row">
                             <a asp-area="Admin" asp-action="DeleteApplication" asp-controller="Control" asp-route-id="@n.UserId" class="btn btn-danger mt-2 rounded-pill">Delete Application</a>
                             <a asp-area="Admin" asp-action="PromoteApplicant" asp-controller="Control" asp-route-id="@n.UserId" class="btn btn-success mt-2 rounded-pill">Promote to Manager</a>

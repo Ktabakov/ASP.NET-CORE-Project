@@ -10,5 +10,7 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         Task<bool> DeleteManagerApplication(string id);
         Task<bool> PromoteUserToManager(string id);
         Task<bool> IsApplicationSent(string? name);
+        Task<List<string>> GetAllRoles();
+        Task<List<UserViewModel>> GetAllUsers();
     }
 }

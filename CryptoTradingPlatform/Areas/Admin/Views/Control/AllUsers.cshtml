@@ -1,1 +1,38 @@
-﻿
+﻿@model List<UserViewModel>
+
+@{
+    var Roles = (List<string>)ViewBag.Roles;
+}
+
+<div class="text-center">
+    <h1>All Platform's Users</h1>
+    <h3>Here you can see all the users on the platform. You can promote them or demote them</h3>
+</div>
+
+<div class="row">
+    <div class="card-group mt-5">
+        @foreach (var n in Model)
+        {
+            <div>
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image cap">
+                    <div class="card-body bg-dark">
+                        <h5 class="card-title">@n.Username</h5>
+                        <p class="card-text">Role: @(n.Role == null ? "User" : n.Role)</p>
+                        <div class="row">
+                            <label>Promote or demote a usser</label>
+                            <select class="rounded-pill form-select form-select-lg" aria-label="form-select-lg example">
+                                <option class="text-dark" value="" disabled selected>Roles</option>
+                                <option class="text-dark" value="User">User</option>
+                                @foreach (var role in Roles)
+                                {
+                                    <option class="text-dark" value="@role">@role</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
