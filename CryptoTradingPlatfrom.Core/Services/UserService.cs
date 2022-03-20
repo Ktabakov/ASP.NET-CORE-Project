@@ -13,11 +13,61 @@ namespace CryptoTradingPlatfrom.Core.Services
     {
         private readonly ApplicationDbContext data;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserService(ApplicationDbContext _data, UserManager<ApplicationUser> _userManager)
+        public UserService(ApplicationDbContext _data, UserManager<ApplicationUser> _userManager, RoleManager<IdentityRole> _roleManager) 
         {
             data = _data;
             userManager = _userManager;
+            roleManager = _roleManager;
+        }
+
+        public async Task<(bool, string)> ChangeRole(string role, string userId)
+        {
+            var user = data.Users.FirstOrDefault(u => u.Id == userId);
+            bool isInRole = await userManager.IsInRoleAsync(user, role);
+            var userRole = await userManager.GetRolesAsync(user);
+
+            string error = string.Empty;
+            bool success = false;
+
+
+            if (role == "User" && userRole.Count == 0)
+            {
+                return (success, "User is already in that role!");
+            }
+
+            if (!await roleManager.RoleExistsAsync(role) && userRole.Count == 0)
+            {
+                return (success, "Please choose a valid Role");
+            }
+
+
+            if (isInRole)
+            {
+                return (success, "User is already in that role!");              
+            }
+            
+            try
+            {
+                if (userRole.Count != 0)
+                {
+                    await userManager.RemoveFromRoleAsync(user, userRole[0]);
+                }
+                if (role != "User")
+                {
+                    await userManager.AddToRoleAsync(user, role);
+                }
+                await data.SaveChangesAsync();
+                success = true;
+            }
+            catch (Exception)
+            {
+                return (success, "Unexpected Error!");
+            }
+
+           
+            return (success, null);
         }
 
         public async Task<bool> DeleteManagerApplication(string id)

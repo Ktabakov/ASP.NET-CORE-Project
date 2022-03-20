@@ -27,6 +27,18 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
             return View(users);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> ChangeRole(string role, string userId)
+        {
+            (bool result, string error) = await userService.ChangeRole(role, userId);
+
+            if (!result)
+            {
+                return Json(new { success = false, responseText = error});
+            }
+
+            return Json(new { success = true });
+        }
         public async Task<IActionResult> DeleteApplication(string id)
         {
             if (id == null)

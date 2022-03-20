@@ -18,10 +18,10 @@
                     <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image cap">
                     <div class="card-body bg-dark">
                         <h5 class="card-title">@n.Username</h5>
-                        <p class="card-text">Role: @(n.Role == null ? "User" : n.Role)</p>
+                        <p id="currentRole@(n.UserId)" class="card-text">Current Role: @(n.Role == null ? "User" : n.Role)</p>
                         <div class="row">
                             <label>Promote or demote a usser</label>
-                            <select class="rounded-pill form-select form-select-lg" aria-label="form-select-lg example">
+                            <select onchange="changeRole(this.value, '@n.UserId')" class="rounded-pill form-select form-select-lg" aria-label="form-select-lg example">
                                 <option class="text-dark" value="" disabled selected>Roles</option>
                                 <option class="text-dark" value="User">User</option>
                                 @foreach (var role in Roles)
@@ -36,3 +36,4 @@
         }
     </div>
 </div>
+

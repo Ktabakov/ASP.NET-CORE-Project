@@ -67,3 +67,30 @@ function Fav(asssetTicker, item) {
         }
     });
 };
+
+function changeRole(role, userId) {
+    var t = $("input[name='__RequestVerificationToken']").val();
+    $.ajax({
+        url: '/Admin/Control/ChangeRole',
+        type: 'POST',
+        data: { role: role, userId: userId },
+        headers: {
+            "RequestVerificationToken": t
+        },
+        success: function (response) {
+            if (response.success) {
+                toastr.success("Role Changed Successfully")
+                $(document.getElementById(`currentRole${userId}`)).text(`Current Role: ${role}`)
+            }
+            else {
+                toastr.error(response.responseText)
+            }
+        },
+        error: function (response) {
+            toastr.error("Unexpected Error")
+        },
+        complete: function (jqXHR, status) { // Whether success or error it enters here
+        }
+    });
+}
+
