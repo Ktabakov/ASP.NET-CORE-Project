@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FRQXvps9f/pomoDIEr/v1xjhS75N2O/1YChZoWVst3U=",
+  "Hash": "UNIpS+gdiu0xRDe9Y+LUrOfeCth3474ehhFkQuID69E=",
   "Source": "CryptoTradingPlatform",
   "BasePath": "_content/CryptoTradingPlatform",
   "Mode": "Default",
@@ -1511,6 +1511,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\DogeMoon.png"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\Images\\Not Found.png",
+      "SourceId": "CryptoTradingPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\",
+      "BasePath": "_content/CryptoTradingPlatform",
+      "RelativePath": "Images/Not Found.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Not Found.png"
     },
     {
       "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\Images\\rm314-adj-02.jpg",

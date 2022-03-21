@@ -12,6 +12,8 @@ namespace CryptoTradingPlatfrom.Core.Models.Users
 
         public string MostTradedAsset { get; set; }
 
+        public int MostTradedAssetTimesTraded { get; set; }
+
         public decimal TotalFees { get; set; }
 
         public decimal TradedVolume { get; set; }

@@ -24,6 +24,7 @@ builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<ITradingService, TradingService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IUserService, UserService>();    
+builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddHttpClient<ICryptoApiService, CryptoApiService>();
 builder.Services.AddHttpClient<INewsService, NewsService>();
 
@@ -68,6 +69,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+//test 404 page
+app.UseStatusCodePagesWithRedirects("/ErrorPage/{0}");
 
 //try configure cors
 app.UseCors(options =>

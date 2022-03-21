@@ -8,21 +8,23 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
     public class ControlController : BaseController
     {
         private readonly IUserService userService;
+        private readonly IAdminService adminService;
 
-        public ControlController(IUserService _userService)
+        public ControlController(IUserService _userService, IAdminService _adminService)
         {
             userService = _userService;
+            adminService = _adminService;
         }
         public async Task<IActionResult> AllApplicatnts()
         {
-            List<ManagerApplicationViewModel> model = await userService.GetAllApplications();
+            List<ManagerApplicationViewModel> model = await adminService.GetAllApplications();
             return View(model);
         }
         public async Task<IActionResult> AllUsers()
         {
-            List<string> roles = await userService.GetAllRoles();
+            List<string> roles = await adminService.GetAllRoles();
             ViewBag.Roles = roles;
-            List<UserViewModel> users = await userService.GetAllUsers();
+            List<UserViewModel> users = await adminService.GetAllUsers();
 
             return View(users);
         }
@@ -30,7 +32,7 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> ChangeRole(string role, string userId)
         {
-            (bool result, string error) = await userService.ChangeRole(role, userId);
+            (bool result, string error) = await adminService.ChangeRole(role, userId);
 
             if (!result)
             {
@@ -46,7 +48,7 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
                 ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return View();
             }
-            bool success = await userService.DeleteManagerApplication(id);
+            bool success = await adminService.DeleteManagerApplication(id);
             if (!success)
             {
                 ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
@@ -64,7 +66,7 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
                 ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return View();
             }
-            bool success = await userService.PromoteUserToManager(id);
+            bool success = await adminService.PromoteUserToManager(id);
             if (!success)
             {
                 ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
@@ -77,7 +79,7 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
 
         public async Task<IActionResult> Statistics()
         {
-            StatisticsViewModel model = await userService.GetStatistics();
+            StatisticsViewModel model = await adminService.GetStatistics();
             return View(model);
         }
     }
