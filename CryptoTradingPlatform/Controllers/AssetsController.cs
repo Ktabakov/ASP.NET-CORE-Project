@@ -26,7 +26,7 @@ namespace CryptoTradingPlatform.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator, Manager")]
-        public IActionResult Add(AddAssetFormModel asset) 
+        public IActionResult Add(AddAssetFormModel asset)
         {
             var isNumeric = int.TryParse(asset.Ticker, out int value);
 
