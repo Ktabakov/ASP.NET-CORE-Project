@@ -74,5 +74,11 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
             TempData[MessageConstants.Success] = "Application Approved";
             return Redirect("/admin");
         }
+
+        public async Task<IActionResult> Statistics()
+        {
+            StatisticsViewModel model = await userService.GetStatistics();
+            return View(model);
+        }
     }
 }

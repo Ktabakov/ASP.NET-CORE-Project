@@ -21,6 +21,11 @@ namespace CryptoTradingPlatform.Data.Models
 
         [Required]
         [Range(0, double.MaxValue)]
+        [Column(TypeName = "money")]
+        public decimal TransactionFee { get; set; }
+
+        [Required]
+        [Range(0, double.MaxValue)]
         public double Quantity { get; set; }
 
         [Required]

@@ -1,5 +1,6 @@
 ﻿using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatform.Infrastructure.Data;
+using CryptoTradingPlatform.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,8 @@ namespace CryptoTradingPlatform.Extensions
 
             SeedAssets(services);
             SeedAdministrator(services);
+            SeedTreasury(services);
+
 
             return app;
         }
@@ -25,6 +28,23 @@ namespace CryptoTradingPlatform.Extensions
             var data = services.GetRequiredService<ApplicationDbContext>();
 
             data.Database.Migrate();
+        }
+
+        private static void SeedTreasury(IServiceProvider services)
+        {
+            var data = services.GetRequiredService<ApplicationDbContext>();
+
+            if (data.Treasury.Any())
+            {
+                return;
+            }
+
+            data.Treasury.Add(new Treasury
+            {
+                Total = 0
+            });
+
+            data.SaveChanges();
         }
         private static void SeedAssets(IServiceProvider services)
         {

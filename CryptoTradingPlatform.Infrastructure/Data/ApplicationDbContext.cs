@@ -33,5 +33,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data
         public DbSet<UserFovorites> UserFavorites { get; set; }
 
         public DbSet<ManagerApplication> ManagerApplications { get; set; }
+
+        public DbSet<Treasury> Treasury { get; set; }
     }
 }

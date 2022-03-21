@@ -121,10 +121,27 @@ namespace CryptoTradingPlatfrom.Core.Services
                 {
                     Username = c.UserName,
                     UserId = c.Id,
-                    Role = data.Roles.FirstOrDefault(r => r.Id == data.UserRoles.FirstOrDefault(u => u.UserId == c.Id).RoleId).Name
+                    Role = data.Roles.FirstOrDefault(r => r.Id == data.UserRoles.FirstOrDefault(u => u.UserId == c.Id).RoleId).Name,
+                    TotalTrades = data.Transactions.Where(u => u.ApplicationUser.UserName == c.UserName).Count()
                 })
                 .ToListAsync();
 
+        }
+
+        public async Task<StatisticsViewModel> GetStatistics()
+        {
+            StatisticsViewModel model = new StatisticsViewModel();
+            model.TotalFees = data.Treasury.FirstOrDefault().Total;
+            model.TotalTrades = data.Transactions.Count();
+            model.TradedVolume = data.Transactions.Select(c => Convert.ToDecimal(c.Quantity) * c.Price).Sum();
+            model.MostTradedAsset = data
+                .Transactions
+                .GroupBy(c => c.Asset.Name)
+                .Select(x => new { AssetName = x.Key, QuantitySum = x.Sum(a => a.Quantity) })
+                .OrderByDescending(x => x.QuantitySum)
+                .Select(x => x.AssetName)
+                .First();
+            return model;
         }
 
         public async Task<bool> IsApplicationSent(string? name)

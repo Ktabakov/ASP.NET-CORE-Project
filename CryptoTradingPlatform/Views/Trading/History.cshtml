@@ -23,6 +23,9 @@
             <th scope="col">
                 <a class="text-white" style="text-decoration:none" asp-action="History" asp-route-sortOrder="@ViewData["TypeSortParm"]">@Html.DisplayNameFor(model => model.Type)</a>
             </th>
+            <th scope="col">
+                <a class="text-white" style="text-decoration:none" asp-action="History" asp-route-sortOrder="@ViewData["FeeSortParm"]">@Html.DisplayNameFor(model => model.Fee)</a>
+            </th>
         </tr>
     </thead>
     <tbody class="bg-black p-2 text-dark bg-opacity-10 text-white">
@@ -60,6 +63,9 @@
                         @tr.Type
                     </td>
                 }
+                <td>
+                    @tr.Fee.ToString("C",new CultureInfo("en-US"))
+                </td>
             </tr>
         }
     <tbody>

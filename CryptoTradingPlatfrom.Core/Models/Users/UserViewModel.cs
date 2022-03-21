@@ -14,5 +14,7 @@ namespace CryptoTradingPlatfrom.Core.Models.Users
         [Required]
         public string Role { get; set; }
 
+        public int TotalTrades { get; set; }
+
     }
 }

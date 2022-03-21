@@ -109,6 +109,7 @@ namespace CryptoTradingPlatform.Controllers
             ViewData["TypeSortParm"] = sortOrder == "Type" ? "type_desc" : "Type";
             ViewData["QuantitySortParm"] = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewData["FeeeSortParm"] = sortOrder == "Fee" ? "fee_desc" : "Fee";
 
             List<TransactionHistoryViewModel> transactions = await tradingService.GetUserTradingHistory(User.Identity.Name);
 

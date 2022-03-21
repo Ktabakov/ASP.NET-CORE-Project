@@ -13,5 +13,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         Task<List<string>> GetAllRoles();
         Task<List<UserViewModel>> GetAllUsers();
         Task<(bool, string)> ChangeRole(string role, string userId);
+        Task<StatisticsViewModel> GetStatistics();
     }
 }

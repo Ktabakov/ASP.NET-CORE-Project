@@ -19,6 +19,7 @@
                     <div class="card-body bg-dark">
                         <h5 class="card-title">@n.Username</h5>
                         <p id="currentRole@(n.UserId)" class="card-text">Current Role: @(n.Role == null ? "User" : n.Role)</p>
+                        <p id="currentRole@(n.UserId)" class="card-text">Total Transactions: @n.TotalTrades</p>
                         <div class="row">
                             <label>Promote or demote a usser</label>
                             <select onchange="changeRole(this.value, '@n.UserId')" class="rounded-pill form-select form-select-lg" aria-label="form-select-lg example">

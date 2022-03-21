@@ -26,5 +26,8 @@ namespace CryptoTradingPlatfrom.Core.Models.Trading
         [Display(Name = "Asset Name")]
         public string AssetName { get; set; }
 
+        [Display(Name = "Transaction Fee")]
+        public decimal Fee { get; set; }
+
     }
 }

@@ -63,8 +63,14 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 return false;
             }
-            
-            
+            decimal transactionFee = (Convert.ToDecimal(buyQuantity) * buyAssetPrice) * 0.01M;
+            if (user.Money - transactionFee < 0)
+            {
+                return false;
+            }
+
+            user.Money -= transactionFee;
+
             Transaction transaction = new Transaction()
             {
                 ApplicationUserId = user.Id,
@@ -72,7 +78,8 @@ namespace CryptoTradingPlatfrom.Core.Services
                 Date = DateTime.Now,
                 Price = buyAssetPrice,
                 Quantity = buyQuantity,
-                Type = "Swap"
+                Type = "Swap",
+                TransactionFee = transactionFee,
             };
 
             try
@@ -80,6 +87,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                 sellUserAsset.Quantity -= sellQuantity;
                 buyUserAsset.Quantity += buyQuantity;
                 data.Transactions.AddAsync(transaction);
+                data.Treasury.FirstOrDefault().Total += transactionFee;
                 data.SaveChangesAsync();
                 success = true;
                 
@@ -108,6 +116,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 return false;
             }
+            decimal transactionFee = 0;
 
             try
             {
@@ -150,12 +159,18 @@ namespace CryptoTradingPlatfrom.Core.Services
                     }
                     user.Money += sum;
                 }
+                if (user.Money - transactionFee < 0)
+                {
+                    return false;
+                }
+                transactionFee = sum * 0.01M;
+                user.Money -= transactionFee;
             }
             catch (Exception)
             {
                 return false;
             }
-            
+
             Transaction transaction = new Transaction()
             {
                 ApplicationUser = user,
@@ -164,10 +179,12 @@ namespace CryptoTradingPlatfrom.Core.Services
                 Price = model.Price,
                 Quantity = quantityToDouble,
                 Type = model.Type,
+                TransactionFee = transactionFee
             };
             try
             {
                 data.Transactions.AddAsync(transaction);
+                data.Treasury.FirstOrDefault().Total += transactionFee;
                 data.SaveChangesAsync();
                 success = true;
             }
@@ -225,6 +242,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                     Price = c.Price,
                     Quantity = c.Quantity,
                     Type = c.Type,
+                    Fee = c.TransactionFee
                 })
                .OrderByDescending(c => c.Date)
                .ToListAsync();
@@ -285,6 +303,12 @@ namespace CryptoTradingPlatfrom.Core.Services
                     break;
                 case "price_desc":
                     transactions = transactions.OrderByDescending(s => s.Price).ToList();
+                    break;
+                case "Fee":
+                    transactions = transactions.OrderBy(s => s.Fee).ToList();
+                    break;
+                case "fee_desc":
+                    transactions = transactions.OrderByDescending(s => s.Fee).ToList();
                     break;
                 default:
                     transactions = transactions.OrderByDescending(s => s.Date).ToList();
