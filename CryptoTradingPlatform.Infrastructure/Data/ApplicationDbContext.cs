@@ -20,6 +20,16 @@ namespace CryptoTradingPlatform.Infrastructure.Data
 
             builder.Entity<UserFovorites>()
                 .HasKey(c => new {c.ApplicationUserId, c.AssetId});
+
+            builder.Entity<ArticleLikes>()
+                .HasKey(c => new { c.ApplicationUserId, c.ArticleId });
+
+            builder.Entity<Article>()
+                .HasOne(c => c.User)
+                .WithMany(c => c.Articles)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
         }
 
         public DbSet<Article> Articles { get; set; }
@@ -35,5 +45,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data
         public DbSet<ManagerApplication> ManagerApplications { get; set; }
 
         public DbSet<Treasury> Treasury { get; set; }
+
+        public DbSet<ArticleLikes> ArticleLikes { get; set; }
     }
 }

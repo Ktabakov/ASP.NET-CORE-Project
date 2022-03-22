@@ -4,16 +4,18 @@ using CryptoTradingPlatform.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
+namespace CryptoTradingPlatform.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220322124818_addArticle")]
+    partial class addArticle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,21 +225,6 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
                     b.ToTable("UserAssets");
                 });
 
-            modelBuilder.Entity("CryptoTradingPlatform.Infrastructure.Data.Models.ArticleLikes", b =>
-                {
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ArticleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ApplicationUserId", "ArticleId");
-
-                    b.HasIndex("ArticleId");
-
-                    b.ToTable("ArticleLikes");
-                });
-
             modelBuilder.Entity("CryptoTradingPlatform.Infrastructure.Data.Models.ManagerApplication", b =>
                 {
                     b.Property<string>("Id")
@@ -438,9 +425,9 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
             modelBuilder.Entity("CryptoTradingPlatform.Data.Models.Article", b =>
                 {
                     b.HasOne("CryptoTradingPlatform.Data.Models.ApplicationUser", "User")
-                        .WithMany("Articles")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -487,25 +474,6 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Asset");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CryptoTradingPlatform.Infrastructure.Data.Models.ArticleLikes", b =>
-                {
-                    b.HasOne("CryptoTradingPlatform.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CryptoTradingPlatform.Data.Models.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Article");
 
                     b.Navigation("User");
                 });
@@ -593,8 +561,6 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("CryptoTradingPlatform.Data.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Articles");
-
                     b.Navigation("Assets");
 
                     b.Navigation("Transactions");

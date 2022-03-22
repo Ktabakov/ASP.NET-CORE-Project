@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CryptoTradingPlatform.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,6 +21,8 @@ namespace CryptoTradingPlatform.Data.Models
         public List<Asset> Assets { get; set; }
 
         public List<Transaction> Transactions { get; set; }
+
+        public List<Article> Articles { get; set; }
 
     }
 }

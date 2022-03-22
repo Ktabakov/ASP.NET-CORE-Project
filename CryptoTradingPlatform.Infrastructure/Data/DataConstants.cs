@@ -4,6 +4,8 @@
     {
         public const int Idlength = 36;
 
+        public const int UserIdlength = 37;
+
         public const int AssetMaxLength = 60;
 
         public const int TickerMaxLength = 6;
@@ -30,6 +32,11 @@
 
         public const int ExperienceMaxLength = 20;
 
+        public const int ArticleTitleMaxLength = 40;
+
+        public const int ArticleTitleMinLength = 5;
+
+        public const int ArticleMinLength = 20;
 
     }
 }
