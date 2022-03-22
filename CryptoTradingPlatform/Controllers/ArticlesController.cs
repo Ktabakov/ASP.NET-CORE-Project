@@ -1,6 +1,7 @@
 ﻿using CryptoTradingPlatform.Constants;
 using CryptoTradingPlatform.Core.Models.Articles;
 using CryptoTradingPlatfrom.Core.Contracts;
+using CryptoTradingPlatfrom.Core.Models.Articles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,7 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> Add(AddArticleFormModel article)
         {
-           /* (bool success, string error) = await articleService.AddArticle(article, User.Identity.Name);
+            (bool success, string error) = await articleService.AddArticle(article, User.Identity.Name);
             if (!success)
             {
                 ViewData[MessageConstants.UnexpectedError] = error;
@@ -35,13 +36,14 @@ namespace CryptoTradingPlatform.Controllers
                 return View(article);
             }
 
-            TempData[MessageConstants.Success] = "Article Added!";*/
+            TempData[MessageConstants.Success] = "Article Added!";
             return Redirect("/Articles/All");
         }
 
         public async Task<IActionResult> All()
         {
-            return View();
+            List<ArticleViewModel> model = await articleService.GetArticles();
+            return View(model);
         }
     }
 }

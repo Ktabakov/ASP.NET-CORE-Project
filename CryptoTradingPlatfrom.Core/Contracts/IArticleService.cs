@@ -1,4 +1,5 @@
 ﻿using CryptoTradingPlatform.Core.Models.Articles;
+using CryptoTradingPlatfrom.Core.Models.Articles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace CryptoTradingPlatfrom.Core.Contracts
 {
     public interface IArticleService
     {
-        //Task<(bool success, string error)> AddArticle(AddArticleFormModel article, string? name);
+        Task<(bool success, string error)> AddArticle(AddArticleFormModel article, string? name);
+        Task<List<ArticleViewModel>> GetArticles();
     }
 }

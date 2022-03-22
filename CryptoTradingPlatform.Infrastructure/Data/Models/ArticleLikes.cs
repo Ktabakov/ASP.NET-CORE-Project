@@ -15,5 +15,8 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Models
         public string ApplicationUserId { get; set; }
 
         public ApplicationUser User { get; set; }
+
+        [Required]
+        public bool IsLiked { get; set; }
     }
 }
