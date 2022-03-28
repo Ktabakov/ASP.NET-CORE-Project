@@ -19,7 +19,6 @@ namespace CryptoTradingPlatform.Extensions
             SeedAdministrator(services);
             SeedTreasury(services);
 
-
             return app;
         }
 
@@ -46,6 +45,7 @@ namespace CryptoTradingPlatform.Extensions
 
             data.SaveChanges();
         }
+      
         private static void SeedAssets(IServiceProvider services)
         {
             var data = services.GetRequiredService<ApplicationDbContext>();

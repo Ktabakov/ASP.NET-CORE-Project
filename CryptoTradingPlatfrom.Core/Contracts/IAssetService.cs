@@ -12,14 +12,14 @@ namespace CryptoTradingPlatfrom.Core.Contracts
 {
     public interface IAssetService
     {
-        (bool, string) AddAsset(CryptoResponseModel model);
+        Task<(bool, string)> AddAsset(CryptoResponseModel model);
         Task<List<string>> GetTickers();
-        List<string> GetIds();
-        AssetDetailsViewModel GetDetails(string assetName);
+        Task<List<string>> GetIds();
+        Task<AssetDetailsViewModel> GetDetails(string assetName);
         Task<SwapAssetsListViewModel> GetUserAssets(string name);
-        bool RemoveAsset(string assetName);
+        Task<bool> RemoveAsset(string assetName);
         Task<List<string>> GetAllAssetTickers();
-        decimal GetUserMoney(string? name);
+        Task<decimal> GetUserMoney(string? name);
         //Task<List<CryptoResponseModel>> CheckIfFavorites(List<CryptoResponseModel> cryptos, string userName);
         Task<List<string>> GetAllFavoritesTickers(string? name);
 

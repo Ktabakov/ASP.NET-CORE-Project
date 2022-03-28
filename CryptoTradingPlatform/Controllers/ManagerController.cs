@@ -6,7 +6,7 @@ namespace CryptoTradingPlatform.Controllers
     [Authorize(Roles = "Manager, Administrator")]
     public class ManagerController : BaseController
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }

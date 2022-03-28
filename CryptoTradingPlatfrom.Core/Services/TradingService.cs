@@ -23,9 +23,9 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<bool> SaveSwap (BuyAssetFormModel model, string userName)
         {
-            var user = data.Users.FirstOrDefault(c => c.UserName == userName);
-            var sellAsset = data.Assets.FirstOrDefault(c => c.Id == model.SellAssetId);
-            var buyAsset = data.Assets.FirstOrDefault(c => c.Id == model.BuyAssetId);
+            var user = await data.Users.FirstOrDefaultAsync(c => c.UserName == userName);
+            var sellAsset = await data.Assets.FirstOrDefaultAsync(c => c.Id == model.SellAssetId);
+            var buyAsset = await data.Assets.FirstOrDefaultAsync(c => c.Id == model.BuyAssetId);
             var sellQuantity = Convert.ToDouble(model.SellAssetQyantity);
             var buyQuantity = Convert.ToDouble(model.BuyAssetQuantity);
             bool success = false;
@@ -38,15 +38,15 @@ namespace CryptoTradingPlatfrom.Core.Services
                 return false;
             }
 
-            var sellUserAsset = data
+            var sellUserAsset = await data
                 .UserAssets
                 .Where(c => c.ApplicationUserId == user.Id)
-                .FirstOrDefault(c => c.AssetId == model.SellAssetId);
+                .FirstOrDefaultAsync(c => c.AssetId == model.SellAssetId);
 
-            var buyUserAsset = data
+            var buyUserAsset = await data
                 .UserAssets
                 .Where(c => c.ApplicationUserId == user.Id)
-                .FirstOrDefault(c => c.AssetId == model.BuyAssetId);
+                .FirstOrDefaultAsync(c => c.AssetId == model.BuyAssetId);
 
             if (sellUserAsset == null || buyUserAsset == null)
             {
@@ -86,9 +86,9 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 sellUserAsset.Quantity -= sellQuantity;
                 buyUserAsset.Quantity += buyQuantity;
-                data.Transactions.AddAsync(transaction);
+                await data.Transactions.AddAsync(transaction);
                 data.Treasury.FirstOrDefault().Total += transactionFee;
-                data.SaveChangesAsync();
+                await data.SaveChangesAsync();
                 success = true;
                 
             }
@@ -98,10 +98,10 @@ namespace CryptoTradingPlatfrom.Core.Services
             }
             return success;
         }
-        public bool SaveTransaction(TradingFormModel model, string userName)
+        public async Task<bool> SaveTransaction(TradingFormModel model, string userName)
         {
-            var user = data.Users.FirstOrDefault(c => c.UserName == userName);
-            var asset = data.Assets.FirstOrDefault(c => c.Name == model.Name);
+            var user = await data.Users.FirstOrDefaultAsync(c => c.UserName == userName);
+            var asset = await data.Assets.FirstOrDefaultAsync(c => c.Name == model.Name);
             bool success = false;
             double quantityToDouble = Convert.ToDouble(model.Quantity); 
 
@@ -120,10 +120,10 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                var userAsset = data
+                var userAsset = await data
                     .UserAssets
                     .Where(c => c.ApplicationUserId == user.Id)
-                    .FirstOrDefault(c => c.AssetId == asset.Id);
+                    .FirstOrDefaultAsync(c => c.AssetId == asset.Id);
 
                 if (model.Type == "Buy")
                 {
@@ -183,9 +183,9 @@ namespace CryptoTradingPlatfrom.Core.Services
             };
             try
             {
-                data.Transactions.AddAsync(transaction);
+                await data.Transactions.AddAsync(transaction);
                 data.Treasury.FirstOrDefault().Total += transactionFee;
-                data.SaveChangesAsync();
+                await data.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)
@@ -206,19 +206,19 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 return success;
             }
-            var userFavoriteEntry = data.UserFavorites.FirstOrDefault(c => c.ApplicationUserId == userId && c.AssetId == assetId);
+            var userFavoriteEntry = await data.UserFavorites.FirstOrDefaultAsync(c => c.ApplicationUserId == userId && c.AssetId == assetId);
 
             try
             {
                 if (userFavoriteEntry == null)
                 {
-                    data.UserFavorites.Add(new UserFovorites { ApplicationUserId = userId, AssetId = assetId });
+                    await data.UserFavorites.AddAsync(new UserFovorites { ApplicationUserId = userId, AssetId = assetId });
                 }
                 else
                 {
                     data.UserFavorites.Remove(userFavoriteEntry);
                 }
-                data.SaveChanges();
+                await data.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)

@@ -19,7 +19,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             data = _data;
         }
 
-        public (bool, string) AddAsset(CryptoResponseModel model)
+        public async Task<(bool, string)> AddAsset(CryptoResponseModel model)
         {
             bool success = false;
             string error = string.Empty;
@@ -41,8 +41,8 @@ namespace CryptoTradingPlatfrom.Core.Services
             };
             try
             {
-                data.Assets.Add(asset);
-                data.SaveChanges();
+                await data.Assets.AddAsync(asset);
+                await data.SaveChangesAsync();
                 success = true;
             }
             catch (Exception ex)
@@ -58,9 +58,9 @@ namespace CryptoTradingPlatfrom.Core.Services
             return await data.Assets.Select(c => c.Ticker).ToListAsync();
         }
 
-        public AssetDetailsViewModel GetDetails(string assetName)
+        public async Task<AssetDetailsViewModel> GetDetails(string assetName)
         {
-            return data.
+            return await data.
                 Assets
                 .Where(c => c.Name == assetName)
                 .Select(c => new AssetDetailsViewModel
@@ -70,12 +70,12 @@ namespace CryptoTradingPlatfrom.Core.Services
                     Name = c.Name,
                     Ticker = c.Ticker
                 })
-               .First();
+               .FirstAsync();
         }
 
-        public List<string> GetIds()
+        public async Task<List<string>> GetIds()
         {
-            return data.Assets.Select(x => x.Id).ToList();
+            return await data.Assets.Select(x => x.Id).ToListAsync();
         }
 
         public async Task<List<string>> GetTickers()
@@ -83,7 +83,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             return await data.Assets.Select(x => x.Ticker).ToListAsync();
         }
 
-        public decimal GetUserMoney(string? name)
+        public async Task<decimal> GetUserMoney(string? name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -100,7 +100,7 @@ namespace CryptoTradingPlatfrom.Core.Services
         public async Task<SwapAssetsListViewModel> GetUserAssets(string name)
         {
             SwapAssetsListViewModel modelList = new SwapAssetsListViewModel();
-            var user = data.Users.Where(c => c.UserName == name).FirstOrDefault();
+            var user = await data.Users.Where(c => c.UserName == name).FirstOrDefaultAsync();
             modelList.Assets = data
                 .UserAssets
                 .Where(c => c.ApplicationUserId == user.Id)        
@@ -123,15 +123,15 @@ namespace CryptoTradingPlatfrom.Core.Services
         }
 
         //maybe to cascade delete - remove from userfavorites also
-        public bool RemoveAsset(string assetName)
+        public async Task<bool> RemoveAsset(string assetName)
         {
-            var asset = data.Assets.FirstOrDefault(a => a.Name == assetName);
+            var asset = await data.Assets.FirstOrDefaultAsync(a => a.Name == assetName);
             bool success = false;
 
             try
             {
                 data.Remove(asset);
-                data.SaveChanges();
+                await data.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)

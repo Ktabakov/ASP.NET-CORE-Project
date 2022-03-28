@@ -99,10 +99,6 @@ app.MapRazorPages();
 app.Run();
 
 //my todos
-//change user card to view component maybe
-//make crypto tables ajax maybe
-//add toaster errors for trading
-//add user roles 
 //write tests
 //save asset prices in assetPrice and maybe make graph
 //get transaction history between dates     

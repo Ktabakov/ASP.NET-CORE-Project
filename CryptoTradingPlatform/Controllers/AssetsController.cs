@@ -22,11 +22,11 @@ namespace CryptoTradingPlatform.Controllers
         }
 
         [Authorize(Roles = "Administrator, Manager")]
-        public IActionResult Add() => View();
+        public async Task<IActionResult> Add() => View();
 
         [HttpPost]
         [Authorize(Roles = "Administrator, Manager")]
-        public IActionResult Add(AddAssetFormModel asset)
+        public async Task<IActionResult> Add(AddAssetFormModel asset)
         {
             var isNumeric = int.TryParse(asset.Ticker, out int value);
 
@@ -53,7 +53,7 @@ namespace CryptoTradingPlatform.Controllers
             }
 
             CryptoResponseModel model = models.Result.FirstOrDefault();
-            (bool success, string error) = assetService.AddAsset(model);
+            (bool success, string error) = await assetService.AddAsset(model);
 
             if (!success)
             {
@@ -65,9 +65,9 @@ namespace CryptoTradingPlatform.Controllers
             return Redirect("/");
         }
 
-        public IActionResult Details(string assetName)
+        public async Task<IActionResult> Details(string assetName)
         {
-            AssetDetailsViewModel model = assetService.GetDetails(assetName);
+            AssetDetailsViewModel model = await assetService.GetDetails(assetName);
             if (model == null)
             {
                 ViewData[MessageConstants.UnexpectedError] = "Asset doesn't exist on the platform";
@@ -77,14 +77,14 @@ namespace CryptoTradingPlatform.Controllers
         }
 
         [Authorize(Roles = "Administrator, Manager")]
-        public IActionResult Remove(string assetName)
+        public async Task<IActionResult> Remove(string assetName)
         {
             if (string.IsNullOrEmpty(assetName))
             {
                 return View();
             }
 
-            bool success = assetService.RemoveAsset(assetName);
+            bool success = await assetService.RemoveAsset(assetName);
 
             if (!success)
             {

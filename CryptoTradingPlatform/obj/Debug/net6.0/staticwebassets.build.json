@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UNIpS+gdiu0xRDe9Y+LUrOfeCth3474ehhFkQuID69E=",
+  "Hash": "sGaSp1dMcMBkf01BGh1IFgOc/G757KHdWkeFnSEvRgE=",
   "Source": "CryptoTradingPlatform",
   "BasePath": "_content/CryptoTradingPlatform",
   "Mode": "Default",
@@ -1545,6 +1545,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\rm314-adj-02.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\Images\\rm314-adj-02-min.jpg",
+      "SourceId": "CryptoTradingPlatform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\",
+      "BasePath": "_content/CryptoTradingPlatform",
+      "RelativePath": "Images/rm314-adj-02-min.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\rm314-adj-02-min.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\OneDrive\\Desktop\\SoftUni\\C# Web\\ASP.NET Core\\CryptoTradingPlatform\\CryptoTradingPlatform\\CryptoTradingPlatform\\wwwroot\\js\\site.js",

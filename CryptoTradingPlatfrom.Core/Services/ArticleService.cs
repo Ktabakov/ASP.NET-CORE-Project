@@ -27,7 +27,7 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             if (!await userManager.IsInRoleAsync(user, "Manager") && !await userManager.IsInRoleAsync(user, "Administrator"))
             {
-                return (success, "You can't do that!");
+                return (success, "We don't do that here!");
             }
 
             Article article = new Article
@@ -39,16 +39,10 @@ namespace CryptoTradingPlatfrom.Core.Services
                 Title = model.Title
             };
 
-            ArticleLikes like = new ArticleLikes()
-            {
-                ApplicationUserId = user.Id,
-                ArticleId = article.Id
-            };
 
             try
             {
                 await data.Articles.AddAsync(article);
-                await data.ArticleLikes.AddAsync(like);
                 await data.SaveChangesAsync();  
                 success = true;
             }

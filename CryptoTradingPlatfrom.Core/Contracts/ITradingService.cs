@@ -6,7 +6,7 @@ namespace CryptoTradingPlatfrom.Core.Contracts
 {
     public interface ITradingService
     {
-        bool SaveTransaction(TradingFormModel model, string userName);
+        Task<bool> SaveTransaction(TradingFormModel model, string userName);
         Task<bool> SaveSwap (BuyAssetFormModel model, string name);
         Task<bool> SaveToFavorites(string ticker, string? name);
         Task<List<TransactionHistoryViewModel>> GetUserTradingHistory(string? name);

@@ -91,7 +91,7 @@ namespace CryptoTradingPlatform.Controllers
                 ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return Redirect("/Trading/Trade");
             }
-            bool success = tradingService.SaveTransaction(model, User.Identity.Name);
+            bool success = await tradingService.SaveTransaction(model, User.Identity.Name);
 
             if (!success)
             {
