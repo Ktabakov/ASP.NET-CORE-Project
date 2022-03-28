@@ -58,3 +58,7 @@ body {
     height: 12vw;
     object-fit: cover;
 }
+.modal-content{
+    height: 500px;
+    width: 700px;
+}

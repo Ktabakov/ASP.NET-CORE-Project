@@ -22,7 +22,7 @@ namespace CryptoTradingPlatfrom.Core.Models.Articles
 
         [Display(Name = "Date Added")]
         public DateTime DateAdded { get; set; }
-
+    
         public int Likes { get; set; }
 
         public bool IsLikedByUser { get; set; }

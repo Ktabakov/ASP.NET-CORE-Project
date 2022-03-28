@@ -32,7 +32,7 @@
 
         public const int ExperienceMaxLength = 20;
 
-        public const int ArticleTitleMaxLength = 40;
+        public const int ArticleTitleMaxLength = 200;
 
         public const int ArticleTitleMinLength = 5;
 

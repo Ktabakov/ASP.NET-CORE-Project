@@ -10,9 +10,20 @@
                 <p class="card-text">@article.Title</p>
                 <p id="totalLikes@(article.Id)" class="card-text">Likes: @article.Likes</p>
                 <p class="card-text"><small class="text-muted">@article.DateAdded</small></p>
-                <a id="likeButton@(article.Id)" onclick="like('@article.Id', this)" class="button btn btn-primary rounded-pill"> <i class="text-danger fa-solid fa-heart"></i>Like</a>
-                <a class="button btn btn-success rounded-pill">Details</a>
+                <!--Maybe Change to Dislike when liked-->
+            <a id="likeButton@(article.Id)" onclick="like('@article.Id', this)" class="button btn btn-primary rounded-pill"> <i class="text-danger fa-solid fa-heart"></i>Like</a>
+                <a data-toggle="modal" data-target="#modal@(article.Id)" id="detailsButton@(article.Id)" class="button btn btn-success rounded-pill">Details</a>
+            </div>
+        </div>
+        <div class="modal fade" id="modal@(article.Id)">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body text-black">
+                        @article.Content
+                    </div>
+                </div>
             </div>
         </div>
     }
 </div>
+
