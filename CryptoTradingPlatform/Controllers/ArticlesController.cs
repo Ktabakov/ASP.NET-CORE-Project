@@ -24,18 +24,19 @@ namespace CryptoTradingPlatform.Controllers
         [Authorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> Add(AddArticleFormModel article)
         {
-            (bool success, string error) = await articleService.AddArticle(article, User.Identity.Name);
-            if (!success)
-            {
-                ViewData[MessageConstants.UnexpectedError] = error;
-                return View(article);
-            }
+           
             if (!ModelState.IsValid)
             {
                 ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
                 return View(article);
             }
 
+            (bool success, string error) = await articleService.AddArticle(article, User.Identity.Name);
+            if (!success)
+            {
+                ViewData[MessageConstants.UnexpectedError] = error;
+                return View(article);
+            }
             TempData[MessageConstants.Success] = "Article Added!";
             return Redirect("/Articles/All");
         }
@@ -43,13 +44,17 @@ namespace CryptoTradingPlatform.Controllers
         [HttpPost]
         public async Task<ActionResult> Like(string articleId)
         {
-            bool result = await articleService.LikeArticle(articleId, User.Identity.Name);
-
-            if (!ModelState.IsValid || result == false)
+            if (!ModelState.IsValid)
             {
                 return Json(new { success = false });
             }
 
+            bool result = await articleService.LikeArticle(articleId, User.Identity.Name);
+
+            if (result == false)
+            {
+                return Json(new { success = false });
+            }
             return Json(new { success = true });
         }
 
@@ -63,6 +68,25 @@ namespace CryptoTradingPlatform.Controllers
         {
             int totalLikes = articleService.getTotalLikes(articleId);
             return Json(totalLikes);
+        }
+
+        [Authorize(Roles = "Administrator, Manager")]
+        public async Task<IActionResult> Delete(string articleId)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
+                return View();
+            }
+            bool success = await articleService.RemoveArticle(articleId);
+            if (!success)
+            {
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
+                return View();
+            }
+
+            TempData[MessageConstants.Success] = "Article Removed!";
+            return Redirect("/Articles/All");
         }
     }
 }

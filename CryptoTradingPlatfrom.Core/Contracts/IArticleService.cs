@@ -14,5 +14,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         Task<List<ArticleViewModel>> GetArticles();
         Task<bool> LikeArticle(string articleId, string? name);
         int getTotalLikes(string articleId);
+        Task<bool> RemoveArticle(string articleId);
     }
 }

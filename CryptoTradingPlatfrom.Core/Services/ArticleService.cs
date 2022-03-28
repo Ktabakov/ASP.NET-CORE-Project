@@ -137,5 +137,29 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             return success;
         }
+
+        public async Task<bool> RemoveArticle(string articleId)
+        {
+            bool success = false;
+            var article = await data.Articles.FirstOrDefaultAsync(c => c.Id == articleId);
+
+            if(article == null)
+            {
+                return (success);
+            }
+            try
+            {
+                data
+               .Articles.Remove(article);
+                data.SaveChanges();
+                success = true;
+            }
+            catch (Exception)
+            {
+                return success;
+            }
+
+            return success;
+        }
     }
 }

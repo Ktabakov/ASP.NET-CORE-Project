@@ -36,6 +36,12 @@ namespace CryptoTradingPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Swap(BuyAssetFormModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
+                return View(model);
+            }
+
             SwapAssetsListViewModel customModel = await assetService.GetUserAssets(User.Identity.Name);
             ViewBag.UserMoney = customModel.UserMoney;
             ViewBag.Assets = customModel.Assets.ToList();
@@ -49,11 +55,6 @@ namespace CryptoTradingPlatform.Controllers
                 return View(model);
             }
 
-            if (!ModelState.IsValid)
-            {
-                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
-                return View(model);
-            }
 
             bool success = await tradingService.SaveSwap(model, User.Identity.Name);
 
