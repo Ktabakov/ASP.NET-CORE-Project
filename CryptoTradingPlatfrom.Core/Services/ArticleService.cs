@@ -64,18 +64,16 @@ namespace CryptoTradingPlatfrom.Core.Services
         {
 
             return await data
-                .ArticleLikes
-                .Include(c => c.Article)
-                .Select(x => new ArticleViewModel
+                .Articles
+                .Select(c => new ArticleViewModel
                 {
-                    Likes = x.Article.Likes,
-                    AddedBy = x.Article.User.UserName,
-                    Content = x.Article.Content,
-                    DateAdded = x.Article.DateAdded,
-                    ImageURL = x.Article.ImageURL,
-                    Id = x.Article.Id,
-                    Title = x.Article.Title,
-                    IsLikedByUser = x.IsLiked
+                    Likes = c.Likes,
+                    AddedBy = c.User.UserName,
+                    Content = c.Content,
+                    DateAdded = c.DateAdded,
+                    ImageURL = c.ImageURL,
+                    Id = c.Id,
+                    Title = c.Title,
                 })
                 .ToListAsync();
 
@@ -95,6 +93,49 @@ namespace CryptoTradingPlatfrom.Core.Services
                    .ToListAsync();*/
 
 
+        }
+
+        public int getTotalLikes(string articleId)
+        {
+            return data
+                .Articles
+                .FirstOrDefault(c => c.Id == articleId)
+                .Likes;
+        }
+
+        public async Task<bool> LikeArticle(string articleId, string? userName)
+        {
+
+            var userId = data.Users.FirstOrDefault(c => c.UserName == userName).Id;
+            bool success = false;
+
+            if (String.IsNullOrEmpty(userId) || String.IsNullOrEmpty(articleId))
+            {
+                return success;
+            }
+            var articleLikeEntry = data.ArticleLikes.FirstOrDefault(c => c.ApplicationUserId == userId && c.ArticleId == articleId);
+
+            try
+            {
+                if (articleLikeEntry == null)
+                {
+                    data.ArticleLikes.Add(new ArticleLikes { ApplicationUserId = userId, ArticleId = articleId });
+                    data.Articles.Where(c => c.Id == articleId).FirstOrDefault().Likes++;
+                }
+                else
+                {
+                    data.ArticleLikes.Remove(articleLikeEntry);
+                    data.Articles.Where(c => c.Id == articleId).FirstOrDefault().Likes--;
+                }
+                data.SaveChanges();
+                success = true;
+            }
+            catch (Exception)
+            {
+                return success;
+            }
+
+            return success;
         }
     }
 }

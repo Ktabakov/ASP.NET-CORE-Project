@@ -12,5 +12,7 @@ namespace CryptoTradingPlatfrom.Core.Contracts
     {
         Task<(bool success, string error)> AddArticle(AddArticleFormModel article, string? name);
         Task<List<ArticleViewModel>> GetArticles();
+        Task<bool> LikeArticle(string articleId, string? name);
+        int getTotalLikes(string articleId);
     }
 }

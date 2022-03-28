@@ -40,10 +40,29 @@ namespace CryptoTradingPlatform.Controllers
             return Redirect("/Articles/All");
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Like(string articleId)
+        {
+            bool result = await articleService.LikeArticle(articleId, User.Identity.Name);
+
+            if (!ModelState.IsValid || result == false)
+            {
+                return Json(new { success = false });
+            }
+
+            return Json(new { success = true });
+        }
+
         public async Task<IActionResult> All()
         {
             List<ArticleViewModel> model = await articleService.GetArticles();
             return View(model);
+        }
+
+        public async Task<ActionResult> GetTotalLikes(string articleId)
+        {
+            int totalLikes = articleService.getTotalLikes(articleId);
+            return Json(totalLikes);
         }
     }
 }

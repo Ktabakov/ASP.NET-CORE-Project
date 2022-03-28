@@ -28,11 +28,11 @@
 
                         @if (!@assetService.IsAssetFavorite(User.Identity.Name, @asset.Ticker))
                         {
-                            <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star" style="font-size:15px"></a>
+                            <a onclick="fav('@asset.Ticker', this)" id="favorites" class="fas fa-star" style="font-size:15px"></a>
                         }
                         else
                         {
-                            <a onclick="Fav('@asset.Ticker', this)" id="favorites" class="fas fa-star fill" style="font-size:15px"></a>
+                            <a onclick="fav('@asset.Ticker', this)" id="favorites" class="fas fa-star fill" style="font-size:15px"></a>
                         }
                     }
                     else

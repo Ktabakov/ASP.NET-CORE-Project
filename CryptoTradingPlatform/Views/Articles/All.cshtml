@@ -8,9 +8,9 @@
             <div class="card-body bg-dark">
                 <a target="_blank"> <h5 class="card-title">Author: @article.AddedBy</h5></a>
                 <p class="card-text">@article.Title</p>
-                <p class="card-text">Likes: @article.Likes</p>
+                <p id="totalLikes@(article.Id)" class="card-text">Likes: @article.Likes</p>
                 <p class="card-text"><small class="text-muted">@article.DateAdded</small></p>
-                <a class="button btn btn-primary rounded-pill"> <i class="text-danger fa-solid fa-heart"></i> Like</a>
+                <a id="likeButton@(article.Id)" onclick="like('@article.Id', this)" class="button btn btn-primary rounded-pill"> <i class="text-danger fa-solid fa-heart"></i>Like</a>
                 <a class="button btn btn-success rounded-pill">Details</a>
             </div>
         </div>

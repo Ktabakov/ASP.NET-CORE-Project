@@ -46,7 +46,7 @@
 }
 
 
-function Fav(asssetTicker, item) {
+function fav(asssetTicker, item) {
 
     var t = $("input[name='__RequestVerificationToken']").val();
     $.ajax({
@@ -60,6 +60,54 @@ function Fav(asssetTicker, item) {
         },
         success: function (data) {
             $(item).toggleClass("fill");
+        },
+        error: function (jqXHR) { // Http Status is not 200
+        },
+        complete: function (jqXHR, status) { // Whether success or error it enters here
+        }
+    });
+};
+
+function like(articleId, item) {
+
+    var t = $("input[name='__RequestVerificationToken']").val();
+    $.ajax({
+        url: '/Articles/Like',
+        type: 'POST',
+        data: {
+            articleId: articleId
+        },
+        headers: {
+            "RequestVerificationToken": t
+        },
+        success: function (data) {
+            getTotalLikes(articleId)
+        },
+        error: function (jqXHR) { // Http Status is not 200
+        },
+        complete: function (jqXHR, status) { // Whether success or error it enters here
+        }
+    });
+};
+
+function getTotalLikes(articleId) {
+
+    var t = $("input[name='__RequestVerificationToken']").val();
+    var article = $(`#totalLikes${articleId}`)[0];
+    $.ajax({
+        url: '/Articles/GetTotalLikes',
+        type: 'GET',
+        data: {
+            articleId: articleId
+        },
+        headers: {
+            "RequestVerificationToken": t
+        },
+        success: function (data) {
+            //see what data returns
+            console.log(data)
+            console.log(article)
+            $(article).text(`Likes: ${data}`)
         },
         error: function (jqXHR) { // Http Status is not 200
         },
