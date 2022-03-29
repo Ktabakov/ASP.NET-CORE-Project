@@ -2,7 +2,7 @@
 :mortar_board: This project was built as the defense project for ASP.NET Core course at Software University. Many thanks [Stamo Petkov](https://github.com/stamo) and the whole [SoftUni Team](https://softuni.bg/)!
 
 # :memo: Overview
-Demo project for trading cryptocurrencies. Once registered, you directly get 300.000USD to test the platform with. 
+Demo project for trading cryptocurrencies. Once registered, you directly get 300.000USD to test the platform with. On each transaction there is a 0.01% Transaction Fee, which is then added to the platform's treasury.
 As a user of the plaftorm you can see live crypto prices, live news update (both thanks to the Coinmarketcap API and CrtyoPanic API respectively), buy and sell cryptocurrencies, as well as swap them for one another. You can add cryptos to your favorites list
 and see them in a seperate page. You can also see your transaction history, sort it, and download it.
 In the admin area the administrators can look at statistics about the trades on the platform, see a list of all platform's users where they can promote them or demote them.
