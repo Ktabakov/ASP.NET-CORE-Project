@@ -3,10 +3,10 @@
 
 # :memo: Overview
 Demo project for trading cryptocurrencies. Once registered, you directly get 300.000USD to test the platform with. 
-As a user on the plaftorm you can see live crypto prices, live news update, buy and sell cryptocurrencies, as well as swap them for one another. You can add cryptos to your favorites
-and see them in a seperate page. You can also go to your transaction history, sort it, and download it
+As a user of the plaftorm you can see live crypto prices, live news update (both thanks to the Coinmarketcap API and CrtyoPanic API respectively), buy and sell cryptocurrencies, as well as swap them for one another. You can add cryptos to your favorites list
+and see them in a seperate page. You can also see your transaction history, sort it, and download it.
 In the admin area the administrators can look at statistics about the trades on the platform, see a list of all platform's users where they can promote them or demote them.
-On a seperate page admins can see all users applications to become managers and take actions. Admins can delete the application or approve it, turning the user directly into a manager on the platform.
+On a seperate page admins can see all users applications to become managers and take actions. Admins can delete the application or approve it, promoting the user directly into a manager on the platform.
 Managers, once logged in, see few more options on their menu screen than the users. Managers are given the important task to add articles for the users
 to help them along their trading journey. Managers can also add new assets to the platform. As this is a demo project, the simplest way to add a crypto asset to the platform
 is to write down the asset's ticker(BTC, ETH, ADA, BNB). The rest is handeled by the backend with the Coinmarketcap API.
