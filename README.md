@@ -36,7 +36,7 @@ is to write down the asset's ticker(BTC, ETH, ADA, BNB). The rest is handeled by
 * CSS
 * toastr
 
-## **Database**
+## :wrench: **Database**
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) and [Entity Framework Core](https://dotnet.microsoft.com/download)  
 
 [![DB.jpg](https://i.postimg.cc/sXTKBn2s/DB.jpg)](https://postimg.cc/N9rRSkTz)
