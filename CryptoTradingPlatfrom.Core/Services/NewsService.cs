@@ -34,10 +34,10 @@ namespace CryptoTradingPlatfrom.Core.Services
             }
             var result = await response.Content.ReadAsStringAsync();
             JObject json = JObject.Parse(result);
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 int arNum = rnd.Next(0, json["results"].Count());
-                int pictureId = rnd.Next(1, 20);
+                int pictureId = rnd.Next(1, 25);
                 
 
                 if (list.Any(c => c.Title == json["results"][arNum]["title"].ToString()))
