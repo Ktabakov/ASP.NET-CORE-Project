@@ -29,7 +29,7 @@ is to write down the asset's ticker(BTC, ETH, ADA, BNB). The rest is handeled by
 * Bootstrap
 * Newtonsoft.Json
 * Moq
-* AJAX real-time Requests
+* AJAX 
 * JavaScript
 * jQuery
 * HTML 5
