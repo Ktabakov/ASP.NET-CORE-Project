@@ -23,7 +23,7 @@
                         {
                             <div>
                                 <img style="float: left;" src=@UserAssets[i].ImageUrl alt="logo" width="16" height="16">
-                                <p class="text-dark mb-1">&thinsp; @UserAssets[i].AssetName: @UserAssets[i].AssetQuantity</p>
+                                <p class="text-dark mb-1">&thinsp; @UserAssets[i].AssetName: @UserAssets[i].AssetQuantity.ToString("f4")</p>
                             </div>
                         }
                     }
@@ -80,7 +80,7 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <input asp-for="Quantity" style="width:100%" step="0.001" type="number" class="rounded-pill text-dark" />
+                                    <input asp-for="Quantity" style="width:100%" step="0.0001" type="number" class="rounded-pill text-dark" />
                                 </td>
                                 <td>
                                     <p><input asp-for="Type" value="Buy" type="submit" class="btn btn-success btn btn-block rounded-pill border-0" /></p>

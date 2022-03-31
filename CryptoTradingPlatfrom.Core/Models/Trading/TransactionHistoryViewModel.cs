@@ -7,12 +7,12 @@ namespace CryptoTradingPlatfrom.Core.Models.Trading
     {
 
         [Required]
-        [Range(0, double.MaxValue)]
+        [Range(0.01, (double)decimal.MaxValue)]
         public decimal Price { get; set; }
 
         [Required]
-        [Range(0, double.MaxValue)]
-        public double Quantity { get; set; }
+        [Range(0.01, (double)decimal.MaxValue)]
+        public decimal Quantity { get; set; }
 
         [Required]
         [Display(Name = "Trade Date")]

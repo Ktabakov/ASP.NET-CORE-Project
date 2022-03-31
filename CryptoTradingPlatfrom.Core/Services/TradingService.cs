@@ -26,8 +26,8 @@ namespace CryptoTradingPlatfrom.Core.Services
             var user = await data.Users.FirstOrDefaultAsync(c => c.UserName == userName);
             var sellAsset = await data.Assets.FirstOrDefaultAsync(c => c.Id == model.SellAssetId);
             var buyAsset = await data.Assets.FirstOrDefaultAsync(c => c.Id == model.BuyAssetId);
-            var sellQuantity = Convert.ToDouble(model.SellAssetQyantity);
-            var buyQuantity = Convert.ToDouble(model.BuyAssetQuantity);
+            var sellQuantity = model.SellAssetQyantity;
+            var buyQuantity = model.BuyAssetQuantity;
             bool success = false;
 
             var buyCryptoResponseModel = await cryptoService.GetCryptos(new List<string> { buyAsset.Ticker });
@@ -103,7 +103,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             var user = await data.Users.FirstOrDefaultAsync(c => c.UserName == userName);
             var asset = await data.Assets.FirstOrDefaultAsync(c => c.Name == model.Name);
             bool success = false;
-            double quantityToDouble = Convert.ToDouble(model.Quantity); 
+            decimal quantityToDouble = model.Quantity; 
 
             if (asset == null)
             {
@@ -157,10 +157,22 @@ namespace CryptoTradingPlatfrom.Core.Services
                         }
                         userAsset.Quantity -= quantityToDouble;
                     }
+                    if (userAsset.Quantity == 0)
+                    {
+                        try
+                        {
+                            data.UserAssets.Remove(userAsset);
+                        }
+                        catch (Exception)
+                        {
+
+                            return false;
+                        }
+                    }
                     user.Money += sum;
                 }
                 if (user.Money - transactionFee < 0)
-                {
+                {                  
                     return false;
                 }
                 transactionFee = sum * 0.01M;
@@ -170,6 +182,8 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 return false;
             }
+
+            
 
             Transaction transaction = new Transaction()
             {
@@ -184,7 +198,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             try
             {
                 await data.Transactions.AddAsync(transaction);
-                data.Treasury.FirstOrDefault().Total += transactionFee;
+                data.Treasury.FirstOrDefault().Total += transactionFee;              
                 await data.SaveChangesAsync();
                 success = true;
             }

@@ -12,7 +12,8 @@ namespace CryptoTradingPlatform.Data.Models
         public Asset Asset { get; set; }
 
         [Required]
-        public double Quantity { get; set; }
+        [Column(TypeName = "money")]
+        public decimal Quantity { get; set; }
 
         [ForeignKey(nameof(ApplicationUser))]
         public string ApplicationUserId { get; set; }

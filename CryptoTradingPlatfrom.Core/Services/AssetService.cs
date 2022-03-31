@@ -108,7 +108,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                 .Select(c => new SwapAssetViewModel
                 {
                     AssetName = c.Asset.Name,
-                    AssetQuantity = Convert.ToDecimal(c.Quantity),
+                    AssetQuantity = c.Quantity,
                     AssetId = c.AssetId,
                     ImageUrl = c.Asset.ImageURL
                 })

@@ -26,7 +26,7 @@ namespace CryptoTradingPlatform.Data.Models
 
         [Required]
         [Range(0, double.MaxValue)]
-        public double Quantity { get; set; }
+        public decimal Quantity { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
