@@ -1,4 +1,5 @@
 ﻿using CryptoTradingPlatform.Core.Models.Api;
+using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatfrom.Core.Models.Assets;
 using CryptoTradingPlatfrom.Core.Models.Trading;
@@ -24,5 +25,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
         Task<List<string>> GetAllFavoritesTickers(string? name);
 
         bool IsAssetFavorite(string userName, string assetName);
+        Task<bool> IsAssetOwned(string assetName);
     }
 }

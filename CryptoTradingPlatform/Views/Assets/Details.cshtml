@@ -17,7 +17,11 @@
         <p>@Model.Description</p>
     </div>
     <a href="/Trading/Trade" class="button btn btn-success mt-2 rounded-pill">Trade now</a>
-    @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+    @if (User.IsInRole("Manager") || User.IsInRole("Administrator") && ViewBag.IsOwned)
+    {
+        <a href="/Assets/Remove?assetName=@Model.Name" class="button btn disabled btn-danger mt-2 rounded-pill">Remove</a>
+    }
+    else if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
     {
         <a href="/Assets/Remove?assetName=@Model.Name" class="button btn btn-danger mt-2 rounded-pill">Remove</a>
     }

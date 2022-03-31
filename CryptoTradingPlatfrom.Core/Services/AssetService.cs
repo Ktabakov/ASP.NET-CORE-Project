@@ -135,7 +135,9 @@ namespace CryptoTradingPlatfrom.Core.Services
                 success = true;
             }
             catch (Exception)
-            {}
+            {
+                return success;
+            }
             return success;
             
         }
@@ -169,5 +171,15 @@ namespace CryptoTradingPlatfrom.Core.Services
                 .Where(u => u.User.UserName == userName)
                 .Any(c => c.Asset.Ticker == assetTicker);
         }
+
+        public async Task<bool> IsAssetOwned(string assetName)
+        {
+            var asset = await data.Assets.FirstOrDefaultAsync(a => a.Name == assetName);
+
+            return data
+                 .UserAssets
+                 .Any(c => c.AssetId == asset.Id);
+        }
+
     }
 }

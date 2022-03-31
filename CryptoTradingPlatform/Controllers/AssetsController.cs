@@ -68,11 +68,13 @@ namespace CryptoTradingPlatform.Controllers
         public async Task<IActionResult> Details(string assetName)
         {
             AssetDetailsViewModel model = await assetService.GetDetails(assetName);
+            bool isOwned = await assetService.IsAssetOwned(assetName);
             if (model == null)
             {
                 ViewData[MessageConstants.UnexpectedError] = "Asset doesn't exist on the platform";
                 return View();
             }
+            ViewBag.IsOwned = isOwned;
             return View(model);
         }
 
@@ -88,8 +90,8 @@ namespace CryptoTradingPlatform.Controllers
 
             if (!success)
             {
-                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
-                return View();
+                TempData[MessageConstants.Warning] = "You can't remove assets, which users currently trade!";
+                return RedirectToAction("Index", "Home", new { area = "" });
             }
 
             TempData[MessageConstants.Success] = "Assst Removed!";
