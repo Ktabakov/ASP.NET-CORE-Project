@@ -26,6 +26,7 @@ namespace CryptoTradingPlatform.Data.Models
 
         [Required]
         [Range(0, double.MaxValue)]
+        [Column(TypeName = "money")]
         public decimal Quantity { get; set; }
 
         [Required]

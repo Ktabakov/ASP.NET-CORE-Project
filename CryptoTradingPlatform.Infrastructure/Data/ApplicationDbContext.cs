@@ -28,6 +28,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data
                 .HasOne(c => c.User)
                 .WithMany(c => c.Articles)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
 
         public DbSet<Article> Articles { get; set; }

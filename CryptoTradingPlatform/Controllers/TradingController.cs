@@ -88,15 +88,15 @@ namespace CryptoTradingPlatform.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
-                return Redirect("/Trading/Trade");
+                TempData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
+                return RedirectToAction("Trade");
             }
             bool success = await tradingService.SaveTransaction(model, User.Identity.Name);
 
             if (!success)
             {
-                ViewData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
-                return Redirect("/Trading/Trade");
+                TempData[MessageConstants.UnexpectedError] = MessageConstants.UnexpectedError;
+                return RedirectToAction("Trade");
             }
 
             TempData[MessageConstants.Success] = "Transaction Successful";

@@ -7,6 +7,7 @@ using CryptoTradingPlatfrom.Core.Cache;
 using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using System.Diagnostics;
 
 namespace CryptoTradingPlatform.Controllers
@@ -17,12 +18,19 @@ namespace CryptoTradingPlatform.Controllers
         private readonly IAssetService assetService;
         private readonly ICryptoApiService cryptoService;
         private readonly INewsService newsService;
-        public HomeController(ILogger<HomeController> _logger, IAssetService _assetService, ICryptoApiService _cryptoService, INewsService _newsService)
+        private readonly IDistributedCache cache;
+
+        public HomeController(ILogger<HomeController> _logger,
+            IAssetService _assetService,
+            ICryptoApiService _cryptoService,
+            INewsService _newsService,
+            IDistributedCache _cache)
         {
             logger = _logger;
             assetService = _assetService;
             cryptoService = _cryptoService;
             newsService = _newsService;
+            cache = _cache;
         }
 
         //seed these 4 assets when creating DB - problem solved
@@ -58,9 +66,25 @@ namespace CryptoTradingPlatform.Controllers
             }
         }
 
-        public IActionResult Privacy()
+        [AllowAnonymous]
+        public async Task<IActionResult> Privacy()
         {
-            return View();
+            DateTime datetime = DateTime.Now;
+            var cachedData = await cache.GetStringAsync("cachedTime");
+
+            if (cachedData == null)
+            {
+                cachedData = datetime.ToString();
+
+                DistributedCacheEntryOptions cacheOptions = new DistributedCacheEntryOptions()
+                {
+                    SlidingExpiration = TimeSpan.FromSeconds(20),
+                    AbsoluteExpiration = DateTime.Now.AddSeconds(60)
+                };
+                await cache.SetStringAsync("cachedTime", cachedData);
+            }
+
+            return View(nameof(Privacy), cachedData);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
