@@ -8,24 +8,26 @@ using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.EntityFrameworkCore;
 using CryptoTradingPlatfrom.Core.Models.Api;
 using Microsoft.AspNetCore.Mvc;
+using CryptoTradingPlatform.Infrastructure.Data.Repositories;
+using CryptoTradingPlatform.Infrastructure.Data.Models;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
     public class TradingService : ITradingService
     {
-        private readonly ApplicationDbContext data;
+        private readonly IApplicatioDbRepository repo;
         private readonly ICryptoApiService cryptoService;
-        public TradingService(ApplicationDbContext _data, ICryptoApiService _cryptoService)
+        public TradingService(IApplicatioDbRepository _repo, ICryptoApiService _cryptoService)
         {
-            data = _data;
+            repo = _repo;
             cryptoService = _cryptoService;
         }
 
         public async Task<bool> SaveSwap (BuyAssetFormModel model, string userName)
         {
-            var user = await data.Users.FirstOrDefaultAsync(c => c.UserName == userName);
-            var sellAsset = await data.Assets.FirstOrDefaultAsync(c => c.Id == model.SellAssetId);
-            var buyAsset = await data.Assets.FirstOrDefaultAsync(c => c.Id == model.BuyAssetId);
+            var user = await repo.All<ApplicationUser>().FirstOrDefaultAsync(c => c.UserName == userName);
+            var sellAsset = await repo.All<Asset>().FirstOrDefaultAsync(c => c.Id == model.SellAssetId);
+            var buyAsset = await repo.All<Asset>().FirstOrDefaultAsync(c => c.Id == model.BuyAssetId);
             var sellQuantity = model.SellAssetQyantity;
             var buyQuantity = model.BuyAssetQuantity;
             bool success = false;
@@ -38,13 +40,13 @@ namespace CryptoTradingPlatfrom.Core.Services
                 return false;
             }
 
-            var sellUserAsset = await data
-                .UserAssets
+            var sellUserAsset = await repo
+                .All<UserAsset>()
                 .Where(c => c.ApplicationUserId == user.Id)
                 .FirstOrDefaultAsync(c => c.AssetId == model.SellAssetId);
 
-            var buyUserAsset = await data
-                .UserAssets
+            var buyUserAsset = await repo
+                .All<UserAsset>()
                 .Where(c => c.ApplicationUserId == user.Id)
                 .FirstOrDefaultAsync(c => c.AssetId == model.BuyAssetId);
 
@@ -53,8 +55,8 @@ namespace CryptoTradingPlatfrom.Core.Services
                 return false;
             }
 
-            var sellAssetUserQuantity = data
-                .UserAssets
+            var sellAssetUserQuantity = repo
+                .All<UserAsset>()
                 .Where(c => c.ApplicationUserId == user.Id)
                 .FirstOrDefault(c => c.AssetId == model.SellAssetId)
                 .Quantity;
@@ -86,9 +88,9 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 sellUserAsset.Quantity -= sellQuantity;
                 buyUserAsset.Quantity += buyQuantity;
-                await data.Transactions.AddAsync(transaction);
-                data.Treasury.FirstOrDefault().Total += transactionFee;
-                await data.SaveChangesAsync();
+                await repo.AddAsync<Transaction>(transaction);
+                repo.All<Treasury>().FirstOrDefault().Total += transactionFee;
+                await repo.SaveChangesAsync();
                 success = true;
                 
             }
@@ -100,8 +102,8 @@ namespace CryptoTradingPlatfrom.Core.Services
         }
         public async Task<bool> SaveTransaction(TradingFormModel model, string userName)
         {
-            var user = await data.Users.FirstOrDefaultAsync(c => c.UserName == userName);
-            var asset = await data.Assets.FirstOrDefaultAsync(c => c.Name == model.Name);
+            var user = await repo.All<ApplicationUser>().FirstOrDefaultAsync(c => c.UserName == userName);
+            var asset = await repo.All<Asset>().FirstOrDefaultAsync(c => c.Name == model.Name);
             bool success = false;
             decimal quantityToDouble = model.Quantity; 
 
@@ -120,8 +122,8 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                var userAsset = await data
-                    .UserAssets
+                var userAsset = await repo
+                    .All<UserAsset>()
                     .Where(c => c.ApplicationUserId == user.Id)
                     .FirstOrDefaultAsync(c => c.AssetId == asset.Id);
 
@@ -129,8 +131,8 @@ namespace CryptoTradingPlatfrom.Core.Services
                 {
                     if (userAsset == null)
                     {
-                        data.UserAssets
-                            .Add(new UserAsset()
+                        await repo.AddAsync<UserAsset>
+                             (new UserAsset()
                             {
                                 ApplicationUserId = user.Id,
                                 AssetId = asset.Id,
@@ -161,7 +163,7 @@ namespace CryptoTradingPlatfrom.Core.Services
                     {
                         try
                         {
-                            data.UserAssets.Remove(userAsset);
+                            repo.Delete<UserAsset>(userAsset);
                         }
                         catch (Exception)
                         {
@@ -197,9 +199,9 @@ namespace CryptoTradingPlatfrom.Core.Services
             };
             try
             {
-                await data.Transactions.AddAsync(transaction);
-                data.Treasury.FirstOrDefault().Total += transactionFee;              
-                await data.SaveChangesAsync();
+                await repo.AddAsync<Transaction>(transaction);
+                repo.All<Treasury>().FirstOrDefault().Total += transactionFee;              
+                await repo.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)
@@ -212,27 +214,27 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<bool> SaveToFavorites(string ticker, string? userName)
         {
-            var userId = data.Users.FirstOrDefault(c => c.UserName == userName).Id;
-            var assetId = data.Assets.FirstOrDefault(c => c.Ticker == ticker).Id;
+            var userId = repo.All<ApplicationUser>().FirstOrDefault(c => c.UserName == userName).Id;
+            var assetId = repo.All<Asset>().FirstOrDefault(c => c.Ticker == ticker).Id;
             bool success = false;
 
             if (String.IsNullOrEmpty(userId) || String.IsNullOrEmpty(assetId))
             {
                 return success;
             }
-            var userFavoriteEntry = await data.UserFavorites.FirstOrDefaultAsync(c => c.ApplicationUserId == userId && c.AssetId == assetId);
+            var userFavoriteEntry = await repo.All<UserFovorites>().FirstOrDefaultAsync(c => c.ApplicationUserId == userId && c.AssetId == assetId);
 
             try
             {
                 if (userFavoriteEntry == null)
                 {
-                    await data.UserFavorites.AddAsync(new UserFovorites { ApplicationUserId = userId, AssetId = assetId });
+                    await repo.AddAsync<UserFovorites>(new UserFovorites { ApplicationUserId = userId, AssetId = assetId });
                 }
                 else
                 {
-                    data.UserFavorites.Remove(userFavoriteEntry);
+                    repo.Delete<UserFovorites>(userFavoriteEntry);
                 }
-                await data.SaveChangesAsync();
+                await repo.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)
@@ -245,8 +247,8 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<List<TransactionHistoryViewModel>> GetUserTradingHistory(string? name)
         {
-            return await data
-                .Transactions
+            return await repo
+                .All<Transaction>()
                 .Where(c => c.ApplicationUser.UserName == name)
                 .Include(c => c.Asset)
                 .Select(c => new TransactionHistoryViewModel
@@ -263,13 +265,13 @@ namespace CryptoTradingPlatfrom.Core.Services
         }
         public async Task<decimal> CalculateTransaction(BuyAssetFormModel model)
         {
-            string sellAssetTicker = data
-                .Assets
+            string sellAssetTicker = repo
+                .All<Asset>()
                 .FirstOrDefault(a => a.Id == model.SellAssetId)
                 .Ticker;
 
-            string buyAssetTicker = data
-                .Assets
+            string buyAssetTicker = repo
+                .All<Asset>()
                 .FirstOrDefault(a => a.Id == model.BuyAssetId)
                 .Ticker;
 

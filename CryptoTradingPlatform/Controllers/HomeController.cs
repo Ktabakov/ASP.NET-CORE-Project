@@ -69,22 +69,7 @@ namespace CryptoTradingPlatform.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Privacy()
         {
-            DateTime datetime = DateTime.Now;
-            var cachedData = await cache.GetStringAsync("cachedTime");
-
-            if (cachedData == null)
-            {
-                cachedData = datetime.ToString();
-
-                DistributedCacheEntryOptions cacheOptions = new DistributedCacheEntryOptions()
-                {
-                    SlidingExpiration = TimeSpan.FromSeconds(20),
-                    AbsoluteExpiration = DateTime.Now.AddSeconds(60)
-                };
-                await cache.SetStringAsync("cachedTime", cachedData);
-            }
-
-            return View(nameof(Privacy), cachedData);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

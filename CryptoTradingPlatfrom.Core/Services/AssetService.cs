@@ -7,16 +7,17 @@ using CryptoTradingPlatfrom.Core.Models.Api;
 using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Trading;
 using Microsoft.EntityFrameworkCore;
+using CryptoTradingPlatform.Infrastructure.Data.Repositories;
 
 namespace CryptoTradingPlatfrom.Core.Services
 {
     public class AssetService : IAssetService
     {
-        private readonly ApplicationDbContext data;
+        private readonly IApplicatioDbRepository repo;
 
-        public AssetService(ApplicationDbContext _data)
+        public AssetService(IApplicatioDbRepository _repo)
         {
-            data = _data;
+            repo = _repo;
         }
 
         public async Task<(bool, string)> AddAsset(CryptoResponseModel model)
@@ -27,7 +28,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             {
                 return (success, "The Asset can't be an empty field");
             }
-            if (data.Assets.Any(c => c.Ticker == model.Ticker))
+            if (repo.All<Asset>().Any(c => c.Ticker == model.Ticker))
             {
                 return (success, "This asset already exists on the plattform");
             }
@@ -41,8 +42,8 @@ namespace CryptoTradingPlatfrom.Core.Services
             };
             try
             {
-                await data.Assets.AddAsync(asset);
-                await data.SaveChangesAsync();
+                await repo.AddAsync<Asset>(asset);
+                await repo.SaveChangesAsync();
                 success = true;
             }
             catch (Exception ex)
@@ -55,13 +56,12 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<List<string>> GetAllAssetTickers()
         {
-            return await data.Assets.Select(c => c.Ticker).ToListAsync();
+            return await repo.All<Asset>().Select(c => c.Ticker).ToListAsync();
         }
 
         public async Task<AssetDetailsViewModel> GetDetails(string assetName)
         {
-            return await data.
-                Assets
+            return await repo.All<Asset>()
                 .Where(c => c.Name == assetName)
                 .Select(c => new AssetDetailsViewModel
                 {
@@ -75,12 +75,12 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<List<string>> GetIds()
         {
-            return await data.Assets.Select(x => x.Id).ToListAsync();
+            return await repo.All<Asset>().Select(x => x.Id).ToListAsync();
         }
 
         public async Task<List<string>> GetTickers()
         {
-            return await data.Assets.Select(x => x.Ticker).ToListAsync();
+            return await repo.All<Asset>().Select(x => x.Ticker).ToListAsync();
         }
 
         public async Task<decimal> GetUserMoney(string? name)
@@ -90,8 +90,8 @@ namespace CryptoTradingPlatfrom.Core.Services
                 return 0M;
             }
             return Math.Round(
-                 data
-                .Users
+                 repo
+                .All<ApplicationUser>()
                 .Where(c => c.UserName == name)
                 .FirstOrDefault()
                 .Money, 2);
@@ -100,10 +100,10 @@ namespace CryptoTradingPlatfrom.Core.Services
         public async Task<SwapAssetsListViewModel> GetUserAssets(string name)
         {
             SwapAssetsListViewModel modelList = new SwapAssetsListViewModel();
-            var user = await data.Users.Where(c => c.UserName == name).FirstOrDefaultAsync();
-            modelList.Assets = data
-                .UserAssets
-                .Where(c => c.ApplicationUserId == user.Id)        
+            var user = await repo.All<ApplicationUser>().Where(c => c.UserName == name).FirstOrDefaultAsync();
+            modelList.Assets = await repo
+                .All<UserAsset>()
+                .Where(c => c.ApplicationUserId == user.Id)
                 .Where(c => c.Quantity > 0)
                 .Select(c => new SwapAssetViewModel
                 {
@@ -112,10 +112,10 @@ namespace CryptoTradingPlatfrom.Core.Services
                     AssetId = c.AssetId,
                     ImageUrl = c.Asset.ImageURL
                 })
-               .ToList();
+               .ToListAsync();
 
-            modelList.UserMoney = data
-                .Users
+            modelList.UserMoney = repo
+                .All<ApplicationUser>()
                 .FirstOrDefault(c => c.UserName == name)
                 .Money;
 
@@ -125,13 +125,13 @@ namespace CryptoTradingPlatfrom.Core.Services
         //maybe to cascade delete - remove from userfavorites also
         public async Task<bool> RemoveAsset(string assetName)
         {
-            var asset = await data.Assets.FirstOrDefaultAsync(a => a.Name == assetName);
+            var asset = await repo.All<Asset>().FirstOrDefaultAsync(a => a.Name == assetName);
             bool success = false;
 
             try
             {
-                data.Remove(asset);
-                await data.SaveChangesAsync();
+                repo.Delete<Asset>(asset);
+                await repo.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)
@@ -139,25 +139,26 @@ namespace CryptoTradingPlatfrom.Core.Services
                 return success;
             }
             return success;
-            
+
         }
 
-       /* public async Task<List<CryptoResponseModel>> CheckIfFavorites(List<CryptoResponseModel> cryptos, string userName)
-        {
-            var user = data.Users.FirstOrDefault(c => c.UserName == userName);
+        /* public async Task<List<CryptoResponseModel>> CheckIfFavorites(List<CryptoResponseModel> cryptos, string userName)
+         {
+             var user = data.Users.FirstOrDefault(c => c.UserName == userName);
 
-            for (int i = 0; i < cryptos.Count; i++)
-            {
-                var cr = cryptos[i];
-                var assetId = data.Assets.FirstOrDefault(c => c.Ticker == cr.Ticker).Id;
-                cr.IsInFavorites = data.UserFavorites.FirstOrDefault(c => c.ApplicationUserId == user.Id && c.AssetId == assetId) == null;
-            }
-            return cryptos;
-        }*/
+             for (int i = 0; i < cryptos.Count; i++)
+             {
+                 var cr = cryptos[i];
+                 var assetId = data.Assets.FirstOrDefault(c => c.Ticker == cr.Ticker).Id;
+                 cr.IsInFavorites = data.UserFavorites.FirstOrDefault(c => c.ApplicationUserId == user.Id && c.AssetId == assetId) == null;
+             }
+             return cryptos;
+         }*/
 
         public async Task<List<string>> GetAllFavoritesTickers(string? name)
         {
-            return await data.UserFavorites
+            return await repo
+                .All<UserFovorites>()
                 .Where(c => c.User.UserName == name)
                 .Include(c => c.Asset)
                 .Select(c => c.Asset.Ticker)
@@ -166,18 +167,17 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public bool IsAssetFavorite(string userName, string assetTicker)
         {
-             return data
-                .UserFavorites
-                .Where(u => u.User.UserName == userName)
-                .Any(c => c.Asset.Ticker == assetTicker);
+            return repo.All<UserFovorites>()
+               .Where(u => u.User.UserName == userName)
+               .Any(c => c.Asset.Ticker == assetTicker);
         }
 
         public async Task<bool> IsAssetOwned(string assetName)
         {
-            var asset = await data.Assets.FirstOrDefaultAsync(a => a.Name == assetName);
+            var asset = await repo.All<Asset>().FirstOrDefaultAsync(a => a.Name == assetName);
 
-            return data
-                 .UserAssets
+            return repo
+                .All<UserAsset>()
                  .Any(c => c.AssetId == asset.Id);
         }
 

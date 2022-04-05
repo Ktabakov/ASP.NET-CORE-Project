@@ -2,6 +2,7 @@
 using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.Infrastructure.Data.Models;
+using CryptoTradingPlatform.Infrastructure.Data.Repositories;
 using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Articles;
 using Microsoft.AspNetCore.Identity;
@@ -11,19 +12,19 @@ namespace CryptoTradingPlatfrom.Core.Services
 {
     public class ArticleService : IArticleService
     {
-        private readonly ApplicationDbContext data;
+        private readonly IApplicatioDbRepository repo;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ArticleService(ApplicationDbContext _data, UserManager<ApplicationUser> _userManager)
+        public ArticleService(IApplicatioDbRepository _repo, UserManager<ApplicationUser> _userManager)
         {
-            data = _data;
+            repo = _repo;
             userManager = _userManager;
         }
         public async Task<(bool success, string error)> AddArticle(AddArticleFormModel model, string? name)
         {
             bool success = false;
 
-            var user = data.Users.FirstOrDefault(c => c.UserName == name);
+            var user = await repo.All<ApplicationUser>().FirstOrDefaultAsync(c => c.UserName == name);
 
             if (!await userManager.IsInRoleAsync(user, "Manager") && !await userManager.IsInRoleAsync(user, "Administrator"))
             {
@@ -42,8 +43,8 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                await data.Articles.AddAsync(article);
-                await data.SaveChangesAsync();  
+                await repo.AddAsync<Article>(article);
+                await repo.SaveChangesAsync();  
                 success = true;
             }
             catch (Exception)
@@ -57,8 +58,7 @@ namespace CryptoTradingPlatfrom.Core.Services
         public async Task<List<ArticleViewModel>> GetArticles()
         {
 
-            return await data
-                .Articles
+            return await repo.All<Article>()
                 .Select(c => new ArticleViewModel
                 {
                     Likes = c.Likes,
@@ -91,8 +91,8 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public int getTotalLikes(string articleId)
         {
-            return data
-                .Articles
+            return repo
+                .All<Article>()
                 .FirstOrDefault(c => c.Id == articleId)
                 .Likes;
         }
@@ -100,28 +100,29 @@ namespace CryptoTradingPlatfrom.Core.Services
         public async Task<bool> LikeArticle(string articleId, string? userName)
         {
 
-            var userId = data.Users.FirstOrDefault(c => c.UserName == userName).Id;
+            var userId = repo.All<ApplicationUser>().FirstOrDefault(c => c.UserName == userName).Id;
             bool success = false;
+            var article = await repo.GetByIdAsync<Article>(articleId);
 
             if (String.IsNullOrEmpty(userId) || String.IsNullOrEmpty(articleId))
             {
                 return success;
             }
-            var articleLikeEntry = data.ArticleLikes.FirstOrDefault(c => c.ApplicationUserId == userId && c.ArticleId == articleId);
+            var articleLikeEntry = await repo.All<ArticleLikes>().FirstOrDefaultAsync(c => c.ApplicationUserId == userId && c.ArticleId == articleId);
 
             try
             {
                 if (articleLikeEntry == null)
                 {
-                    data.ArticleLikes.Add(new ArticleLikes { ApplicationUserId = userId, ArticleId = articleId });
-                    data.Articles.Where(c => c.Id == articleId).FirstOrDefault().Likes++;
+                    await repo.AddAsync<ArticleLikes>(new ArticleLikes { ApplicationUserId = userId, ArticleId = articleId });
+                    article.Likes++;
                 }
                 else
                 {
-                    data.ArticleLikes.Remove(articleLikeEntry);
-                    data.Articles.Where(c => c.Id == articleId).FirstOrDefault().Likes--;
+                    repo.Delete<ArticleLikes>(articleLikeEntry);
+                    article.Likes--;
                 }
-                data.SaveChanges();
+                await repo.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)
@@ -135,7 +136,7 @@ namespace CryptoTradingPlatfrom.Core.Services
         public async Task<bool> RemoveArticle(string articleId)
         {
             bool success = false;
-            var article = await data.Articles.FirstOrDefaultAsync(c => c.Id == articleId);
+            var article = await repo.GetByIdAsync<Article>(articleId);
 
             if(article == null)
             {
@@ -143,9 +144,8 @@ namespace CryptoTradingPlatfrom.Core.Services
             }
             try
             {
-                data
-               .Articles.Remove(article);
-                data.SaveChanges();
+                repo.Delete<Article>(article);
+                await repo.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)

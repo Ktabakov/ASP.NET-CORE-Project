@@ -2,6 +2,7 @@
 using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatform.Infrastructure.Data.Models;
+using CryptoTradingPlatform.Infrastructure.Data.Repositories;
 using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Models.Users;
 using Microsoft.AspNetCore.Identity;
@@ -11,26 +12,25 @@ namespace CryptoTradingPlatfrom.Core.Services
 {
     public class UserService : IUserService
     {
-        private readonly ApplicationDbContext data;
+        private readonly IApplicatioDbRepository repo;
 
-
-        public UserService(ApplicationDbContext _data) 
+        public UserService(IApplicatioDbRepository _repo) 
         {
-            data = _data;
+            repo = _repo;
         }
 
         public async Task<bool> IsApplicationSent(string? name)
         {
-            return data.ManagerApplications.FirstOrDefault(c => c.User.UserName == name) != null;
+            return repo.All<ManagerApplication>().FirstOrDefault(c => c.User.UserName == name) != null;
         }
 
 
         public async Task<(bool, string)> SendManagerApplication(string? name, AddManagerFormModel model)
         {
-            var user = data.Users.FirstOrDefault(c => c.UserName == name);
+            var user = repo.All<ApplicationUser>().FirstOrDefault(c => c.UserName == name);
             bool success = false;
 
-            if (data.ManagerApplications.Any(c => c.ApplicationUserId == user.Id))
+            if (repo.All<ManagerApplication>().Any(c => c.ApplicationUserId == user.Id))
             {
                 return (success, "Your application is currently in progress!");
             }
@@ -45,8 +45,8 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                await data.ManagerApplications.AddAsync(application);
-                await data.SaveChangesAsync();
+                await repo.AddAsync<ManagerApplication>(application);
+                await repo.SaveChangesAsync();
                 success = true;
             }
             catch (Exception)

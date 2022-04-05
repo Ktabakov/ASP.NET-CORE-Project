@@ -18,7 +18,7 @@
                     <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image cap">
                     <div class="card-body bg-dark">
                         <h5 class="card-title">@n.Username</h5>
-                        <p id="currentRole@(n.UserId)" class="card-text">Current Role: @(n.Role == null ? "User" : n.Role)</p>
+                        <p id="currentRole@(n.UserId)" class="card-text">Current Role: @(String.IsNullOrEmpty(n.Role) ? "User" : n.Role)</p>
                         <p id="currentRole@(n.UserId)" class="card-text">Total Transactions: @n.TotalTrades</p>
                         <div class="row">
                             <label>Promote or demote a usser</label>

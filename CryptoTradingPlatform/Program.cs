@@ -3,6 +3,7 @@ using CryptoTradingPlatform.Core.Services;
 using CryptoTradingPlatform.Data.Models;
 using CryptoTradingPlatform.Extensions;
 using CryptoTradingPlatform.Infrastructure.Data;
+using CryptoTradingPlatform.Infrastructure.Data.Repositories;
 using CryptoTradingPlatform.ModelBinders;
 using CryptoTradingPlatfrom.Core.Contracts;
 using CryptoTradingPlatfrom.Core.Services;
@@ -25,6 +26,7 @@ builder.Services.AddScoped<ITradingService, TradingService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IUserService, UserService>();    
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IApplicatioDbRepository, ApplicatioDbRepository>();
 builder.Services.AddHttpClient<ICryptoApiService, CryptoApiService>();
 builder.Services.AddHttpClient<INewsService, NewsService>();
 
@@ -107,3 +109,4 @@ app.Run();
 //write tests
 //save asset prices in assetPrice and maybe make graph
 //get transaction history between dates     
+//Transaction History is deleted when removeing an asset!!!!!!!
