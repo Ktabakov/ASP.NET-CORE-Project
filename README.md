@@ -28,7 +28,8 @@ is to write down the asset's ticker(BTC, ETH, ADA, BNB). The rest is handeled by
 * [CryptoPanic API](https://cryptopanic.com/developers/api/)
 * Bootstrap
 * Newtonsoft.Json
-* Moq
+* NUnit
+* Sqlite
 * AJAX 
 * JavaScript
 * jQuery
