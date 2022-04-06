@@ -124,7 +124,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
                 });
 
             modelBuilder.Entity("CryptoTradingPlatform.Data.Models.Asset", b =>
@@ -163,7 +163,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Assets");
+                    b.ToTable("Assets", (string)null);
                 });
 
             modelBuilder.Entity("CryptoTradingPlatform.Data.Models.Transaction", b =>
@@ -204,7 +204,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
                     b.HasIndex("AssetId");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transactions", (string)null);
                 });
 
             modelBuilder.Entity("CryptoTradingPlatform.Data.Models.UserAsset", b =>
@@ -223,7 +223,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("UserAssets");
+                    b.ToTable("UserAssets", (string)null);
                 });
 
             modelBuilder.Entity("CryptoTradingPlatform.Infrastructure.Data.Models.ArticleLikes", b =>
@@ -241,7 +241,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("ArticleLikes");
+                    b.ToTable("ArticleLikes", (string)null);
                 });
 
             modelBuilder.Entity("CryptoTradingPlatform.Infrastructure.Data.Models.ManagerApplication", b =>
@@ -271,7 +271,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("ManagerApplications");
+                    b.ToTable("ManagerApplications", (string)null);
                 });
 
             modelBuilder.Entity("CryptoTradingPlatform.Infrastructure.Data.Models.Treasury", b =>
@@ -285,7 +285,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Treasury");
+                    b.ToTable("Treasury", (string)null);
                 });
 
             modelBuilder.Entity("CryptoTradingPlatform.Infrastructure.Data.UserFovorites", b =>
@@ -301,7 +301,7 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Migrations
 
                     b.HasIndex("AssetId");
 
-                    b.ToTable("UserFavorites");
+                    b.ToTable("UserFavorites", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
