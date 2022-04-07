@@ -5,13 +5,13 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        @if (User.IsInRole("Administrator"))
+        @if (User.IsInRole(RolesConstants.Administrator))
         {
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Area</a>
             </li>
         }
-        else if (User.IsInRole("Manager"))
+        else if (User.IsInRole(RolesConstants.Manager))
         {
             <li class="nav-item">
                 <a class="nav-link text-white" asp-area="" asp-controller="Manager" asp-action="Index">Managers Page</a>

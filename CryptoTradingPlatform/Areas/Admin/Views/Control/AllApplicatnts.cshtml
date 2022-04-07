@@ -18,8 +18,8 @@
                         <p class="card-text">Answer: @n.Question</p>
                         <p class="card-text"><small class="text-muted">Applied on: @n.DateApplied.ToString("d")</small></p>
                         <div class="row">
-                            <a asp-area="Admin" asp-action="DeleteApplication" asp-controller="Control" asp-route-id="@n.UserId" class="btn btn-danger mt-2 rounded-pill">Delete Application</a>
-                            <a asp-area="Admin" asp-action="PromoteApplicant" asp-controller="Control" asp-route-id="@n.UserId" class="btn btn-success mt-2 rounded-pill">Promote to Manager</a>
+                            <a asp-area="Admin" asp-action="DeleteApplication" asp-controller="Control" asp-route-id="@n.Id" class="btn btn-danger mt-2 rounded-pill">Delete Application</a>
+                            <a asp-area="Admin" asp-action="PromoteApplicant" asp-controller="Control" asp-route-id="@n.Id" class="btn btn-success mt-2 rounded-pill">Promote to Manager</a>
                         </div>
                     </div>
                 </div>

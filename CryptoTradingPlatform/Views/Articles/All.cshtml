@@ -13,7 +13,7 @@
                 <!--Maybe Change to Dislike when liked-->
             <a id="likeButton@(article.Id)" onclick="like('@article.Id', this)" class="button btn btn-primary rounded-pill"> <i class="text-danger fa-solid fa-heart"></i>Like</a>
                 <a data-toggle="modal" data-target="#modal@(article.Id)" id="detailsButton@(article.Id)" class="button btn btn-success rounded-pill">Details</a>
-                @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+                @if (User.IsInRole(RolesConstants.Manager) || User.IsInRole(RolesConstants.Administrator))
                 {
                     <a href="/Articles/Delete?articleId=@article.Id" class="button btn btn-danger rounded-pill">Delete</a>
                 }

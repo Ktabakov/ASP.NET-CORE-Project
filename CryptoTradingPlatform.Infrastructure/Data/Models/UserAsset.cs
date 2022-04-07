@@ -16,7 +16,7 @@ namespace CryptoTradingPlatform.Data.Models
         public decimal Quantity { get; set; }
 
         [ForeignKey(nameof(ApplicationUser))]
-        public string ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }   
 
         public ApplicationUser User { get; set; }
     }

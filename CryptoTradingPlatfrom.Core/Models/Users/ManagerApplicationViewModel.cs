@@ -25,5 +25,8 @@ namespace CryptoTradingPlatfrom.Core.Models.Users
 
         [Required]
         public string UserId { get; set; }
+
+        [Required]
+        public string Id { get; set; }
     }
 }

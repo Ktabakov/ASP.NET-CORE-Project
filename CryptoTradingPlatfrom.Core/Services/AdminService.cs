@@ -98,7 +98,8 @@ namespace CryptoTradingPlatfrom.Core.Services
                     Experience = c.Experience,
                     Question = c.Question,
                     Username = c.User.UserName,
-                    UserId = c.User.Id
+                    UserId = c.User.Id,
+                    Id = c.Id,
                 })
                 .ToListAsync();
         }
@@ -152,7 +153,7 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<bool> PromoteUserToManager(string id)
         {
-            var user = await repo.GetByIdAsync<ApplicationUser>(id);
+            var user =  repo.All<ManagerApplication>().Include(c => c.User).FirstOrDefault(c => c.Id == id).User;
             bool success = false;
 
             var application = repo.GetByIdAsync<ManagerApplication>(id);
@@ -170,7 +171,7 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                await repo.DeleteAsync<ManagerApplication>(application.Id);
+                await repo.DeleteAsync<ManagerApplication>(id);
                 await repo.SaveChangesAsync();
             }
             catch (Exception)

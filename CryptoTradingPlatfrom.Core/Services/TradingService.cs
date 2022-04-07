@@ -87,6 +87,19 @@ namespace CryptoTradingPlatfrom.Core.Services
             try
             {
                 sellUserAsset.Quantity -= sellQuantity;
+                if (sellUserAsset.Quantity == 0)
+                {
+                    try
+                    {
+                        repo.Delete<UserAsset>(sellUserAsset);
+                    }
+                    catch (Exception)
+                    {
+
+                        return false;
+                    }
+                }
+
                 buyUserAsset.Quantity += buyQuantity;
                 await repo.AddAsync<Transaction>(transaction);
                 repo.All<Treasury>().FirstOrDefault().Total += transactionFee;
