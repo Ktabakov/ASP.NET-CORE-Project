@@ -13,12 +13,12 @@ namespace CryptoTradingPlatfrom.Core.Services
     public class ArticleService : IArticleService
     {
         private readonly IApplicatioDbRepository repo;
-        private readonly UserManager<ApplicationUser> userManager;
+        //private readonly UserManager<ApplicationUser> userManager;
 
-        public ArticleService(IApplicatioDbRepository _repo, UserManager<ApplicationUser> _userManager)
+        public ArticleService(IApplicatioDbRepository _repo)
         {
             repo = _repo;
-            userManager = _userManager;
+            //userManager = _userManager;
         }
         public async Task<(bool success, string error)> AddArticle(AddArticleFormModel model, string? name)
         {
@@ -26,10 +26,10 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             var user = await repo.All<ApplicationUser>().FirstOrDefaultAsync(c => c.UserName == name);
 
-            if (!await userManager.IsInRoleAsync(user, "Manager") && !await userManager.IsInRoleAsync(user, "Administrator"))
-            {
-                return (success, "We don't do that here!");
-            }
+            //if (!await userManager.IsInRoleAsync(user, "Manager") && !await userManager.IsInRoleAsync(user, "Administrator"))
+            //{
+            //    return (success, "We don't do that here!");
+            //}
 
             Article article = new Article
             {
