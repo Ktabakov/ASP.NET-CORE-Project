@@ -14,7 +14,6 @@ namespace CryptoTradingPlatfrom.Core.Contracts
     public interface IAssetService
     {
         Task<(bool, string)> AddAsset(CryptoResponseModel model);
-        Task<List<string>> GetTickers();
         Task<List<string>> GetIds();
         Task<AssetDetailsViewModel> GetDetails(string assetName);
         Task<SwapAssetsListViewModel> GetUserAssets(string name);

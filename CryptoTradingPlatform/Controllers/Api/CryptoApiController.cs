@@ -23,7 +23,7 @@ namespace CryptoTradingPlatform.Controllers.Api
         [ProducesResponseType(400)]
         public async Task<ActionResult<List<CryptoResponseModel>>> Top()
         {
-            List<string> tickers = await assetService.GetTickers();
+            List<string> tickers = await assetService.GetAllAssetTickers();
             return await cryptoApiService.GetCryptos(tickers);
         }
 

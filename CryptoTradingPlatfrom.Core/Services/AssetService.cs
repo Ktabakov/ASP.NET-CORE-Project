@@ -24,10 +24,7 @@ namespace CryptoTradingPlatfrom.Core.Services
         {
             bool success = false;
             string error = string.Empty;
-            if (model == null)
-            {
-                return (success, "The Asset can't be an empty field");
-            }
+           
             if (repo.All<Asset>().Any(c => c.Ticker == model.Ticker))
             {
                 return (success, "This asset already exists on the plattform");
@@ -78,11 +75,6 @@ namespace CryptoTradingPlatfrom.Core.Services
             return await repo.All<Asset>().Select(x => x.Id).ToListAsync();
         }
 
-        public async Task<List<string>> GetTickers()
-        {
-            return await repo.All<Asset>().Select(x => x.Ticker).ToListAsync();
-        }
-
         public async Task<decimal> GetUserMoney(string? name)
         {
             if (string.IsNullOrEmpty(name))
@@ -122,7 +114,6 @@ namespace CryptoTradingPlatfrom.Core.Services
             return modelList;
         }
 
-        //maybe to cascade delete - remove from userfavorites also
         public async Task<bool> RemoveAsset(string assetName)
         {
             var asset = await repo.All<Asset>().FirstOrDefaultAsync(a => a.Name == assetName);
