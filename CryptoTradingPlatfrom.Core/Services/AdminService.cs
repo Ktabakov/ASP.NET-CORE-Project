@@ -77,7 +77,7 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                repo.Delete<ManagerApplication>(application);
+                application.Status = "Denied";
                 await repo.SaveChangesAsync();
                 success = true;
             }
@@ -92,6 +92,7 @@ namespace CryptoTradingPlatfrom.Core.Services
         public async Task<List<ManagerApplicationViewModel>> GetAllApplications()
         {
             return await repo.All<ManagerApplication>()
+                .Where(c => c.Status == "Pending")
                 .Select(c => new ManagerApplicationViewModel
                 {
                     DateApplied = c.DateApplied,
@@ -156,7 +157,7 @@ namespace CryptoTradingPlatfrom.Core.Services
             var user =  repo.All<ManagerApplication>().Include(c => c.User).FirstOrDefault(c => c.Id == id).User;
             bool success = false;
 
-            var application = repo.GetByIdAsync<ManagerApplication>(id);
+            var application = await repo.GetByIdAsync<ManagerApplication>(id);
 
             try
             {
@@ -171,7 +172,7 @@ namespace CryptoTradingPlatfrom.Core.Services
 
             try
             {
-                await repo.DeleteAsync<ManagerApplication>(id);
+                application.Status = "Approved";
                 await repo.SaveChangesAsync();
             }
             catch (Exception)

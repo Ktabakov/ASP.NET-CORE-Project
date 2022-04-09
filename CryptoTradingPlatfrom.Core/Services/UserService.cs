@@ -21,7 +21,16 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<bool> IsApplicationSent(string? name)
         {
-            return repo.All<ManagerApplication>().FirstOrDefault(c => c.User.UserName == name) != null;
+            var app = repo.All<ManagerApplication>().FirstOrDefault(c => c.User.UserName == name);
+            if (app == null)
+            {
+                return false;
+            }
+            if (app.Status == "Pending")
+            {
+                return true;
+            }
+            return false;
         }
 
 
@@ -40,7 +49,8 @@ namespace CryptoTradingPlatfrom.Core.Services
                 ApplicationUserId = user.Id,
                 Experience = model.Experience,
                 Question = model.Question,
-                DateApplied = DateTime.Now
+                DateApplied = DateTime.Now,
+                Status = "Pending"
             };
 
             try

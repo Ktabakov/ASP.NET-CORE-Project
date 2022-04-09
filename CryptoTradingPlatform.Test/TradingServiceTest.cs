@@ -1,5 +1,4 @@
-﻿//using Castle.Core.Configuration;
-//using CryptoTradingPlatform.Core.Contracts;
+﻿//using CryptoTradingPlatform.Core.Contracts;
 //using CryptoTradingPlatform.Core.Services;
 //using CryptoTradingPlatform.Data.Models;
 //using CryptoTradingPlatform.Infrastructure.Data.Repositories;
@@ -7,8 +6,12 @@
 //using CryptoTradingPlatfrom.Core.Models.Assets;
 //using CryptoTradingPlatfrom.Core.Services;
 //using Microsoft.Extensions.DependencyInjection;
+//using Moq;
+//using Moq.Protected;
 //using NUnit.Framework;
+//using System.Net;
 //using System.Net.Http;
+//using System.Threading;
 //using System.Threading.Tasks;
 
 //namespace CryptoTradingPlatform.Test
@@ -17,10 +20,12 @@
 //    {
 //        private ServiceProvider serviceProvider;
 //        private InMemoryDbContext dbContext;
+   
 
 //        [SetUp]
 //        public async Task Setup()
 //        {
+          
 //            dbContext = new InMemoryDbContext();
 //            var serviceCollection = new ServiceCollection();
 
@@ -28,19 +33,20 @@
 //                .AddSingleton(sp => dbContext.CreateContext())
 //                .AddSingleton<IApplicatioDbRepository, ApplicatioDbRepository>()
 //                .AddSingleton<ITradingService, TradingService>()
-//                .AddSingleton<IConfiguration>()
+//                .AddSingleton<ICryptoApiService, CryptoApiService>()
 //                .BuildServiceProvider();
 
 //            var repo = serviceProvider.GetService<IApplicatioDbRepository>();
 //            await SeedDbAsync(repo);
 //        }
-
+        
 //        [Test]
 //        public async Task UsersAddArticlesShouldReturnError()
 //        {
 //            var tradingService = serviceProvider.GetService<ITradingService>();
-//            var cryptoApiService = serviceProvider.GetService<ITradingService>();
+//            var cryptoApiService = serviceProvider.GetService<CryptoApiService>();
 
+           
 //            BuyAssetFormModel model = new BuyAssetFormModel()
 //            {
 //                SellAssetId = "sell",

@@ -38,5 +38,7 @@
 
         public const int ArticleMinLength = 20;
 
+        public const int ApplicationStatus = 10;
+
     }
 }
