@@ -89,6 +89,7 @@ namespace CryptoTradingPlatform.Test
                 Experience = "1 - 5 Years",          
                 Id = "1",
                 User = user,
+                Status = "Pending"
             };
 
             await repo.AddAsync(user2);

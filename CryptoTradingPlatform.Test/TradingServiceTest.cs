@@ -20,12 +20,12 @@
 //    {
 //        private ServiceProvider serviceProvider;
 //        private InMemoryDbContext dbContext;
-   
+
 
 //        [SetUp]
 //        public async Task Setup()
 //        {
-          
+
 //            dbContext = new InMemoryDbContext();
 //            var serviceCollection = new ServiceCollection();
 
@@ -39,14 +39,14 @@
 //            var repo = serviceProvider.GetService<IApplicatioDbRepository>();
 //            await SeedDbAsync(repo);
 //        }
-        
+
 //        [Test]
 //        public async Task UsersAddArticlesShouldReturnError()
 //        {
 //            var tradingService = serviceProvider.GetService<ITradingService>();
-//            var cryptoApiService = serviceProvider.GetService<CryptoApiService>();
+//            var cryptoApiService = serviceProvider.GetService<ICryptoApiService>();
 
-           
+
 //            BuyAssetFormModel model = new BuyAssetFormModel()
 //            {
 //                SellAssetId = "sell",

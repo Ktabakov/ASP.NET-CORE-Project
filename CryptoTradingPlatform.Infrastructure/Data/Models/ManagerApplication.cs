@@ -20,9 +20,8 @@ namespace CryptoTradingPlatform.Infrastructure.Data.Models
         [MaxLength(DataConstants.ExperienceMaxLength)]
         public string Experience { get; set; }
 
-        [Required]
         [MaxLength(DataConstants.ApplicationStatus)]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [Required]
         public DateTime DateApplied { get; set; }
