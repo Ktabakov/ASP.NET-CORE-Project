@@ -139,7 +139,12 @@ namespace CryptoTradingPlatfrom.Core.Services
             StatisticsViewModel model = new StatisticsViewModel();
             model.TotalFees = repo.All<Treasury>().FirstOrDefault().Total;
             model.TotalTrades = repo.All<Transaction>().Count();
+            if (model.TotalTrades == 0)
+            {
+                return model;
+            }
             model.TradedVolume = repo.All<Transaction>().Select(c => Convert.ToDecimal(c.Quantity) * c.Price).Sum();
+
             var mostTraded = repo.All<Transaction>()
                 .GroupBy(c => c.Asset.Name)
                 .Select(x => new { AssetName = x.Key, TimesTraded = x.Count(a => a.AssetId == a.AssetId) })

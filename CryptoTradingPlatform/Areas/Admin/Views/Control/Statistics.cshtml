@@ -4,34 +4,41 @@
     <h1>Welcome to the statistics page</h1>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="offset-md-3 col-md-6 col-sm-12">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Most Traded Asset
-                    <span class="badge bg-primary rounded-pill">@Model.MostTradedAsset</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Most Traded Asset - Times Traded: 
-                    <span class="badge bg-primary rounded-pill">@Model.MostTradedAssetTimesTraded</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Total Trades On The Platform
-                    <span class="badge bg-primary rounded-pill">@Model.TotalTrades</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Total Trading Fees
-                    <span class="badge bg-primary rounded-pill">@Model.TotalFees.ToString("C",new CultureInfo("en-US"))</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Total Trading Volume
-                    <span class="badge bg-primary rounded-pill">@Model.TradedVolume.ToString("C",new CultureInfo("en-US"))</span>
-                </li>
-            </ul>
+@if (Model == null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-3 col-md-6 col-sm-12">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Most Traded Asset
+                        <span class="badge bg-primary rounded-pill">@Model.MostTradedAsset</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Most Traded Asset - Times Traded:
+                        <span class="badge bg-primary rounded-pill">@Model.MostTradedAssetTimesTraded</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Trades On The Platform
+                        <span class="badge bg-primary rounded-pill">@Model.TotalTrades</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Trading Fees
+                        <span class="badge bg-primary rounded-pill">@Model.TotalFees.ToString("C",new CultureInfo("en-US"))</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Trading Volume
+                        <span class="badge bg-primary rounded-pill">@Model.TradedVolume.ToString("C",new CultureInfo("en-US"))</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <h3 class="text-center">There are currently no statistics to show. Come back at a later point!</h3>
+}
 
 <div class="container">
     <div class="mt-5 text-center">

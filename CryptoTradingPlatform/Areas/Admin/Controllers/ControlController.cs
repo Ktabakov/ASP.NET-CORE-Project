@@ -80,6 +80,7 @@ namespace CryptoTradingPlatform.Areas.Admin.Controllers
         public async Task<IActionResult> Statistics()
         {
             StatisticsViewModel model = await adminService.GetStatistics();
+           
             return View(model);
         }
     }
