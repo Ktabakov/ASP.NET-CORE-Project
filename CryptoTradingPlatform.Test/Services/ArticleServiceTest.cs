@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System.Threading.Tasks;
 
-namespace CryptoTradingPlatform.Test
+namespace CryptoTradingPlatform.Test.Services
 {
     public class ArticleServiceTest
     {

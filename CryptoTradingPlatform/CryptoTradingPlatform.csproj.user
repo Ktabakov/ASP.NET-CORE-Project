@@ -9,7 +9,7 @@
     <_SelectedScaffolderID>IdentityScaffolder</_SelectedScaffolderID>
     <_SelectedScaffolderCategoryPath>root/Identity</_SelectedScaffolderCategoryPath>
     <WebStackScaffolding_ViewDialogWidth>800</WebStackScaffolding_ViewDialogWidth>
-    <NameOfLastUsedPublishProfile>C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\Properties\PublishProfiles\CryptoTradingPlatform20220409191713 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\User\OneDrive\Desktop\SoftUni\C# Web\ASP.NET Core\CryptoTradingPlatform\CryptoTradingPlatform\CryptoTradingPlatform\Properties\PublishProfiles\CryptoTradingPlatform - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>

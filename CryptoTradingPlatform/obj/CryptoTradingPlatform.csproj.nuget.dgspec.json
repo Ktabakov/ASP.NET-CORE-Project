@@ -123,6 +123,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Azure.Security.KeyVault.Secrets": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "Microsoft.AspNet.WebApi.Client": {
               "target": "Package",
               "version": "[5.2.7, )"
@@ -148,6 +152,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.2, )"
+            },
+            "Microsoft.Extensions.Azure": {
+              "target": "Package",
+              "version": "[1.1.1, )"
             },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {
               "target": "Package",
@@ -224,6 +232,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "Azure.Security.KeyVault.Secrets": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "CsvHelper": {
               "target": "Package",
               "version": "[27.2.1, )"

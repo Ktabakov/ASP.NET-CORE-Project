@@ -8,18 +8,18 @@ namespace CryptoTradingPlatform.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Articles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    ImageURL = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Articles", x => x.Id);
-                });
+            //migrationBuilder.CreateTable(
+            //    name: "Articles",
+            //    columns: table => new
+            //    {
+            //        Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+            //        Content = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+            //        ImageURL = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_Articles", x => x.Id);
+            //    });
 
             migrationBuilder.CreateTable(
                 name: "Assets",

@@ -1,7 +1,10 @@
-﻿using CryptoTradingPlatform.Core.Constants;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using CryptoTradingPlatform.Core.Constants;
 using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models.Api;
 using CryptoTradingPlatform.Infrastructure.Data;
+using CryptoTradingPlatfrom.Core.Cache;
 using CryptoTradingPlatfrom.Core.Models.Api;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
@@ -21,7 +24,10 @@ namespace CryptoTradingPlatform.Core.Services
 
         public async Task<List<ImageDescriptionResponseModel>> GetImgUrls(List<string> tickers)
         {
+          
+
             HttpResponseMessage response = await client.GetAsync(ApiConstants.InfoPath + "?symbol=" + string.Join(',', tickers));
+
             List<ImageDescriptionResponseModel> list = new List<ImageDescriptionResponseModel>();
             if (!response.IsSuccessStatusCode)
             {
@@ -45,8 +51,28 @@ namespace CryptoTradingPlatform.Core.Services
        
         public async Task<List<CryptoResponseModel>> GetCryptos(List<string> tickers)
         {
-            Init();
-            
+            string secretString = null;
+            var cacheResult = CacheModel.GetApiKey("coinmarketcapKey");
+            if (cacheResult == null)
+            {
+                var kvUri = $"https://MyVaultCrypto.vault.azure.net";
+                var secretClient = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+                var secret = await secretClient.GetSecretAsync("coinmarketcapKey");
+                secretString = secret.Value.Value;
+                CacheModel.AddApiKey("coinmarketcapKey", secretString);
+            }
+            else
+            {
+                secretString = cacheResult;
+            }
+
+            //var apikey = config.GetValue<string>("coinmarketcapKey");
+            if (!client.DefaultRequestHeaders.Contains("Accepts"))
+            {
+                client.DefaultRequestHeaders.Add("Accepts", "application/json");
+                client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", secretString);
+            }
+
             HttpResponseMessage response = await client.GetAsync(ApiConstants.LatestPath + "?symbol=" + string.Join(',',tickers));
 
             if (!response.IsSuccessStatusCode)
@@ -83,14 +109,9 @@ namespace CryptoTradingPlatform.Core.Services
             return cryptos;
         }
 
-        private void Init()
+        private async Task Init()
         {
-            var apikey = config.GetValue<string>("coinmarketcapKey");
-            if (!client.DefaultRequestHeaders.Contains("Accepts"))
-            {
-                client.DefaultRequestHeaders.Add("Accepts", "application/json");
-                client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", apikey);
-            }
+            
         }
         public async Task<BuyAssetResponseModel> GetPrices(List<string> tickers)
         {

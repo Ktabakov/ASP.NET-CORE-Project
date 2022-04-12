@@ -23,6 +23,21 @@ namespace CryptoTradingPlatfrom.Core.Cache
             var result = memoryCache.Get(cacheKey);
             return (List<CryptoResponseModel>)result;
         }
+        public static void AddApiKey(string cacheKey, string key)
+        {
+            var cacheExpiryOptions = new MemoryCacheEntryOptions()
+            {
+                AbsoluteExpiration = DateTime.Now.AddDays(40),
+                Priority = CacheItemPriority.High,
+            };
+            memoryCache.Set(cacheKey, key, cacheExpiryOptions);
+        }
+
+        public static string GetApiKey(string cacheKey)
+        {
+            var result = memoryCache.Get(cacheKey);
+            return (string)result;
+        }
 
         public static void Delete(string cacheKey)
         {

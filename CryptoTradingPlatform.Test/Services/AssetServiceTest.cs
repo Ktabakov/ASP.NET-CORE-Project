@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CryptoTradingPlatform.Test
+namespace CryptoTradingPlatform.Test.Services
 {
     public class AssetServiceTest
     {

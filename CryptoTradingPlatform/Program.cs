@@ -11,20 +11,23 @@ using CryptoTradingPlatfrom.Infrastructure.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Azure.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString)); builder.Services.AddDbContext<ApplicationDbContext>(options =>
+     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<IAssetService, AssetService>();
 builder.Services.AddScoped<ITradingService, TradingService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
-builder.Services.AddScoped<IUserService, UserService>();    
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IApplicatioDbRepository, ApplicatioDbRepository>();
 builder.Services.AddHttpClient<ICryptoApiService, CryptoApiService>();
@@ -59,6 +62,7 @@ builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
+
 
 builder.Services.AddCors();
 

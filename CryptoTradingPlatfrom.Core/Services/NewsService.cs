@@ -1,4 +1,7 @@
-﻿using CryptoTradingPlatform.Core.Models.Articles;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using CryptoTradingPlatform.Core.Models.Articles;
+using CryptoTradingPlatfrom.Core.Cache;
 using CryptoTradingPlatfrom.Core.Contracts;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
@@ -18,10 +21,25 @@ namespace CryptoTradingPlatfrom.Core.Services
 
         public async Task<List<NewsViewModel>> GetNews()
         {
-            var rnd = new Random();
-            var apiKey = config.GetValue<string>("newsKey");
+            string secretString = null;
+            var cacheResult = CacheModel.GetApiKey("newsKey");
+            if (cacheResult == null)
+            {
+                var kvUri = $"https://MyVaultCrypto.vault.azure.net";
+                var secretClient = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+                var secret = await secretClient.GetSecretAsync("newsKey");
+                secretString = secret.Value.Value;
+                CacheModel.AddApiKey("newsKey", secretString);
+            }
+            else
+            {
+                secretString = cacheResult;
+            }
 
-            HttpResponseMessage response = await client.GetAsync($"https://cryptopanic.com/api/v1/posts/?auth_token={apiKey}&public=true");
+            var rnd = new Random();
+            //var apiKey = config.GetValue<string>("newsKey");
+
+            HttpResponseMessage response = await client.GetAsync($"https://cryptopanic.com/api/v1/posts/?auth_token={secretString}&public=true");
             List<NewsViewModel> list = new List<NewsViewModel>();
             if (!response.IsSuccessStatusCode)
             {
