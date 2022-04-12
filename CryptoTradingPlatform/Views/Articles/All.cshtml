@@ -1,33 +1,40 @@
 ﻿@model List<ArticleViewModel>
 
 <div class="card-group mt-5">
-    @foreach (var article in Model)
+    @if (Model != null)
     {
-        <div class="card mb-5">
-            <img class="card-img-top" src="@article.ImageURL" alt="Card image cap">
-            <div class="card-body bg-dark">
-                <a target="_blank"> <h5 class="card-title">Author: @article.AddedBy</h5></a>
-                <p class="card-text">@article.Title</p>
-                <p id="totalLikes@(article.Id)" class="card-text">Likes: @article.Likes</p>
-                <p class="card-text"><small class="text-muted">@article.DateAdded</small></p>
-                <!--Maybe Change to Dislike when liked-->
+        @foreach (var article in Model)
+        {
+            <div class="card mb-5">
+                <img class="card-img-top" src="@article.ImageURL" alt="Card image cap">
+                <div class="card-body bg-dark">
+                    <a target="_blank"> <h5 class="card-title">@article.Title</h5></a>
+                    <p class="card-text">Author: @article.AddedBy</p>
+                    <p id="totalLikes@(article.Id)" class="card-text">Likes: @article.Likes</p>
+                    <p class="card-text"><small class="text-muted">Date Added: @article.DateAdded</small></p>
+                    <!--Maybe Change to Dislike when liked-->
             <a id="likeButton@(article.Id)" onclick="like('@article.Id', this)" class="button btn btn-primary rounded-pill"> <i class="text-danger fa-solid fa-heart"></i>Like</a>
-                <a data-toggle="modal" data-target="#modal@(article.Id)" id="detailsButton@(article.Id)" class="button btn btn-success rounded-pill">Details</a>
-                @if (User.IsInRole(RolesConstants.Manager) || User.IsInRole(RolesConstants.Administrator))
-                {
-                    <a href="/Articles/Delete?articleId=@article.Id" class="button btn btn-danger rounded-pill">Delete</a>
-                }
+                    <a data-toggle="modal" data-target="#modal@(article.Id)" id="detailsButton@(article.Id)" class="button btn btn-success rounded-pill">Details</a>
+                    @if (User.IsInRole(RolesConstants.Manager) || User.IsInRole(RolesConstants.Administrator))
+                    {
+                        <a href="/Articles/Delete?articleId=@article.Id" class="button btn btn-danger rounded-pill">Delete</a>
+                    }
+                </div>
             </div>
-        </div>
-        <div class="modal fade" id="modal@(article.Id)">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body text-black">
-                        @article.Content
+            <div class="modal fade" id="modal@(article.Id)">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-black">
+                            @article.Content
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+    }
+    else
+    {
+        <h3 class="text-center">There are currently no articles for you!</h3>
     }
 </div>
 

@@ -11,11 +11,9 @@ using CryptoTradingPlatfrom.Infrastructure.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Azure.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 // Add services to the container.
@@ -111,7 +109,4 @@ app.MapRazorPages();
 app.Run();
 
 //my todos
-//write tests
-//save asset prices in assetPrice and maybe make graph
 //get transaction history between dates     
-//Transaction History is deleted when removeing an asset!!!!!!!
