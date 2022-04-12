@@ -1,5 +1,8 @@
 # Crypto Trading Platform
 :mortar_board: This project was built as the defense project for ASP.NET Core course at Software University. Many thanks [Stamo Petkov](https://github.com/stamo) and the whole [SoftUni Team](https://softuni.bg/)!
+<br>
+<br>
+:computer: [Try It Here!](https://cryptotradingplatform.azurewebsites.net/)
 
 # :memo: Overview
 Demo project for trading cryptocurrencies. Once registered, you directly get 300.000USD to test the platform with. On each transaction there is a 0.01% Transaction Fee, which is then added to the platform's treasury.
