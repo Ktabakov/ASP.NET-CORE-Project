@@ -40,7 +40,8 @@ namespace CryptoTradingPlatform.Controllers
             }
 
             TempData[MessageConstants.Success] = "Application Sent Successfully!";
-            return Redirect("/");
+            return RedirectToAction(actionName: nameof(Index), controllerName: "Home");
+           //return Redirect("/");
         }
     }
 }

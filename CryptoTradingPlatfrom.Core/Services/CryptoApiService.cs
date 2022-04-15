@@ -3,10 +3,8 @@ using Azure.Security.KeyVault.Secrets;
 using CryptoTradingPlatform.Core.Constants;
 using CryptoTradingPlatform.Core.Contracts;
 using CryptoTradingPlatform.Core.Models.Api;
-using CryptoTradingPlatform.Infrastructure.Data;
 using CryptoTradingPlatfrom.Core.Cache;
 using CryptoTradingPlatfrom.Core.Models.Api;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
 namespace CryptoTradingPlatform.Core.Services
@@ -14,17 +12,14 @@ namespace CryptoTradingPlatform.Core.Services
     public class CryptoApiService : ICryptoApiService
     {
         private readonly HttpClient client;
-        private readonly IConfiguration config;
 
-        public CryptoApiService(HttpClient _client, IConfiguration _config)
+        public CryptoApiService(HttpClient _client)
         {
             client = _client;
-            config = _config;
         }
 
         public async Task<List<ImageDescriptionResponseModel>> GetImgUrls(List<string> tickers)
-        {
-          
+        {       
 
             HttpResponseMessage response = await client.GetAsync(ApiConstants.InfoPath + "?symbol=" + string.Join(',', tickers));
 
@@ -107,12 +102,7 @@ namespace CryptoTradingPlatform.Core.Services
                 cryptos[i].Description = urls[i].Description;
             }
             return cryptos;
-        }
-
-        private async Task Init()
-        {
-            
-        }
+        }  
         public async Task<BuyAssetResponseModel> GetPrices(List<string> tickers)
         {
             BuyAssetResponseModel result = new BuyAssetResponseModel();

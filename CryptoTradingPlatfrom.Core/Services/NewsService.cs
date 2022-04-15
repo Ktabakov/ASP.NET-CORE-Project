@@ -11,12 +11,10 @@ namespace CryptoTradingPlatfrom.Core.Services
     public class NewsService : INewsService
     {
         private readonly HttpClient client;
-        private readonly IConfiguration config;
 
-        public NewsService(HttpClient _httpClient, IConfiguration _config)
+        public NewsService(HttpClient _httpClient)
         {
             client = _httpClient;
-            config = _config;
         }
 
         public async Task<List<NewsViewModel>> GetNews()
