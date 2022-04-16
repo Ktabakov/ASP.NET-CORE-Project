@@ -137,13 +137,13 @@ namespace CryptoTradingPlatfrom.Core.Services
         public async Task<StatisticsViewModel> GetStatistics()
         {
             StatisticsViewModel model = new StatisticsViewModel();
-            model.TotalFees = repo.All<Treasury>().FirstOrDefault().Total;
+            model.TotalFees = Math.Abs(repo.All<Treasury>().FirstOrDefault().Total);
             model.TotalTrades = repo.All<Transaction>().Count();
             if (model.TotalTrades == 0)
             {
                 return model;
             }
-            model.TradedVolume = repo.All<Transaction>().Select(c => Convert.ToDecimal(c.Quantity) * c.Price).Sum();
+            model.TradedVolume = Math.Abs(repo.All<Transaction>().Select(c => Convert.ToDecimal(c.Quantity) * c.Price).Sum());
 
             var mostTraded = repo.All<Transaction>()
                 .GroupBy(c => c.Asset.Name)
