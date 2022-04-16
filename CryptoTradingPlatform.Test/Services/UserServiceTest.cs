@@ -15,6 +15,7 @@ namespace CryptoTradingPlatform.Test.Services
         private ServiceProvider serviceProvider;
         private InMemoryDbContext dbContext;
 
+
         [SetUp]
         public async Task Setup()
         {

@@ -78,7 +78,7 @@ namespace CryptoTradingPlatform.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Administrator, Manager")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Remove(string assetName)
         {
             if (string.IsNullOrEmpty(assetName))
