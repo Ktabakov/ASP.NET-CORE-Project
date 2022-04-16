@@ -19,7 +19,6 @@ namespace CryptoTradingPlatfrom.Core.Models.Assets
         public string BuyAssetId { get; set; }
 
         [Required]
-        [Range(0.001, double.MaxValue, ErrorMessage = "Quantity must be more than 0")]
         public decimal BuyAssetQuantity { get; set; }
 
         public string? Calculate { get; set; }
