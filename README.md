@@ -69,6 +69,9 @@ is to write down the asset's ticker(BTC, ETH, ADA, BNB). The rest is handeled by
 [![Add-Article.jpg](https://i.postimg.cc/SNFY66zh/Add-Article.jpg)](https://postimg.cc/8s4CDrHK)
 [![AddAsset.jpg](https://i.postimg.cc/02YMczpJ/AddAsset.jpg)](https://postimg.cc/hfGtGPZS)
 
+## :framed_picture: Screenshots - Custom Error Page
+[![Custom-Error.jpg](https://i.postimg.cc/NGVNBwts/Custom-Error.jpg)](https://postimg.cc/BtT5Bktk)
+
 ## :framed_picture: Screenshots - Admin Area
 [![All-Application.jpg](https://i.postimg.cc/mkK1cMfm/All-Application.jpg)](https://postimg.cc/ZvF52WqN)
 [![AllUsers.jpg](https://i.postimg.cc/9Xk7N3Ry/AllUsers.jpg)](https://postimg.cc/Yj10hsxS)
